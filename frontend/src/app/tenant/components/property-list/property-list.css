@@ -1,0 +1,107 @@
+/* ================= Page ================= */
+.page-container {
+  padding: 28px 32px;
+  background-color: #fafafa;
+}
+
+/* ================= Title ================= */
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #222;
+}
+
+/* ================= Filters ================= */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* Search button */
+.search-btn {
+  height: 60px;
+  margin-top: 2px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-radius: 8px;
+}
+
+/* ================= Property Grid ================= */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+/* ================= Property Card ================= */
+.property-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.property-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Image */
+.property-card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Card Content */
+mat-card-content {
+  padding: 18px;
+}
+
+mat-card-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+mat-card-content p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ================= Actions ================= */
+mat-card-actions {
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* Buttons */
+button[mat-stroked-button] {
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+button[mat-raised-button] {
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* ================= No Results ================= */
+.no-results {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 60px;
+}
