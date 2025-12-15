@@ -2,8 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  min-height: 100vh;
   padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .login-card {
@@ -17,16 +18,16 @@
   margin-bottom: 15px;
 }
 
-.signup-link {
+.signup-link, .back-link {
   text-align: center;
   margin-top: 10px;
 }
 
-.signup-link a {
+.signup-link a, .back-link a {
   color: #3f51b5;
   text-decoration: none;
 }
 
-.signup-link a:hover {
+.signup-link a:hover, .back-link a:hover {
   text-decoration: underline;
 }

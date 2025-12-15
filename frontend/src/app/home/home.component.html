@@ -1,0 +1,33 @@
+<div class="home-container">
+  <h1>Welcome to House Rental System</h1>
+  <p class="subtitle">Choose your role to continue</p>
+
+  <div class="cards-container">
+    <mat-card class="role-card tenant">
+      <mat-icon class="role-icon">search</mat-icon>
+      <h2>Tenant</h2>
+      <p>Looking for a house?</p>
+      <a mat-raised-button routerLink="/login" [queryParams]="{role: 'tenant'}" class="btn-tenant">
+        Tenant Login
+      </a>
+    </mat-card>
+
+    <mat-card class="role-card owner">
+      <mat-icon class="role-icon">apartment</mat-icon>
+      <h2>Owner</h2>
+      <p>Want to rent your property?</p>
+      <a mat-raised-button routerLink="/login" [queryParams]="{role: 'owner'}" class="btn-owner">
+        Owner Login
+      </a>
+    </mat-card>
+
+    <mat-card class="role-card admin">
+      <mat-icon class="role-icon">admin_panel_settings</mat-icon>
+      <h2>Admin</h2>
+      <p>System administration</p>
+      <a mat-raised-button routerLink="/login" [queryParams]="{role: 'admin'}" class="btn-admin">
+        Admin Login
+      </a>
+    </mat-card>
+  </div>
+</div>

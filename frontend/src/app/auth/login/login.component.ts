@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,11 +22,26 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
+  role: string = 'tenant';
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['role']) {
+        this.role = params['role'];
+      }
+    });
+  }
+
+  getLoginTitle(): string {
+    return this.role.charAt(0).toUpperCase() + this.role.slice(1) + ' Login';
+  }
 
   onLogin() {
-    console.log('Login clicked:', this.email);
+    console.log('Login clicked:', this.email, 'Role:', this.role);
   }
 }

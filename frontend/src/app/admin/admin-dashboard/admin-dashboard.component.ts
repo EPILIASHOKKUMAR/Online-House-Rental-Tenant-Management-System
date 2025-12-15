@@ -13,11 +13,11 @@ import { MatTableModule } from '@angular/material/table';
 export class AdminDashboardComponent {
   
   users = [
-    { id: 1, name: 'Rahul Kumar', role: 'Tenant', email: 'rahul@mail.com' },
-    { id: 2, name: 'Anitha Reddy', role: 'Owner', email: 'anitha@mail.com' },
-    { id: 3, name: 'Suresh Babu', role: 'Tenant', email: 'suresh@mail.com' },
-    { id: 4, name: 'Priya Sharma', role: 'Owner', email: 'priya@mail.com' },
-    { id: 5, name: 'Kiran Rao', role: 'Tenant', email: 'kiran@mail.com' }
+    { id: 1, name: 'E.ASHOK KUMAR', role: 'Tenant', email: 'Ashok@mail.com' },
+    { id: 2, name: 'VISHNU', role: 'Owner', email: 'vishnu@mail.com' },
+    { id: 3, name: 'Santhosh', role: 'Tenant', email: 'Santhosh@mail.com' },
+    { id: 4, name: 'Chaitrika', role: 'Owner', email: 'Chaitrikha@mail.com' },
+    { id: 5, name: 'Sudhavali', role: 'Tenant', email: 'Sudhavalli@mail.com' }
   ];
 
   properties = [
