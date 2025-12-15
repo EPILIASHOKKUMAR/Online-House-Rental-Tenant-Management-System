@@ -1,0 +1,97 @@
+<div class="page-container">
+
+  <h2 class="title">Available Properties</h2>
+
+  <!-- ================= Filters ================= -->
+  <div class="filters">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Location</mat-label>
+      <input
+        matInput
+        [(ngModel)]="location"
+        placeholder="Enter city">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Max Budget</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="maxBudget"
+        placeholder="Enter amount">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Amenities</mat-label>
+      <mat-select [(ngModel)]="amenity">
+        <mat-option value="All">All</mat-option>
+        <mat-option value="Parking">Parking</mat-option>
+        <mat-option value="Lift">Lift</mat-option>
+        <mat-option value="Power Backup">Power Backup</mat-option>
+        <mat-option value="Garden">Garden</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- 🔍 Bigger Search Button -->
+   <button
+  mat-raised-button
+  color="primary"
+  class="search-btn"
+  (click)="filterProperties()">
+  Search
+</button>
+
+
+  </div>
+
+  <!-- ================= Property Cards ================= -->
+  <div class="property-grid" *ngIf="filteredProperties.length > 0">
+
+    <mat-card
+      class="property-card"
+      *ngFor="let property of filteredProperties">
+
+      <img
+        mat-card-image
+        [src]="property.image"
+        alt="Property Image">
+
+      <mat-card-content>
+        <h3>{{ property.title }}</h3>
+
+        <p><strong>Location:</strong> {{ property.location }}</p>
+        <p><strong>Rent:</strong> ₹{{ property.rent }}</p>
+        <p><strong>Amenities:</strong> {{ property.amenities.join(', ') }}</p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+
+        <!-- View Details -->
+        <button
+          mat-stroked-button
+          color="primary"
+          [routerLink]="['/property', property.id]">
+          View Details
+        </button>
+
+        <!-- Request Booking -->
+        <button
+          mat-raised-button
+          color="accent"
+          [routerLink]="['/booking-request', property.id]">
+          Request Booking
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  </div>
+
+  <!-- ================= No Results ================= -->
+  <p class="no-results" *ngIf="filteredProperties.length === 0">
+    No properties found
+  </p>
+
+</div>

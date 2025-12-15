@@ -1,0 +1,52 @@
+<div class="page-container">
+
+  <h2 class="title">Booking Request</h2>
+
+  <!-- Form -->
+  <form *ngIf="!submitted" class="form-card">
+
+    <label>Tenant Name</label>
+    <input
+      type="text"
+      [(ngModel)]="booking.tenantName"
+      name="tenantName"
+      required />
+
+    <label>Email</label>
+    <input
+      type="email"
+      [(ngModel)]="booking.email"
+      name="email"
+      required />
+
+    <label>Phone</label>
+    <input
+      type="text"
+      [(ngModel)]="booking.phone"
+      name="phone"
+      required />
+
+    <label>Move-in Date</label>
+    <input
+      type="date"
+      [(ngModel)]="booking.moveInDate"
+      name="moveInDate" />
+
+    <label>Message</label>
+    <textarea
+      [(ngModel)]="booking.message"
+      name="message"></textarea>
+
+    <button type="button" (click)="submitBooking()">
+      Submit Booking Request
+    </button>
+
+  </form>
+
+  <!-- Success Message -->
+  <div *ngIf="submitted" class="success-box">
+    <h3>✅ Booking Request Submitted</h3>
+    <p>Your request is currently <strong>{{ booking.status }}</strong>.</p>
+  </div>
+
+</div>
