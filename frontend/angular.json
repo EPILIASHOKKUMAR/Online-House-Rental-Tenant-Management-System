@@ -19,14 +19,17 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+  {
+    "glob": "**/*",
+    "input": "src/assets",
+    "output": "assets"
+  }
+],
             "styles": [
-              "src/styles.css"
-            ]
+  "@angular/material/prebuilt-themes/indigo-pink.css",
+  "src/styles.css"
+]
+
           },
           "configurations": {
             "production": {

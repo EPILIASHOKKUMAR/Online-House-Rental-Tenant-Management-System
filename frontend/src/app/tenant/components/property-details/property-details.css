@@ -1,0 +1,27 @@
+.details-container {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.details-card {
+  max-width: 600px;
+  width: 100%;
+}
+
+mat-card-content h2 {
+  margin-bottom: 12px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+img {
+  height: 300px;
+  object-fit: cover;
+}
