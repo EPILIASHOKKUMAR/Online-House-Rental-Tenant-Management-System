@@ -1,67 +1,207 @@
 .home-container {
   min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.navbar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 15px 50px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #667eea;
+}
+
+.logo mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #667eea;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: 2px solid #667eea;
+  border-radius: 25px;
+  transition: all 0.3s;
+}
+
+.nav-links a:hover {
+  background: #667eea;
   color: white;
 }
 
-h1 {
-  font-size: 2.5rem;
+.hero-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 80px 50px;
+  text-align: center;
+  color: white;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.roles-section {
+  padding: 60px 50px;
+  text-align: center;
+}
+
+.roles-section h2 {
+  font-size: 2rem;
+  color: #333;
   margin-bottom: 10px;
 }
 
-.subtitle {
-  font-size: 1.2rem;
+.section-subtitle {
+  color: #666;
   margin-bottom: 40px;
 }
 
 .cards-container {
   display: flex;
   gap: 30px;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .role-card {
-  width: 280px;
-  padding: 30px;
+  width: 320px;
+  padding: 30px 25px;
+  border-radius: 16px;
   text-align: center;
-  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: none;
 }
 
-.role-icon {
-  font-size: 48px;
-  height: 48px;
-  width: 48px;
-  margin-bottom: 15px;
+.role-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-.role-card h2 {
-  margin: 10px 0;
+.card-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
 }
 
-.role-card p {
+.card-icon-wrapper mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+.tenant-bg { background: linear-gradient(135deg, #2196F3, #1976D2); }
+.owner-bg { background: linear-gradient(135deg, #4CAF50, #388E3C); }
+.admin-bg { background: linear-gradient(135deg, #f44336, #d32f2f); }
+
+.role-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.role-card > mat-card-content > p {
   color: #666;
   margin-bottom: 20px;
 }
 
-/* Tenant - Blue */
-.tenant .role-icon { color: #2196F3; }
-.btn-tenant { background-color: #2196F3 !important; color: white !important; }
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
 
-/* Owner - Green */
-.owner .role-icon { color: #4CAF50; }
-.btn-owner { background-color: #4CAF50 !important; color: white !important; }
+.features-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  color: #555;
+  font-size: 0.95rem;
+}
 
-/* Admin - Red */
-.admin .role-icon { color: #f44336; }
-.btn-admin { background-color: #f44336 !important; color: white !important; }
+.features-list mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #4CAF50;
+}
+
+mat-card-actions {
+  padding: 0 !important;
+}
+
+mat-card-actions a {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+.btn-tenant { background: #2196F3 !important; color: white !important; }
+.btn-owner { background: #4CAF50 !important; color: white !important; }
+.btn-admin { background: #f44336 !important; color: white !important; }
+
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
 
 @media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .roles-section {
+    padding: 40px 20px;
+  }
+  
   .cards-container {
     flex-direction: column;
+    align-items: center;
+  }
+  
+  .role-card {
+    width: 100%;
+    max-width: 350px;
   }
 }

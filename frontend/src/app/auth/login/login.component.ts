@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,14 +20,17 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
   role: string = 'tenant';
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -43,5 +46,15 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     console.log('Login clicked:', this.email, 'Role:', this.role);
+    
+    localStorage.setItem('userRole', this.role);
+    
+    if (this.role === 'admin') {
+      this.router.navigate(['/admin/dashboard']);
+    } else if (this.role === 'tenant') {
+      this.router.navigate(['/properties']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }
