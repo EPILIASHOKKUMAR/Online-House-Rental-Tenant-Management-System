@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     RouterModule,
     FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
+    MatIconModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -25,7 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
-  role: string = 'tenant';
+  ownerEmail: string = '';
+  ownerPassword: string = '';
+  isOwnerMode: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,26 +30,25 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      if (params['role']) {
-        this.role = params['role'];
+      if (params['role'] === 'owner') {
+        this.isOwnerMode = true;
+      } else if (params['role'] === 'admin') {
+        this.router.navigate(['/admin-login']);
       }
     });
   }
 
-  getLoginTitle(): string {
-    return this.role.charAt(0).toUpperCase() + this.role.slice(1) + ' Login';
+  toggleMode(): void {
+    this.isOwnerMode = !this.isOwnerMode;
   }
 
-  onLogin() {
-    console.log('Login clicked:', this.email, 'Role:', this.role);
+  onLogin(role: string): void {
+    console.log('Login as:', role);
+    localStorage.setItem('userRole', role);
     
-    localStorage.setItem('userRole', this.role);
-    
-    if (this.role === 'admin') {
-      this.router.navigate(['/admin/dashboard']);
-    } else if (this.role === 'tenant') {
+    if (role === 'tenant') {
       this.router.navigate(['/properties']);
-    } else {
+    } else if (role === 'owner') {
       this.router.navigate(['/']);
     }
   }

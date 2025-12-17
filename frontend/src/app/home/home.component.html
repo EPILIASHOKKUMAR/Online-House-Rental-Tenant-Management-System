@@ -1,11 +1,22 @@
 <div class="home-container">
   <nav class="navbar">
     <div class="logo">
-      <mat-icon>home</mat-icon>
+      <mat-icon>home_work</mat-icon>
       <span>HouseRental</span>
     </div>
     <div class="nav-links">
-      <a routerLink="/signup">Sign Up</a>
+      <a routerLink="/admin-login" class="admin-link">
+        <mat-icon>admin_panel_settings</mat-icon>
+        Admin
+      </a>
+      <a routerLink="/login" [queryParams]="{role: 'tenant'}" class="login-link">
+        <mat-icon>login</mat-icon>
+        Login
+      </a>
+      <a routerLink="/signup" class="signup-btn">
+        <mat-icon>person_add</mat-icon>
+        Sign Up
+      </a>
     </div>
   </nav>
 
@@ -70,12 +81,12 @@
           <p>System administration</p>
           <ul class="features-list">
             <li><mat-icon>check_circle</mat-icon> Manage users</li>
-            <li><mat-icon>check_circle</mat-icon> Monitor platform</li>
-            <li><mat-icon>check_circle</mat-icon> View analytics</li>
+            <li><mat-icon>check_circle</mat-icon> Monitor properties</li>
+            <li><mat-icon>check_circle</mat-icon> System overview</li>
           </ul>
         </mat-card-content>
         <mat-card-actions>
-          <a mat-raised-button routerLink="/login" [queryParams]="{role: 'admin'}" class="btn-admin">
+          <a mat-raised-button routerLink="/admin-login" class="btn-admin">
             Admin Login
           </a>
         </mat-card-actions>

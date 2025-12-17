@@ -18,31 +18,106 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.5rem;
+  gap: 12px;
+  font-size: 1.8rem;
   font-weight: 700;
   color: #667eea;
 }
 
 .logo mat-icon {
-  font-size: 32px;
-  width: 32px;
-  height: 32px;
+  font-size: 42px;
+  width: 42px;
+  height: 42px;
 }
 
-.nav-links a {
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links .admin-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   text-decoration: none;
-  color: #667eea;
-  font-weight: 500;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
   padding: 10px 20px;
-  border: 2px solid #667eea;
-  border-radius: 25px;
-  transition: all 0.3s;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.nav-links a:hover {
-  background: #667eea;
+.nav-links .admin-link mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.nav-links .admin-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.nav-links .login-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
   color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-links .login-link mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.nav-links .login-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
+}
+
+.nav-links .signup-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-links .signup-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.nav-links .signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
 }
 
 .hero-section {

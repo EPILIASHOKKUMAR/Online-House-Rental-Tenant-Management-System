@@ -232,6 +232,7 @@
   color: white;
   line-height: 1;
   background: linear-gradient(90deg, #fff, rgba(255,255,255,0.8));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
