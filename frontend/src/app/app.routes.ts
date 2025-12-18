@@ -14,6 +14,12 @@ import { PropertyDetailsComponent } from './tenant/components/property-details/p
 import { BookingRequestComponent } from './tenant/components/booking-request/booking-request';
 import { BookingStatusComponent } from './tenant/components/booking-status/booking-status';
 
+
+import { OwnerDashboardComponent } from './owner/owner-dashboard/owner-dashboard';
+import { AddPropertyComponent } from './owner/add-property/add-property';
+import { ManagePropertiesComponent } from './owner/manage-properties/manage-properties';
+import { BookingRequestsComponent } from './owner/booking-requests/booking-requests';
+
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -26,5 +32,11 @@ export const routes: Routes = [
   { path: 'properties', component: PropertyListComponent },
   { path: 'property/:id', component: PropertyDetailsComponent },
   { path: 'booking-request/:id', component: BookingRequestComponent },
-  { path: 'booking-status', component: BookingStatusComponent }
+  { path: 'booking-status', component: BookingStatusComponent },
+
+  
+  { path: 'owner/dashboard', component: OwnerDashboardComponent },
+  { path: 'owner/add-property', component: AddPropertyComponent },
+  { path: 'owner/manage-properties', component: ManagePropertiesComponent },
+  { path: 'owner/booking-requests', component: BookingRequestsComponent }
 ];

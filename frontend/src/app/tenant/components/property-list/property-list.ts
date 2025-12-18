@@ -19,14 +19,28 @@ import { Property } from '../../models/property.model';
 })
 export class PropertyListComponent implements OnInit {
 
+  /* ================= DATA ================= */
+
   properties: Property[] = [];
   filteredProperties: Property[] = [];
 
+  /* ================= FILTER MODEL ================= */
+
   location: string = '';
   maxBudget: number | null = null;
-  amenity: string = 'All';
+
+  // ✅ IMPORTANT FIX
+  amenity: string | null = null;
+
+  /* ================= LIFECYCLE ================= */
 
   ngOnInit(): void {
+    this.loadProperties();
+  }
+
+  /* ================= METHODS ================= */
+
+  loadProperties(): void {
     this.properties = [
       {
         id: 1,
@@ -54,39 +68,35 @@ export class PropertyListComponent implements OnInit {
       }
     ];
 
-    // ✅ IMPORTANT: create new array
     this.filteredProperties = [...this.properties];
   }
 
   filterProperties(): void {
-
     this.filteredProperties = this.properties.filter(property => {
 
-      // ✅ Location filter (case-insensitive)
       const locationMatch =
-        this.location.trim() === '' ||
-        property.location.toLowerCase().includes(this.location.toLowerCase());
+        !this.location ||
+        property.location
+          .toLowerCase()
+          .includes(this.location.trim().toLowerCase());
 
-      // ✅ Budget filter (LESS THAN OR EQUAL)
       const budgetMatch =
         this.maxBudget === null ||
-        this.maxBudget === undefined ||
         property.rent <= this.maxBudget;
 
-      // ✅ Amenity filter
+      // ✅ CORRECT LOGIC
       const amenityMatch =
-        this.amenity === 'All' ||
+        !this.amenity ||
         property.amenities.includes(this.amenity);
 
       return locationMatch && budgetMatch && amenityMatch;
     });
   }
 
-  // Optional reset
   resetFilters(): void {
     this.location = '';
     this.maxBudget = null;
-    this.amenity = 'All';
+    this.amenity = null; // ✅ reset correctly
     this.filteredProperties = [...this.properties];
   }
 }

@@ -1,39 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Booking } from '../../models/booking.model';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+
+/* ✅ Custom DD-MM-YYYY format */
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD-MM-YYYY',
+  },
+  display: {
+    dateInput: 'DD-MM-YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD-MM-YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: 'app-booking-request',
   standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './booking-request.html',
-  styleUrls: ['./booking-request.css']
+  styleUrls: ['./booking-request.css'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ]
 })
-export class BookingRequestComponent implements OnInit {
+export class BookingRequestComponent {
 
-  booking!: Booking;
+  booking = {
+    tenantName: '',
+    email: '',
+    phone: '',
+    moveInDate: '',
+    message: '',
+    status: 'Pending'
+  };
+
   submitted = false;
 
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    const propertyId = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.booking = {
-      propertyId,
-      tenantName: '',
-      email: '',
-      phone: '',
-      moveInDate: '',
-      message: '',
-      status: 'PENDING'
-    };
-  }
-
-  submitBooking(): void {
-    console.log('Booking Request Submitted:', this.booking);
+  submitBooking() {
     this.submitted = true;
   }
 }
