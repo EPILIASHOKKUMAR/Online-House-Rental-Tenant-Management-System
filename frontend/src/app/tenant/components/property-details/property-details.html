@@ -1,42 +1,52 @@
-<div class="details-container" *ngIf="property">
+<div class="tenant-layout">
+  <div class="details-container" *ngIf="property">
 
-  <mat-card class="details-card">
+    <div class="details-card">
 
-    <img
-      mat-card-image
-      [src]="property.image"
-      alt="Property Image">
+      <!-- Property Image -->
+      <img
+        [src]="property.image"
+        alt="Property Image"
+        class="property-image"
+      />
 
-    <mat-card-content>
-      <h2>{{ property.title }}</h2>
+      <!-- Content -->
+      <div class="details-content">
 
-      <p><strong>Location:</strong> {{ property.location }}</p>
-      <p><strong>Rent:</strong> ₹{{ property.rent }}</p>
-      <p><strong>Amenities:</strong></p>
+        <h2>{{ property.title }}</h2>
 
-      <ul>
-        <li *ngFor="let amenity of property.amenities">
-          {{ amenity }}
-        </li>
-      </ul>
-    </mat-card-content>
+        <p><strong>Location:</strong> {{ property.location }}</p>
+        <p><strong>Rent:</strong> ₹{{ property.rent }}</p>
 
-    <mat-card-actions align="end">
-      <button
-        mat-raised-button
-        color="accent"
-        [routerLink]="['/booking-request', property.id]">
-        Request Booking
-      </button>
+        <div class="amenities">
+          <strong>Amenities</strong>
+          <ul>
+            <li *ngFor="let a of property.amenities">{{ a }}</li>
+          </ul>
+        </div>
 
-      <button
-        mat-stroked-button
-        color="primary"
-        routerLink="/properties">
-        Back
-      </button>
-    </mat-card-actions>
+        <!-- Actions -->
+        <div class="actions">
+          <button
+            mat-raised-button
+            class="primary-btn"
+            [routerLink]="['/booking-request', property.id]"
+          >
+            Request Booking
+          </button>
 
-  </mat-card>
+          <button
+            mat-stroked-button
+            class="secondary-btn"
+            routerLink="/properties"
+          >
+            Back
+          </button>
+        </div>
 
+      </div>
+
+    </div>
+
+  </div>
 </div>

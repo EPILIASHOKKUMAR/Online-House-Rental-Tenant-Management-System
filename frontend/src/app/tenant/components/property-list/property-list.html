@@ -1,61 +1,46 @@
-<div class="page-container">
+<div class="property-list-page">
 
-  <h2 class="title">Available Properties</h2>
+  <h2 class="page-title">Available Properties</h2>
 
-  <!-- ================= Filters ================= -->
+  <!-- ================= FILTERS ================= -->
   <div class="filters">
 
     <mat-form-field appearance="outline">
       <mat-label>Location</mat-label>
-      <input
-        matInput
-        [(ngModel)]="location"
-        placeholder="Enter city">
+      <input matInput [(ngModel)]="location" placeholder="Enter location" />
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Max Budget</mat-label>
-      <input
-        matInput
-        type="number"
-        [(ngModel)]="maxBudget"
-        placeholder="Enter amount">
+      <input matInput type="number" [(ngModel)]="maxBudget" placeholder="Enter max rent" />
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Amenities</mat-label>
-      <mat-select [(ngModel)]="amenity">
-        <mat-option value="All">All</mat-option>
-        <mat-option value="Parking">Parking</mat-option>
-        <mat-option value="Lift">Lift</mat-option>
-        <mat-option value="Power Backup">Power Backup</mat-option>
-        <mat-option value="Garden">Garden</mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+  <mat-label>Amenities</mat-label>
 
-    <!-- 🔍 Bigger Search Button -->
-   <button
-  mat-raised-button
-  color="primary"
-  class="search-btn"
-  (click)="filterProperties()">
-  Search
-</button>
+  <mat-select [(ngModel)]="amenity">
+    <mat-option [value]="null">All</mat-option>
+    <mat-option value="Parking">Parking</mat-option>
+    <mat-option value="Lift">Lift</mat-option>
+    <mat-option value="Power Backup">Power Backup</mat-option>
+    <mat-option value="Garden">Garden</mat-option>
+  </mat-select>
+</mat-form-field>
 
+
+
+    <button mat-raised-button class="search-btn" (click)="filterProperties()">
+      Search
+    </button>
 
   </div>
 
-  <!-- ================= Property Cards ================= -->
-  <div class="property-grid" *ngIf="filteredProperties.length > 0">
+  <!-- ================= PROPERTY GRID ================= -->
+  <div class="property-grid">
 
-    <mat-card
-      class="property-card"
-      *ngFor="let property of filteredProperties">
+    <mat-card class="property-card" *ngFor="let property of filteredProperties">
 
-      <img
-        mat-card-image
-        [src]="property.image"
-        alt="Property Image">
+      <img mat-card-image [src]="property.image" alt="Property Image" />
 
       <mat-card-content>
         <h3>{{ property.title }}</h3>
@@ -65,9 +50,9 @@
         <p><strong>Amenities:</strong> {{ property.amenities.join(', ') }}</p>
       </mat-card-content>
 
-      <mat-card-actions align="end">
+      <mat-card-actions>
 
-        <!-- View Details -->
+        <!-- ✅ CORRECT ROUTES -->
         <button
           mat-stroked-button
           color="primary"
@@ -75,10 +60,9 @@
           View Details
         </button>
 
-        <!-- Request Booking -->
         <button
           mat-raised-button
-          color="accent"
+          color="primary"
           [routerLink]="['/booking-request', property.id]">
           Request Booking
         </button>
@@ -89,9 +73,9 @@
 
   </div>
 
-  <!-- ================= No Results ================= -->
-  <p class="no-results" *ngIf="filteredProperties.length === 0">
-    No properties found
-  </p>
+  <!-- ================= EMPTY STATE ================= -->
+  <div class="no-results" *ngIf="filteredProperties.length === 0">
+    No properties found.
+  </div>
 
 </div>
