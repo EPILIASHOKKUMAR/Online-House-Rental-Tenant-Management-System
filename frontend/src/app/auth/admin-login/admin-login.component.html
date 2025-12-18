@@ -1,0 +1,53 @@
+<div class="admin-login-container">
+  <div class="background-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+
+  <div class="login-card">
+    <div class="card-header">
+      <div class="admin-icon">
+        <mat-icon>admin_panel_settings</mat-icon>
+      </div>
+      <h1>Admin Portal</h1>
+      <p>House Rental Management System</p>
+    </div>
+
+    <form (ngSubmit)="onLogin()">
+      <div class="input-group">
+        <mat-icon>mail</mat-icon>
+        <input type="email" placeholder="Admin Email" [(ngModel)]="email" name="email" required />
+      </div>
+
+      <div class="input-group">
+        <mat-icon>lock</mat-icon>
+        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+      </div>
+
+      <div class="remember-forgot">
+        <label class="remember">
+          <input type="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
+          <span>Remember me</span>
+        </label>
+        <a href="#" class="forgot">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="login-btn">
+        <mat-icon>login</mat-icon>
+        Login to Dashboard
+      </button>
+    </form>
+
+    <div class="security-note">
+      <mat-icon>security</mat-icon>
+      <span>Secure admin access only</span>
+    </div>
+
+    <a routerLink="/" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Home
+    </a>
+  </div>
+</div>

@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-signup',
@@ -15,22 +11,34 @@ import { MatSelectModule } from '@angular/material/select';
     CommonModule,
     RouterModule,
     FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule
+    MatIconModule
   ],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
   name: string = '';
   email: string = '';
+  phone: string = '';
   password: string = '';
+  confirmPassword: string = '';
   role: string = '';
 
-  onSignup() {
-    console.log('Signup clicked:', this.name, this.email, this.role);
+  constructor(private router: Router) {}
+
+  onSignup(): void {
+    if (this.password !== this.confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+    
+    console.log('Signup:', this.name, this.email, this.role);
+    localStorage.setItem('userRole', this.role);
+    
+    if (this.role === 'tenant') {
+      this.router.navigate(['/properties']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

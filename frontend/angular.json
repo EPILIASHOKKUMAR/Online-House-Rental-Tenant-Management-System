@@ -23,7 +23,13 @@
     "glob": "**/*",
     "input": "src/assets",
     "output": "assets"
-  }
+  },
+  {
+    "glob": "**/*",
+    "input": "public",
+    "output": ""
+  },
+  "src/logo.png"
 ],
             "styles": [
   "@angular/material/prebuilt-themes/indigo-pink.css",
