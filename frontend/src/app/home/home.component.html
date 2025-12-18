@@ -1,0 +1,100 @@
+<div class="home-container">
+  <nav class="navbar">
+    <div class="logo">
+      <mat-icon>home_work</mat-icon>
+      <span>HouseRental</span>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/admin-login" class="admin-link">
+        <mat-icon>admin_panel_settings</mat-icon>
+        Admin
+      </a>
+      <a routerLink="/login" [queryParams]="{role: 'tenant'}" class="login-link">
+        <mat-icon>login</mat-icon>
+        Login
+      </a>
+      <a routerLink="/signup" class="signup-btn">
+        <mat-icon>person_add</mat-icon>
+        Sign Up
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Find Your Perfect Home</h1>
+      <p>Discover the best rental properties or list your own. Simple, secure, and hassle-free.</p>
+    </div>
+  </section>
+
+  <section class="roles-section">
+    <h2>Get Started</h2>
+    <p class="section-subtitle">Choose how you want to use our platform</p>
+    
+    <div class="cards-container">
+      <mat-card class="role-card tenant-card">
+        <div class="card-icon-wrapper tenant-bg">
+          <mat-icon>search</mat-icon>
+        </div>
+        <mat-card-content>
+          <h3>Tenant</h3>
+          <p>Looking for a house?</p>
+          <ul class="features-list">
+            <li><mat-icon>check_circle</mat-icon> Browse properties</li>
+            <li><mat-icon>check_circle</mat-icon> Book your dream home</li>
+            <li><mat-icon>check_circle</mat-icon> Track your bookings</li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button routerLink="/login" [queryParams]="{role: 'tenant'}" class="btn-tenant">
+            Tenant Login
+          </a>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="role-card owner-card">
+        <div class="card-icon-wrapper owner-bg">
+          <mat-icon>apartment</mat-icon>
+        </div>
+        <mat-card-content>
+          <h3>Owner</h3>
+          <p>Want to rent your property?</p>
+          <ul class="features-list">
+            <li><mat-icon>check_circle</mat-icon> List your properties</li>
+            <li><mat-icon>check_circle</mat-icon> Manage bookings</li>
+            <li><mat-icon>check_circle</mat-icon> Connect with tenants</li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button routerLink="/login" [queryParams]="{role: 'owner'}" class="btn-owner">
+            Owner Login
+          </a>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="role-card admin-card">
+        <div class="card-icon-wrapper admin-bg">
+          <mat-icon>admin_panel_settings</mat-icon>
+        </div>
+        <mat-card-content>
+          <h3>Admin</h3>
+          <p>System administration</p>
+          <ul class="features-list">
+            <li><mat-icon>check_circle</mat-icon> Manage users</li>
+            <li><mat-icon>check_circle</mat-icon> Monitor properties</li>
+            <li><mat-icon>check_circle</mat-icon> System overview</li>
+          </ul>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button routerLink="/admin-login" class="btn-admin">
+            Admin Login
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 HouseRental. All rights reserved.</p>
+  </footer>
+</div>

@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+.angular/
+
+# Exclude tenant and owner pages
+frontend/src/app/tenant/
+frontend/src/app/owner/

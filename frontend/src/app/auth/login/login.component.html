@@ -1,0 +1,99 @@
+<div class="auth-container" [class.owner-mode]="isOwnerMode">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <form class="sign-in-form tenant-form" (ngSubmit)="onLogin('tenant')">
+        <h2 class="title">Tenant Login</h2>
+        <div class="input-field">
+          <mat-icon>mail</mat-icon>
+          <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+        </div>
+        <div class="input-field">
+          <mat-icon>lock</mat-icon>
+          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+        </div>
+        <button type="submit" class="btn solid">Login</button>
+        <p class="social-text">Or login with</p>
+        <div class="social-media">
+          <a href="#" class="social-icon"><mat-icon>public</mat-icon></a>
+          <a href="#" class="social-icon"><mat-icon>facebook</mat-icon></a>
+          <a href="#" class="social-icon"><mat-icon>mail</mat-icon></a>
+        </div>
+        <p class="signup-link">Don't have an account? <a routerLink="/signup">Sign Up</a></p>
+      </form>
+
+      <form class="sign-up-form owner-form" (ngSubmit)="onLogin('owner')">
+        <h2 class="title">Owner Login</h2>
+        <div class="input-field">
+          <mat-icon>mail</mat-icon>
+          <input type="email" placeholder="Email" [(ngModel)]="ownerEmail" name="ownerEmail" required />
+        </div>
+        <div class="input-field">
+          <mat-icon>lock</mat-icon>
+          <input type="password" placeholder="Password" [(ngModel)]="ownerPassword" name="ownerPassword" required />
+        </div>
+        <button type="submit" class="btn solid">Login</button>
+        <p class="social-text">Or login with</p>
+        <div class="social-media">
+          <a href="#" class="social-icon"><mat-icon>public</mat-icon></a>
+          <a href="#" class="social-icon"><mat-icon>facebook</mat-icon></a>
+          <a href="#" class="social-icon"><mat-icon>mail</mat-icon></a>
+        </div>
+        <p class="signup-link">Don't have an account? <a routerLink="/signup">Sign Up</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <div class="brand-logo">
+          <mat-icon>apartment</mat-icon>
+        </div>
+        <h3>Property Owner?</h3>
+        <p class="brand-tagline">List & Manage Properties</p>
+        <p>Login as owner to list your properties and manage tenant bookings!</p>
+        <button class="btn transparent" (click)="toggleMode()">Owner Login</button>
+      </div>
+      <div class="features">
+        <div class="feature-item">
+          <mat-icon>add_home</mat-icon>
+          <span>List Properties</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon>people</mat-icon>
+          <span>Manage Tenants</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon>payments</mat-icon>
+          <span>Track Payments</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel right-panel">
+      <div class="content">
+        <div class="brand-logo">
+          <mat-icon>home</mat-icon>
+        </div>
+        <h3>Looking for Home?</h3>
+        <p class="brand-tagline">Find Your Perfect Home</p>
+        <p>Login as tenant to browse properties and book your dream home!</p>
+        <button class="btn transparent" (click)="toggleMode()">Tenant Login</button>
+      </div>
+      <div class="features">
+        <div class="feature-item">
+          <mat-icon>search</mat-icon>
+          <span>Browse Properties</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon>verified</mat-icon>
+          <span>Verified Listings</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon>support_agent</mat-icon>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

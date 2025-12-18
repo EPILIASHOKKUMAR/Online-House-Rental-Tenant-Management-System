@@ -1,0 +1,152 @@
+<div class="admin-layout">
+  <mat-toolbar class="admin-header">
+    <mat-icon>admin_panel_settings</mat-icon>
+    <span class="header-title">Admin Panel</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <div class="admin-body">
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav mode="side" opened class="sidebar">
+        <div class="sidebar-menu">
+          <a routerLink="/admin/dashboard" class="menu-item active">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </a>
+          <a routerLink="/admin/users" class="menu-item">
+            <mat-icon>people</mat-icon>
+            <span>Users</span>
+          </a>
+          <a routerLink="/admin/properties" class="menu-item">
+            <mat-icon>apartment</mat-icon>
+            <span>Properties</span>
+          </a>
+        </div>
+      </mat-sidenav>
+
+      <mat-sidenav-content class="main-content">
+        <div class="dashboard-content">
+          <h2 class="section-title">Dashboard Overview</h2>
+          
+          <div class="stats-container">
+            <mat-card class="stat-card users-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>people</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ totalUsers }}</span>
+                  <span class="stat-label">Total Users</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card tenants-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>person_search</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ totalTenants }}</span>
+                  <span class="stat-label">Tenants</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card owners-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>business_center</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ totalOwners }}</span>
+                  <span class="stat-label">Owners</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card properties-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>home_work</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ totalProperties }}</span>
+                  <span class="stat-label">Properties</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="charts-container">
+            <mat-card class="chart-card">
+              <mat-card-header>
+                <mat-card-title>Users Distribution</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="chart-placeholder">
+                  <div class="bar-chart">
+                    <div class="bar tenants-bar" [style.height.%]="(totalTenants / totalUsers) * 100">
+                      <span class="bar-label">{{ totalTenants }}</span>
+                    </div>
+                    <div class="bar owners-bar" [style.height.%]="(totalOwners / totalUsers) * 100">
+                      <span class="bar-label">{{ totalOwners }}</span>
+                    </div>
+                  </div>
+                  <div class="chart-labels">
+                    <span>Tenants</span>
+                    <span>Owners</span>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="chart-card">
+              <mat-card-header>
+                <mat-card-title>Platform Statistics</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <div class="stats-list">
+                  <div class="stats-item">
+                    <span class="stats-item-label">Active Users</span>
+                    <span class="stats-item-value">{{ totalUsers }}</span>
+                  </div>
+                  <div class="stats-item">
+                    <span class="stats-item-label">Listed Properties</span>
+                    <span class="stats-item-value">{{ totalProperties }}</span>
+                  </div>
+                  <div class="stats-item">
+                    <span class="stats-item-label">Pending Bookings</span>
+                    <span class="stats-item-value">3</span>
+                  </div>
+                  <div class="stats-item">
+                    <span class="stats-item-label">Completed Bookings</span>
+                    <span class="stats-item-value">12</span>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="quick-links">
+            <h3>Quick Access</h3>
+            <div class="links-container">
+              <a routerLink="/admin/users">
+                <mat-icon>people</mat-icon>
+                View All Users
+              </a>
+              <a routerLink="/admin/properties">
+                <mat-icon>apartment</mat-icon>
+                View All Properties
+              </a>
+            </div>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

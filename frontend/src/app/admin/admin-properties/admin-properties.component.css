@@ -1,0 +1,244 @@
+.admin-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+}
+
+.header-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.admin-header button {
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.admin-header button:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.05);
+}
+
+.admin-body {
+  flex: 1;
+  margin-top: 64px;
+}
+
+.sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-menu {
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.menu-item mat-icon {
+  color: #ffffff;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.menu-item span {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.menu-item:hover {
+  background: rgba(102, 126, 234, 0.25);
+  transform: translateX(5px);
+}
+
+.menu-item:hover mat-icon,
+.menu-item:hover span {
+  color: #ffffff;
+}
+
+.menu-item.active {
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
+  border-left: 4px solid #a78bfa;
+}
+
+.menu-item.active mat-icon,
+.menu-item.active span {
+  opacity: 1;
+  color: #ffffff;
+}
+
+.main-content {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.page-content {
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+  font-size: 1.8rem;
+  margin: 0 0 25px 0;
+  font-weight: 600;
+  animation: fadeInDown 0.5s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-title mat-icon {
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+  padding: 10px;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  border-radius: 12px;
+}
+
+.table-card {
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease;
+}
+
+.table-card mat-card-content {
+  padding: 0 !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.data-table {
+  width: 100%;
+  background: transparent;
+}
+
+.mat-mdc-table {
+  background: transparent !important;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600 !important;
+  color: white !important;
+  background: linear-gradient(90deg, rgba(240, 147, 251, 0.3), rgba(245, 87, 108, 0.3)) !important;
+  padding: 18px 20px !important;
+  font-size: 1rem !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.mat-mdc-cell {
+  padding: 18px 20px !important;
+  color: white !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  transition: all 0.3s ease;
+}
+
+.mat-mdc-row {
+  transition: all 0.3s ease;
+  background: transparent !important;
+}
+
+.mat-mdc-row:hover {
+  background: rgba(240, 147, 251, 0.15) !important;
+}
+
+.location-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #f5576c;
+  vertical-align: middle;
+  margin-right: 8px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.rent-cell {
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, #11998e, #38ef7d);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  
+  .page-content {
+    padding: 20px;
+  }
+  
+  .page-title {
+    font-size: 1.4rem;
+  }
+}
