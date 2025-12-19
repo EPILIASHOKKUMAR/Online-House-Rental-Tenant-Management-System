@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('userRole', role);
     
     if (role === 'tenant') {
-      this.router.navigate(['/properties']);
+      this.router.navigate(['/tenant/dashboard']);
     } else if (role === 'owner') {
       this.router.navigate(['/']);
     }

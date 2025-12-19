@@ -36,7 +36,7 @@ export class SignupComponent {
     localStorage.setItem('userRole', this.role);
     
     if (this.role === 'tenant') {
-      this.router.navigate(['/properties']);
+      this.router.navigate(['/tenant/dashboard']);
     } else {
       this.router.navigate(['/']);
     }

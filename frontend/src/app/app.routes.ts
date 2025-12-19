@@ -10,10 +10,12 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminPropertiesComponent } from './admin/admin-properties/admin-properties.component';
 
-import { PropertyListComponent } from './tenant/components/property-list/property-list';
-import { PropertyDetailsComponent } from './tenant/components/property-details/property-details';
-import { BookingRequestComponent } from './tenant/components/booking-request/booking-request';
-import { BookingStatusComponent } from './tenant/components/booking-status/booking-status';
+import { TenantDashboardComponent } from './tenant/tenant-dashboard/tenant-dashboard.component';
+import { TenantPropertiesComponent } from './tenant/tenant-properties/tenant-properties.component';
+import { TenantBookingsComponent } from './tenant/tenant-bookings/tenant-bookings.component';
+
+import { adminGuard } from './guards/admin.guard';
+import { tenantGuard } from './guards/tenant.guard';
 
 
 // import { OwnerDashboardComponent } from './owner/owner-dashboard/owner-dashboard';
@@ -27,14 +29,19 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'admin-login', component: AdminLoginComponent },
 
-  { path: 'admin/dashboard', component: AdminDashboardComponent },
-  { path: 'admin/users', component: AdminUsersComponent },
-  { path: 'admin/properties', component: AdminPropertiesComponent },
+  { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [adminGuard] },
+  { path: 'admin/users', component: AdminUsersComponent, canActivate: [adminGuard] },
+  { path: 'admin/properties', component: AdminPropertiesComponent, canActivate: [adminGuard] },
 
-  { path: 'properties', component: PropertyListComponent },
-  { path: 'property/:id', component: PropertyDetailsComponent },
-  { path: 'booking-request/:id', component: BookingRequestComponent },
-  { path: 'booking-status', component: BookingStatusComponent }
+  { path: 'tenant/dashboard', component: TenantDashboardComponent, canActivate: [tenantGuard] },
+  { path: 'tenant/properties', component: TenantPropertiesComponent, canActivate: [tenantGuard] },
+  { path: 'tenant/bookings', component: TenantBookingsComponent, canActivate: [tenantGuard] },
+  
+  // Legacy routes for backward compatibility
+  { path: 'properties', redirectTo: 'tenant/properties', pathMatch: 'full' },
+  { path: 'property/:id', redirectTo: 'tenant/properties', pathMatch: 'full' },
+  { path: 'booking-request/:id', redirectTo: 'tenant/properties', pathMatch: 'full' },
+  { path: 'booking-status', redirectTo: 'tenant/bookings', pathMatch: 'full' }
 
   
   // { path: 'owner/dashboard', component: OwnerDashboardComponent },
