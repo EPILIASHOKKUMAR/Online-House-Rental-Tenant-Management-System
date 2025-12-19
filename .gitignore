@@ -5,6 +5,5 @@ dist/
 .DS_Store
 .angular/
 
-# Exclude tenant and owner pages
-frontend/src/app/tenant/
+# Exclude owner pages (tenant pages are now included)
 frontend/src/app/owner/

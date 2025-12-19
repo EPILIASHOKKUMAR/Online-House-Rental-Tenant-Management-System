@@ -1,0 +1,261 @@
+<div class="tenant-layout">
+  <mat-toolbar class="tenant-header">
+    <mat-icon>home_work</mat-icon>
+    <span class="header-title">Tenant Portal</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <div class="tenant-body">
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav mode="side" opened class="sidebar">
+        <div class="sidebar-menu">
+          <a routerLink="/tenant/dashboard" class="menu-item">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </a>
+          <a routerLink="/tenant/properties" class="menu-item">
+            <mat-icon>search</mat-icon>
+            <span>Search Properties</span>
+          </a>
+          <a routerLink="/tenant/bookings" class="menu-item active">
+            <mat-icon>book_online</mat-icon>
+            <span>My Bookings</span>
+          </a>
+        </div>
+      </mat-sidenav>
+
+      <mat-sidenav-content class="main-content">
+        <div class="bookings-content">
+          <h2 class="section-title">My Booking Requests</h2>
+          
+          <!-- Stats Cards -->
+          <div class="stats-container">
+            <mat-card class="stat-card total-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>book_online</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ allBookings.length }}</span>
+                  <span class="stat-label">Total Requests</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card pending-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>schedule</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ pendingBookings.length }}</span>
+                  <span class="stat-label">Pending</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card approved-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>check_circle</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ approvedBookings.length }}</span>
+                  <span class="stat-label">Approved</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card rejected-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>cancel</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ rejectedBookings.length }}</span>
+                  <span class="stat-label">Rejected</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Tabs for different booking statuses -->
+          <mat-card class="bookings-card">
+            <mat-tab-group class="bookings-tabs">
+              <mat-tab label="All Bookings ({{ allBookings.length }})">
+                <div class="bookings-list">
+                  <div *ngFor="let booking of allBookings" class="booking-item">
+                    <div class="booking-image">
+                      <img [src]="booking.propertyImage" [alt]="booking.propertyTitle">
+                    </div>
+                    
+                    <div class="booking-details">
+                      <div class="booking-header">
+                        <h3>{{ booking.propertyTitle }}</h3>
+                        <mat-chip [style.background-color]="getStatusColor(booking.status)" class="status-chip">
+                          <mat-icon>{{ getStatusIcon(booking.status) }}</mat-icon>
+                          {{ booking.status | titlecase }}
+                        </mat-chip>
+                      </div>
+                      
+                      <div class="booking-info">
+                        <div class="info-item">
+                          <mat-icon>location_on</mat-icon>
+                          <span>{{ booking.propertyLocation }}</span>
+                        </div>
+                        <div class="info-item">
+                          <mat-icon>currency_rupee</mat-icon>
+                          <span>₹{{ booking.rent }}/month</span>
+                        </div>
+                        <div class="info-item">
+                          <mat-icon>calendar_today</mat-icon>
+                          <span>Move-in: {{ booking.moveInDate | date:'mediumDate' }}</span>
+                        </div>
+                        <div class="info-item">
+                          <mat-icon>schedule</mat-icon>
+                          <span>Requested: {{ booking.requestDate | date:'mediumDate' }}</span>
+                        </div>
+                      </div>
+
+                      <div *ngIf="booking.message" class="booking-message">
+                        <mat-icon>message</mat-icon>
+                        <p>{{ booking.message }}</p>
+                      </div>
+
+                      <div class="booking-actions">
+                        <button mat-button color="primary" [routerLink]="['/property', booking.propertyId]">
+                          <mat-icon>visibility</mat-icon>
+                          View Property
+                        </button>
+                        <button *ngIf="booking.status === 'approved'" mat-button color="accent" (click)="contactOwner(booking.propertyId)">
+                          <mat-icon>contact_phone</mat-icon>
+                          Contact Owner
+                        </button>
+                        <button *ngIf="booking.status === 'pending'" mat-button color="warn" (click)="cancelBooking(booking.id)">
+                          <mat-icon>cancel</mat-icon>
+                          Cancel Request
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Pending ({{ pendingBookings.length }})">
+                <div class="bookings-list">
+                  <div *ngFor="let booking of pendingBookings" class="booking-item">
+                    <div class="booking-image">
+                      <img [src]="booking.propertyImage" [alt]="booking.propertyTitle">
+                    </div>
+                    
+                    <div class="booking-details">
+                      <div class="booking-header">
+                        <h3>{{ booking.propertyTitle }}</h3>
+                        <mat-chip style="background-color: orange" class="status-chip">
+                          <mat-icon>schedule</mat-icon>
+                          Pending
+                        </mat-chip>
+                      </div>
+                      
+                      <div class="booking-info">
+                        <div class="info-item">
+                          <mat-icon>location_on</mat-icon>
+                          <span>{{ booking.propertyLocation }}</span>
+                        </div>
+                        <div class="info-item">
+                          <mat-icon>currency_rupee</mat-icon>
+                          <span>₹{{ booking.rent }}/month</span>
+                        </div>
+                        <div class="info-item">
+                          <mat-icon>calendar_today</mat-icon>
+                          <span>Move-in: {{ booking.moveInDate | date:'mediumDate' }}</span>
+                        </div>
+                      </div>
+
+                      <div class="booking-actions">
+                        <button mat-button color="primary" [routerLink]="['/property', booking.propertyId]">
+                          <mat-icon>visibility</mat-icon>
+                          View Property
+                        </button>
+                        <button mat-button color="warn" (click)="cancelBooking(booking.id)">
+                          <mat-icon>cancel</mat-icon>
+                          Cancel Request
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Approved ({{ approvedBookings.length }})">
+                <div class="bookings-list">
+                  <div *ngFor="let booking of approvedBookings" class="booking-item approved-item">
+                    <div class="booking-image">
+                      <img [src]="booking.propertyImage" [alt]="booking.propertyTitle">
+                    </div>
+                    
+                    <div class="booking-details">
+                      <div class="booking-header">
+                        <h3>{{ booking.propertyTitle }}</h3>
+                        <mat-chip style="background-color: green" class="status-chip">
+                          <mat-icon>check_circle</mat-icon>
+                          Approved
+                        </mat-chip>
+                      </div>
+                      
+                      <div class="booking-info">
+                        <div class="info-item">
+                          <mat-icon>location_on</mat-icon>
+                          <span>{{ booking.propertyLocation }}</span>
+                        </div>
+                        <div class="info-item">
+                          <mat-icon>currency_rupee</mat-icon>
+                          <span>₹{{ booking.rent }}/month</span>
+                        </div>
+                        <div class="info-item">
+                          <mat-icon>calendar_today</mat-icon>
+                          <span>Move-in: {{ booking.moveInDate | date:'mediumDate' }}</span>
+                        </div>
+                      </div>
+
+                      <div *ngIf="booking.message" class="booking-message success-message">
+                        <mat-icon>check_circle</mat-icon>
+                        <p>{{ booking.message }}</p>
+                      </div>
+
+                      <div class="booking-actions">
+                        <button mat-button color="primary" [routerLink]="['/property', booking.propertyId]">
+                          <mat-icon>visibility</mat-icon>
+                          View Property
+                        </button>
+                        <button mat-raised-button color="accent" (click)="contactOwner(booking.propertyId)">
+                          <mat-icon>contact_phone</mat-icon>
+                          Contact Owner
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card>
+
+          <!-- Empty State -->
+          <div *ngIf="allBookings.length === 0" class="empty-state">
+            <mat-icon>book_online</mat-icon>
+            <h3>No Booking Requests Yet</h3>
+            <p>Start browsing properties and make your first booking request</p>
+            <button mat-raised-button color="primary" routerLink="/tenant/properties">
+              <mat-icon>search</mat-icon>
+              Browse Properties
+            </button>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

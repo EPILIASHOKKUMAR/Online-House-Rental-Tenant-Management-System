@@ -1,0 +1,170 @@
+<div class="tenant-layout">
+  <mat-toolbar class="tenant-header">
+    <mat-icon>home_work</mat-icon>
+    <span class="header-title">Tenant Portal</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </mat-toolbar>
+
+  <div class="tenant-body">
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav mode="side" opened class="sidebar">
+        <div class="sidebar-menu">
+          <a routerLink="/tenant/dashboard" class="menu-item active">
+            <mat-icon>dashboard</mat-icon>
+            <span>Dashboard</span>
+          </a>
+          <a routerLink="/tenant/properties" class="menu-item">
+            <mat-icon>search</mat-icon>
+            <span>Search Properties</span>
+          </a>
+          <a routerLink="/tenant/bookings" class="menu-item">
+            <mat-icon>book_online</mat-icon>
+            <span>My Bookings</span>
+          </a>
+        </div>
+      </mat-sidenav>
+
+      <mat-sidenav-content class="main-content">
+        <div class="dashboard-content">
+          <h2 class="section-title">Dashboard Overview</h2>
+          
+          <!-- Quick Search Section -->
+          <mat-card class="search-card">
+            <mat-card-header>
+              <mat-card-title>Quick Property Search</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="search-form">
+                <mat-form-field class="search-field">
+                  <mat-label>Search Properties</mat-label>
+                  <input matInput [(ngModel)]="searchQuery" placeholder="Enter property name or keywords">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="filter-field">
+                  <mat-label>Location</mat-label>
+                  <mat-select [(ngModel)]="selectedLocation">
+                    <mat-option value="">All Locations</mat-option>
+                    <mat-option *ngFor="let location of locations" [value]="location">
+                      {{ location }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="filter-field">
+                  <mat-label>Budget Range</mat-label>
+                  <mat-select [(ngModel)]="selectedBudget">
+                    <mat-option value="">Any Budget</mat-option>
+                    <mat-option *ngFor="let budget of budgetRanges" [value]="budget">
+                      ₹{{ budget }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="filter-field">
+                  <mat-label>Amenities</mat-label>
+                  <mat-select [(ngModel)]="selectedAmenities">
+                    <mat-option value="">Any Amenities</mat-option>
+                    <mat-option *ngFor="let amenity of amenities" [value]="amenity">
+                      {{ amenity }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" class="search-btn" (click)="onSearch()">
+                  <mat-icon>search</mat-icon>
+                  Search
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Stats Section -->
+          <div class="stats-container">
+            <mat-card class="stat-card properties-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>home_work</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ totalProperties }}</span>
+                  <span class="stat-label">Available Properties</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card bookings-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>book_online</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ myBookings }}</span>
+                  <span class="stat-label">My Bookings</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card class="stat-card pending-stat">
+              <mat-card-content>
+                <div class="stat-icon">
+                  <mat-icon>pending</mat-icon>
+                </div>
+                <div class="stat-info">
+                  <span class="stat-value">{{ pendingRequests }}</span>
+                  <span class="stat-label">Pending Requests</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Recent Properties Section -->
+          <mat-card class="recent-properties-card">
+            <mat-card-header>
+              <mat-card-title>Recently Added Properties</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="properties-grid">
+                <div *ngFor="let property of recentProperties" class="property-item">
+                  <div class="property-image">
+                    <img [src]="property.image" [alt]="property.title">
+                  </div>
+                  <div class="property-info">
+                    <h4>{{ property.title }}</h4>
+                    <p class="location">
+                      <mat-icon>location_on</mat-icon>
+                      {{ property.location }}
+                    </p>
+                    <p class="rent">₹{{ property.rent }}/month</p>
+                    <button mat-button color="primary" [routerLink]="['/property', property.id]">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Quick Actions -->
+          <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="actions-container">
+              <a routerLink="/tenant/properties">
+                <mat-icon>search</mat-icon>
+                Browse All Properties
+              </a>
+              <a routerLink="/tenant/bookings">
+                <mat-icon>book_online</mat-icon>
+                View My Bookings
+              </a>
+            </div>
+          </div>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>
