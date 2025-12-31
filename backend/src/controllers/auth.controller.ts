@@ -202,3 +202,90 @@ export const googleLogin = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to process Google login' });
   }
 };
+
+export const forgotPassword = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Check if user exists
+    const [users] = await pool.query<RowDataPacket[]>(
+      'SELECT id, name, email, role FROM users WHERE email = ?',
+      [email]
+    );
+
+    if (users.length === 0) {
+      return res.status(404).json({ error: 'No account found with this email address' });
+    }
+
+    const user = users[0];
+
+    // Generate a simple reset token (in production, use crypto.randomBytes)
+    const resetToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    const resetExpires = new Date(Date.now() + 3600000); // 1 hour from now
+
+    // Store reset token in database
+    await pool.query(
+      'UPDATE users SET reset_token = ?, reset_expires = ? WHERE id = ?',
+      [resetToken, resetExpires, user.id]
+    );
+
+    // In a real application, you would send an email here
+    // For now, we'll return the reset token (for development/testing)
+    res.json({
+      message: 'Password reset instructions sent to your email',
+      // Remove this in production - only for development
+      resetToken: resetToken,
+      email: email,
+      instructions: 'Use the reset token to reset your password'
+    });
+
+  } catch (error) {
+    console.error('Forgot password error:', error);
+    res.status(500).json({ error: 'Failed to process forgot password request' });
+  }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    if (!token || !newPassword) {
+      return res.status(400).json({ error: 'Reset token and new password are required' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+    }
+
+    // Find user with valid reset token
+    const [users] = await pool.query<RowDataPacket[]>(
+      'SELECT id, email FROM users WHERE reset_token = ? AND reset_expires > NOW()',
+      [token]
+    );
+
+    if (users.length === 0) {
+      return res.status(400).json({ error: 'Invalid or expired reset token' });
+    }
+
+    const user = users[0];
+
+    // Update password and clear reset token
+    await pool.query(
+      'UPDATE users SET password = ?, reset_token = NULL, reset_expires = NULL WHERE id = ?',
+      [newPassword, user.id]
+    );
+
+    res.json({
+      message: 'Password reset successful. You can now login with your new password.',
+      email: user.email
+    });
+
+  } catch (error) {
+    console.error('Reset password error:', error);
+    res.status(500).json({ error: 'Failed to reset password' });
+  }
+};
