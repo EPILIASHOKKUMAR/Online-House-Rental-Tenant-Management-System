@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import pool from '../config/db';
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
+import { sendPasswordResetEmail } from '../services/emailService';
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -223,7 +224,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     const user = users[0];
 
-    // Generate a simple reset token (in production, use crypto.randomBytes)
+    // Generate a secure reset token
     const resetToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     const resetExpires = new Date(Date.now() + 3600000); // 1 hour from now
 
@@ -233,15 +234,28 @@ export const forgotPassword = async (req: Request, res: Response) => {
       [resetToken, resetExpires, user.id]
     );
 
-    // In a real application, you would send an email here
-    // For now, we'll return the reset token (for development/testing)
-    res.json({
-      message: 'Password reset instructions sent to your email',
-      // Remove this in production - only for development
-      resetToken: resetToken,
-      email: email,
-      instructions: 'Use the reset token to reset your password'
-    });
+    // Send password reset email
+    const emailSent = await sendPasswordResetEmail(user.email, resetToken, user.name);
+
+    if (emailSent) {
+      res.json({
+        message: 'Password reset instructions have been sent to your email address',
+        email: email,
+        // Remove these in production - only for development/testing
+        ...(process.env.NODE_ENV === 'development' && {
+          resetToken: resetToken,
+          devNote: 'Reset token shown for development only'
+        })
+      });
+    } else {
+      // If email fails, still provide the token for development
+      res.json({
+        message: 'Email service temporarily unavailable. Please use the reset token below.',
+        resetToken: resetToken,
+        email: email,
+        instructions: 'Use this reset token to reset your password'
+      });
+    }
 
   } catch (error) {
     console.error('Forgot password error:', error);
