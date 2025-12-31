@@ -14,13 +14,22 @@ export const register = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Invalid role. Must be owner, tenant, or admin' });
     }
 
+    // Check if email already exists and get the role
     const [existing] = await pool.query<RowDataPacket[]>(
-      'SELECT id FROM users WHERE email = ?',
+      'SELECT id, role FROM users WHERE email = ?',
       [email]
     );
 
     if (existing.length > 0) {
-      return res.status(409).json({ error: 'Email already registered' });
+      const existingRole = existing[0].role;
+      return res.status(409).json({ 
+        error: `Email already registered as ${existingRole}`,
+        details: {
+          email: email,
+          existingRole: existingRole,
+          message: `This email is already registered with the role: ${existingRole}. Please use a different email or login with existing credentials.`
+        }
+      });
     }
 
     const [result] = await pool.query<ResultSetHeader>(
@@ -115,5 +124,81 @@ export const updateProfilePhoto = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Update profile photo error:', error);
     res.status(500).json({ error: 'Failed to update profile photo' });
+  }
+};
+
+export const updateProfile = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.id;
+    const { name, phone } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ error: 'Name is required' });
+    }
+
+    const [result] = await pool.query<ResultSetHeader>(
+      'UPDATE users SET name = ?, phone = ? WHERE id = ?',
+      [name, phone || null, userId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
+  }
+};
+
+export const googleLogin = async (req: Request, res: Response) => {
+  try {
+    const { email, name, googleId } = req.body;
+
+    if (!email || !name) {
+      return res.status(400).json({ error: 'Email and name are required' });
+    }
+
+    // Check if user already exists
+    const [existing] = await pool.query<RowDataPacket[]>(
+      'SELECT id, name, email, phone, role, profile_photo FROM users WHERE email = ?',
+      [email]
+    );
+
+    if (existing.length > 0) {
+      // User exists, return user data
+      const user = existing[0];
+      return res.json({
+        message: 'Login successful',
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          phone: user.phone,
+          role: user.role,
+          profile_photo: user.profile_photo
+        }
+      });
+    }
+
+    // Create new user with Google login
+    const [result] = await pool.query<ResultSetHeader>(
+      'INSERT INTO users (name, email, role, google_id) VALUES (?, ?, ?, ?)',
+      [name, email, 'tenant', googleId]
+    );
+
+    res.status(201).json({
+      message: 'User registered and logged in successfully',
+      user: {
+        id: result.insertId,
+        name: name,
+        email: email,
+        role: 'tenant'
+      }
+    });
+  } catch (error) {
+    console.error('Google login error:', error);
+    res.status(500).json({ error: 'Failed to process Google login' });
   }
 };

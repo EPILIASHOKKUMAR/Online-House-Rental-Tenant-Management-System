@@ -66,7 +66,19 @@ export class SignupComponent {
       },
       error: (error) => {
         this.isLoading = false;
-        this.errorMessage = error.error?.error || 'Registration failed. Please try again.';
+        
+        // Handle detailed error message for existing email
+        if (error.error?.details) {
+          const details = error.error.details;
+          this.errorMessage = `${details.message}`;
+          
+          // Show additional information in an alert
+          setTimeout(() => {
+            alert(`Email Registration Conflict!\n\nEmail: ${details.email}\nExisting Role: ${details.existingRole}\n\nPlease either:\n1. Use a different email address\n2. Login with your existing credentials\n3. Contact support if this is an error`);
+          }, 100);
+        } else {
+          this.errorMessage = error.error?.error || 'Registration failed. Please try again.';
+        }
       }
     });
   }
