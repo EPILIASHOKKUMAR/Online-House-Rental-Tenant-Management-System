@@ -1,0 +1,576 @@
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>apartment</mat-icon>
+        <span class="brand-text">Owner</span>
+      </div>
+
+      <!-- DO NOT TOUCH -->
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <span *ngIf="!isSidebarCollapsed" class="arrow">&#x2039;</span>
+        <span *ngIf="isSidebarCollapsed" class="arrow">&#x203A;</span>
+      </button>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/owner/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/owner/properties">
+        <mat-icon>home_work</mat-icon>
+        <span>My Properties</span>
+      </a>
+
+      <a class="active" routerLink="/owner/add-property">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Add Property</span>
+      </a>
+      <a routerLink="/owner/edit-property">
+        <mat-icon>edit</mat-icon>
+        <span>Edit Property</span>
+      </a>
+
+      <a routerLink="/owner/bookings">
+        <mat-icon>event</mat-icon>
+        <span>Booking Requests</span>
+      </a>
+
+      <a routerLink="/owner/tenants">
+        <mat-icon>people</mat-icon>
+        <span>Tenants</span>
+      </a>
+
+      <a routerLink="/owner/profile">
+        <mat-icon>person</mat-icon>
+        <span>Owner Profile</span>
+      </a>
+
+      <a class="logout-link" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <div class="add-property-container">
+
+      <div class="page-header">
+        <h1>Add New Property</h1>
+        <p>Create a new rental listing</p>
+      </div>
+
+     <form class="form-card" [formGroup]="propertyForm" (ngSubmit)="submit()">
+
+  <!-- MAIN CONTAINER -->
+  <div class="property-container">
+
+    <!-- PROPERTY DETAILS -->
+    <h2 class="section-title">Property Details</h2>
+
+    <div class="form-grid">
+
+      <div class="form-field">
+        <label>Property Title *</label>
+        <input type="text" formControlName="title"
+               placeholder="e.g., Spacious 2BHK in Koramangala">
+        <small>Enter a descriptive title for your property</small>
+      </div>
+
+      <div class="form-field">
+        <label>Property Type *</label>
+        <select formControlName="propertyType">
+          <option value="" disabled selected hidden>Select property type</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Villa">Villa</option>
+          <option value="Independent House">Independent House</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>BHK Configuration *</label>
+        <select formControlName="bhk">
+          <option value="" disabled selected hidden>Select BHK</option>
+          <option value="1 BHK">1 BHK</option>
+          <option value="2 BHK">2 BHK</option>
+          <option value="3 BHK">3 BHK</option>
+          <option value="4 BHK">4 BHK</option>
+          <option value="5+ BHK">5+ BHK</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Furnishing Status *</label>
+        <select formControlName="furnishing">
+          <option value="" disabled selected hidden>Select furnishing</option>
+          <option value="Fully Furnished">Fully Furnished</option>
+          <option value="Semi Furnished">Semi Furnished</option>
+          <option value="Unfurnished">Unfurnished</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Monthly Rent (₹) *</label>
+        <input type="number" formControlName="rent" placeholder="e.g., 25000">
+        <small>Enter monthly rent amount in INR</small>
+      </div>
+
+      <div class="form-field">
+        <label>Security Deposit (₹) *</label>
+        <input type="number" formControlName="deposit" placeholder="e.g., 50000">
+      </div>
+
+      <div class="form-field">
+        <label>Carpet Area (sq.ft) *</label>
+        <input type="number" formControlName="area" placeholder="e.g., 1200">
+      </div>
+
+      <div class="form-field">
+        <label>Floor Number</label>
+        <input type="number" formControlName="floor" placeholder="e.g., 3">
+      </div>
+
+      <div class="form-field full">
+        <label>Complete Address *</label>
+        <input type="text" formControlName="address"
+               placeholder="e.g., 123, MG Road, Near Metro Station">
+        <small>Enter full street address</small>
+      </div>
+
+      <div class="form-field">
+  <label>City *</label>
+
+  <input
+    type="text"
+    list="cityList"
+    formControlName="city"
+    placeholder="Select city"
+  />
+
+  <datalist id="cityList">
+    <option value="Mumbai"></option>
+    <option value="Delhi"></option>
+    <option value="Bangalore"></option>
+    <option value="Hyderabad"></option>
+    <option value="Pune"></option>
+    <option value="Chennai"></option>
+    <option value="Kolkata"></option>
+  </datalist>
+</div>
+
+
+      <div class="form-field">
+        <label>State *</label>
+        <input type="text" formControlName="state"
+         placeholder="e.g., Chennai" >
+      </div>
+
+      <div class="form-field">
+        <label>PIN Code *</label>
+        <input type="number" formControlName="pin"
+         placeholder="eg., 641660" >
+      </div>
+
+    </div>
+
+    
+
+  </div>
+  
+
+  <!-- ACTIONS -->
+   <!-- AMENITIES & FEATURES -->
+<div class="amenities-container">
+
+  <h2 class="amenities-title">Amenities & Features</h2>
+  <p class="amenities-subtitle">
+    Select all amenities available in your property
+  </p>
+
+  <div class="amenities-grid">
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Car Parking')" [checked]="isAmenitySelected('Car Parking')">
+      <div>
+        <span class="amenity-name">Car Parking</span>
+        <span class="amenity-desc">Dedicated parking space</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Gymnasium')" [checked]="isAmenitySelected('Gymnasium')">
+      <div>
+        <span class="amenity-name">Gymnasium</span>
+        <span class="amenity-desc">Fitness center access</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Swimming Pool')" [checked]="isAmenitySelected('Swimming Pool')">
+      <div>
+        <span class="amenity-name">Swimming Pool</span>
+        <span class="amenity-desc">Community pool facility</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('24/7 Security')" [checked]="isAmenitySelected('24/7 Security')">
+      <div>
+        <span class="amenity-name">24/7 Security</span>
+        <span class="amenity-desc">Round-the-clock security</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Elevator/Lift')" [checked]="isAmenitySelected('Elevator/Lift')">
+      <div>
+        <span class="amenity-name">Elevator/Lift</span>
+        <span class="amenity-desc">Building elevator access</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Power Backup')" [checked]="isAmenitySelected('Power Backup')">
+      <div>
+        <span class="amenity-name">Power Backup</span>
+        <span class="amenity-desc">Generator backup available</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('24/7 Water Supply')" [checked]="isAmenitySelected('24/7 Water Supply')">
+      <div>
+        <span class="amenity-name">24/7 Water Supply</span>
+        <span class="amenity-desc">Continuous water availability</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('WiFi / Internet')" [checked]="isAmenitySelected('WiFi / Internet')">
+      <div>
+        <span class="amenity-name">WiFi / Internet</span>
+        <span class="amenity-desc">High-speed internet connection</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Air Conditioning')" [checked]="isAmenitySelected('Air Conditioning')">
+      <div>
+        <span class="amenity-name">Air Conditioning</span>
+        <span class="amenity-desc">AC units installed</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Modular Kitchen')" [checked]="isAmenitySelected('Modular Kitchen')">
+      <div>
+        <span class="amenity-name">Modular Kitchen</span>
+        <span class="amenity-desc">Modern kitchen setup</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Balcony')" [checked]="isAmenitySelected('Balcony')">
+      <div>
+        <span class="amenity-name">Balcony</span>
+        <span class="amenity-desc">Private balcony space</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Garden / Park')" [checked]="isAmenitySelected('Garden / Park')">
+      <div>
+        <span class="amenity-name">Garden / Park</span>
+        <span class="amenity-desc">Green space access</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Clubhouse')" [checked]="isAmenitySelected('Clubhouse')">
+      <div>
+        <span class="amenity-name">Clubhouse</span>
+        <span class="amenity-desc">Community clubhouse</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Children Playground')" [checked]="isAmenitySelected('Children Playground')">
+      <div>
+        <span class="amenity-name">Children Playground</span>
+        <span class="amenity-desc">Kids play area</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Pet Friendly')" [checked]="isAmenitySelected('Pet Friendly')">
+      <div>
+        <span class="amenity-name">Pet Friendly</span>
+        <span class="amenity-desc">Pets allowed</span>
+      </div>
+    </label>
+
+    <label class="amenity-item">
+      <input type="checkbox" (change)="toggleAmenity('Maintenance Staff')" [checked]="isAmenitySelected('Maintenance Staff')">
+      <div>
+        <span class="amenity-name">Maintenance Staff</span>
+        <span class="amenity-desc">On-site maintenance team</span>
+      </div>
+    </label>
+
+  </div>
+</div>
+<!-- PROPERTY DESCRIPTION -->
+<div class="description-container">
+
+  <h2 class="description-title">Property Description</h2>
+  <p class="description-subtitle">
+    Provide detailed information about your property
+  </p>
+
+ <textarea
+  class="description-textarea placeholder-text"
+  rows="8"
+  onfocus="if(this.classList.contains('placeholder-text')){this.value='';this.classList.remove('placeholder-text');}"
+  onblur="if(this.value===''){this.value='Describe your property in detail... Include information about the neighborhood, nearby facilities, transportation, and any special features that make your property unique.';this.classList.add('placeholder-text');}">
+Describe your property in detail... Include information about the neighborhood, nearby facilities, transportation, and any special features that make your property unique.
+</textarea>
+
+  
+  <div class="description-footer">
+    <span class="min-chars">Minimum 50 characters required</span>
+    <span class="char-count">1000 characters remaining</span>
+  </div>
+
+</div>
+<!-- PROPERTY IMAGES -->
+<!-- PROPERTY IMAGES -->
+<div class="images-container">
+
+  <h2 class="images-title">Property Images</h2>
+  <p class="images-subtitle">
+    Upload high-quality images of your property (Max 5MB per image)
+  </p>
+
+  <div class="upload-box">
+
+    <!-- ICON -->
+    <div class="upload-icon">
+      <!-- svg icon here -->
+    </div>
+
+    <h3>Drag and drop images here</h3>
+    <p>or click the button below to browse</p>
+
+    <!-- BROWSE BUTTON -->
+    <label class="browse-btn">
+      Browse Files
+      <input
+        type="file"
+        accept="image/*"
+        multiple
+        (change)="handleImages($event)"
+      />
+    </label>
+
+    <small>
+      Supported formats: JPG, PNG, WEBP • Max size: 5MB per image
+    </small>
+
+  </div>
+
+  <!-- 👇 PASTE PREVIEW GRID RIGHT HERE -->
+ <!-- IMAGE PREVIEW GRID -->
+<div class="image-preview-grid">
+  <div
+    class="preview-card"
+    *ngFor="let img of imagePreviews; let i = index"
+  >
+    <!-- REMOVE BUTTON -->
+    <span class="remove-btn" (click)="removeImage(i)">×</span>
+
+    <!-- IMAGE -->
+    <img
+      [src]="img"
+      (click)="openImage(img)"
+    />
+  </div>
+</div>
+
+<!-- FULL IMAGE VIEW MODAL -->
+<div class="image-modal" *ngIf="selectedImage">
+  <span class="close-btn" (click)="closeImage()">×</span>
+  <img [src]="selectedImage" />
+</div>
+</div>
+
+<!-- GEOLOCATION -->
+<div class="location-container">
+  <h2 class="location-title">
+    <mat-icon>location_on</mat-icon>
+    Property Location
+  </h2>
+  <p class="location-subtitle">
+    Capture property location. If GPS fails, we'll use your approximate location - then drag the marker to set exact position.
+  </p>
+
+  <div class="location-box" *ngIf="!locationEnabled">
+    <div class="location-icon">
+      <mat-icon>my_location</mat-icon>
+    </div>
+    
+    <h3>Get Property Location</h3>
+    <p>Click the button to get location. You can adjust the marker on the map.</p>
+    
+    <button type="button" class="location-btn" (click)="enableLocation()" [disabled]="locationLoading">
+      <mat-icon>{{ locationLoading ? 'sync' : 'gps_fixed' }}</mat-icon>
+      <span *ngIf="!locationLoading">Enable Live Location</span>
+      <span *ngIf="locationLoading">Getting Location...</span>
+    </button>
+    
+    <div class="location-error" *ngIf="locationError">
+      <mat-icon>error</mat-icon>
+      {{ locationError }}
+    </div>
+
+    <div class="location-tip" style="margin-top: 15px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 10px; color: rgba(255,255,255,0.7); font-size: 0.85rem;">
+      <strong>Tip:</strong> If browser blocks location, click the lock icon 🔒 in address bar → Site Settings → Allow Location
+    </div>
+
+    <div class="manual-location">
+      <p class="manual-text">Or enter coordinates manually (get from Google Maps):</p>
+      <div class="manual-inputs">
+        <input type="number" step="any" placeholder="Latitude (e.g., 12.9716)" #manualLat />
+        <input type="number" step="any" placeholder="Longitude (e.g., 77.5946)" #manualLng />
+        <button type="button" class="manual-btn" (click)="setManualLocation(manualLat.value, manualLng.value)">
+          <mat-icon>check</mat-icon> Set
+        </button>
+      </div>
+      <p style="margin-top: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.5);">
+        To get coordinates: Open Google Maps → Right-click on location → Copy coordinates
+      </p>
+    </div>
+  </div>
+
+  <div class="location-success" *ngIf="locationEnabled">
+    <div class="location-header">
+      <mat-icon class="success-icon">check_circle</mat-icon>
+      <span>Live Location Captured!</span>
+    </div>
+    
+    <div class="coordinates">
+      <div class="coord-item">
+        <span class="coord-label">Latitude</span>
+        <span class="coord-value">{{ latitude?.toFixed(6) }}</span>
+      </div>
+      <div class="coord-item">
+        <span class="coord-label">Longitude</span>
+        <span class="coord-value">{{ longitude?.toFixed(6) }}</span>
+      </div>
+      <div class="coord-item" *ngIf="locationAccuracy">
+        <span class="coord-label">Accuracy</span>
+        <span class="coord-value">~{{ locationAccuracy | number:'1.0-0' }}m</span>
+      </div>
+    </div>
+    
+    <div class="map-container">
+      <div id="locationMap" class="leaflet-map"></div>
+      <p class="map-hint"><mat-icon>info</mat-icon> Click on map or drag marker to adjust location</p>
+    </div>
+
+    <div class="location-actions">
+      <button type="button" class="refresh-btn" (click)="refreshLocation()" [disabled]="locationLoading">
+        <mat-icon>{{ locationLoading ? 'sync' : 'refresh' }}</mat-icon>
+        Refresh Location
+      </button>
+      <a class="view-map-btn" 
+         [href]="'https://www.google.com/maps?q=' + latitude + ',' + longitude" 
+         target="_blank">
+        <mat-icon>open_in_new</mat-icon>
+        View on Google Maps
+      </a>
+      <button type="button" class="remove-location-btn" (click)="removeLocation()">
+        <mat-icon>close</mat-icon>
+        Remove
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT INFORMATION -->
+<div class="contact-container">
+
+  <h2 class="contact-title">Contact Information</h2>
+  <p class="contact-subtitle">
+    Provide contact details for tenant inquiries
+  </p>
+
+  <div class="contact-grid">
+
+    <div class="form-field">
+      <label>Contact Person Name *</label>
+      <input
+        type="text"
+        placeholder="e.g., Rajesh Kumar"
+      />
+      <small>Name of person to contact</small>
+    </div>
+
+    <div class="form-field">
+      <label>Contact Number *</label>
+      <input
+        type="tel"
+        placeholder="e.g., 9876543210"
+      />
+      <small>10-digit mobile number</small>
+    </div>
+
+    <div class="form-field">
+      <label>Email Address *</label>
+      <input
+        type="email"
+        placeholder="e.g., owner@example.com"
+      />
+      <small>Valid email for communication</small>
+    </div>
+
+    <div class="form-field">
+      <label>Alternate Number (Optional)</label>
+      <input
+        type="tel"
+        placeholder="e.g., 9123456789"
+      />
+    </div>
+
+  </div>
+
+</div>
+
+  <div class="actions">
+
+      <button class="btn-save" type="submit">
+        <span class="icon">💾</span>
+        Save Property
+      </button>
+  <button class="btn-cancel" type="button" routerLink="/owner/properties">
+    <span class="icon">✕</span>
+    Cancel
+  </button>
+
+
+</div>
+
+
+</form>
+
+
+    </div>
+  </main>
+</div>

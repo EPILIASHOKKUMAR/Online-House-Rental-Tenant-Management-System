@@ -52,9 +52,14 @@
         </select>
       </div>
 
-      <button type="submit" class="signup-btn">
-        <mat-icon>how_to_reg</mat-icon>
-        Create Account
+      <div class="error-message" *ngIf="errorMessage">
+        <mat-icon>error</mat-icon>
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="signup-btn" [disabled]="isLoading">
+        <mat-icon>{{ isLoading ? 'hourglass_empty' : 'how_to_reg' }}</mat-icon>
+        {{ isLoading ? 'Creating Account...' : 'Create Account' }}
       </button>
     </form>
 

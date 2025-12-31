@@ -1,0 +1,132 @@
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>person</mat-icon>
+        <div class="brand-text">
+          <h3>Tenant</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/tenant/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/tenant/properties">
+        <mat-icon>search</mat-icon>
+        <span>Browse Properties</span>
+      </a>
+      <a routerLink="/tenant/bookings">
+        <mat-icon>event_note</mat-icon>
+        <span>My Bookings</span>
+      </a>
+      <a class="active" routerLink="/tenant/profile">
+        <mat-icon>person</mat-icon>
+        <span>My Profile</span>
+      </a>
+      <a class="logout-link" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+    <div class="header">
+      <div>
+        <h1>My Profile</h1>
+        <p>Manage your account information</p>
+      </div>
+    </div>
+
+    <div class="profile-card">
+      <div class="avatar-section">
+        <img [src]="tenant.profilePhoto || 'https://ui-avatars.com/api/?name=' + tenant.name + '&background=00d4aa&color=fff&size=150'" alt="Profile" />
+        <button class="camera-btn" (click)="photoInput.click()">
+          <mat-icon>camera_alt</mat-icon>
+        </button>
+        <input type="file" #photoInput accept="image/*" (change)="onPhotoSelected($event)" hidden />
+      </div>
+
+      <div class="profile-details">
+        <h2>{{ tenant.name }}</h2>
+
+        <div class="info-row">
+          <mat-icon>email</mat-icon>
+          <span>{{ tenant.email }}</span>
+        </div>
+
+        <div class="info-row">
+          <mat-icon>phone</mat-icon>
+          <span>{{ tenant.phone }}</span>
+        </div>
+
+        <div class="badges">
+          <div class="badge">
+            <mat-icon>event_note</mat-icon>
+            <span>{{ bookingCount }} Bookings</span>
+          </div>
+
+          <div class="badge approved">
+            <mat-icon>check_circle</mat-icon>
+            <span>{{ approvedCount }} Approved</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-action">
+        <button class="edit-btn">
+          <mat-icon>edit</mat-icon>
+          Edit Profile
+        </button>
+      </div>
+    </div>
+
+    <!-- ACCOUNT SETTINGS -->
+    <div class="settings-card">
+      <h3>Account Settings</h3>
+      
+      <div class="setting-item">
+        <div class="setting-info">
+          <mat-icon>lock</mat-icon>
+          <div>
+            <h4>Change Password</h4>
+            <p>Update your account password</p>
+          </div>
+        </div>
+        <button class="setting-btn">Change</button>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <mat-icon>notifications</mat-icon>
+          <div>
+            <h4>Notifications</h4>
+            <p>Manage email and push notifications</p>
+          </div>
+        </div>
+        <button class="setting-btn">Manage</button>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-info">
+          <mat-icon>logout</mat-icon>
+          <div>
+            <h4>Logout</h4>
+            <p>Sign out of your account</p>
+          </div>
+        </div>
+        <button class="setting-btn danger" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </main>
+
+</div>

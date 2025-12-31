@@ -1,44 +1,68 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
+import { HttpClient } from '@angular/common/http';
+
+interface Property {
+  id: number;
+  title: string;
+  location: string;
+  city: string;
+  rent: number;
+  owner_name: string;
+  status: string;
+  created_at: string;
+}
 
 @Component({
   selector: 'app-admin-properties',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatCardModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule
-  ],
+  imports: [CommonModule, RouterModule, MatIconModule],
   templateUrl: './admin-properties.component.html',
   styleUrls: ['./admin-properties.component.css']
 })
-export class AdminPropertiesComponent {
-  
-  properties = [
-    { id: 101, title: '2BHK Flat', location: 'Bangalore', rent: 12000, ownerId: 'Owner-2' },
-    { id: 102, title: '1BHK Apartment', location: 'Hyderabad', rent: 8000, ownerId: 'Owner-4' },
-    { id: 103, title: '3BHK Villa', location: 'Chennai', rent: 25000, ownerId: 'Owner-2' },
-    { id: 104, title: 'Studio Room', location: 'Pune', rent: 6000, ownerId: 'Owner-4' }
-  ];
+export class AdminPropertiesComponent implements OnInit {
 
-  propertyColumns: string[] = ['id', 'title', 'location', 'rent', 'ownerId'];
+  private apiUrl = 'http://localhost:3000/api/admin';
+
+  isSidebarCollapsed = false;
+  isLoading = true;
+  properties: Property[] = [];
+
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {}
+
+  ngOnInit(): void {
+    this.loadProperties();
+  }
+
+  loadProperties(): void {
+    this.http.get<Property[]>(`${this.apiUrl}/properties`).subscribe({
+      next: (properties) => {
+        this.properties = properties;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading properties:', error);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
+
+  formatDate(dateStr: string): string {
+    return new Date(dateStr).toLocaleDateString('en-IN');
+  }
 
   logout(): void {
     localStorage.removeItem('userRole');
-    window.location.href = '/';
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/']);
   }
 }

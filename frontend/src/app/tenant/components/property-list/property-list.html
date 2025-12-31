@@ -1,81 +1,92 @@
-<div class="property-list-page">
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>person</mat-icon>
+        <div class="brand-text">
+          <h3>Tenant</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+    <nav class="menu">
+      <a routerLink="/tenant/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a class="active"><mat-icon>search</mat-icon><span>Browse Properties</span></a>
+      <a routerLink="/tenant/bookings"><mat-icon>event_note</mat-icon><span>My Bookings</span></a>
+      <a routerLink="/tenant/profile"><mat-icon>person</mat-icon><span>Profile</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
 
-  <h2 class="page-title">Available Properties</h2>
+  <main class="content">
+    <div class="header">
+      <h1>Available Properties</h1>
+    </div>
 
-  <!-- ================= FILTERS ================= -->
-  <div class="filters">
+    <div class="filters">
+      <mat-form-field appearance="outline">
+        <mat-label>Location</mat-label>
+        <input matInput [(ngModel)]="location" placeholder="Enter location" />
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Location</mat-label>
-      <input matInput [(ngModel)]="location" placeholder="Enter location" />
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Max Budget</mat-label>
+        <input matInput type="number" [(ngModel)]="maxBudget" placeholder="Enter max rent" />
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Max Budget</mat-label>
-      <input matInput type="number" [(ngModel)]="maxBudget" placeholder="Enter max rent" />
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Amenities</mat-label>
+        <mat-select [(ngModel)]="amenity">
+          <mat-option [value]="null">All</mat-option>
+          <mat-option value="Parking">Parking</mat-option>
+          <mat-option value="Lift">Lift</mat-option>
+          <mat-option value="Power Backup">Power Backup</mat-option>
+          <mat-option value="Garden">Garden</mat-option>
+          <mat-option value="Wi-Fi">Wi-Fi</mat-option>
+          <mat-option value="AC">AC</mat-option>
+          <mat-option value="Gym">Gym</mat-option>
+          <mat-option value="Swimming Pool">Swimming Pool</mat-option>
+          <mat-option value="Security">Security</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-  <mat-label>Amenities</mat-label>
+      <button mat-raised-button class="search-btn" (click)="filterProperties()">Search</button>
+    </div>
 
-  <mat-select [(ngModel)]="amenity">
-    <mat-option [value]="null">All</mat-option>
-    <mat-option value="Parking">Parking</mat-option>
-    <mat-option value="Lift">Lift</mat-option>
-    <mat-option value="Power Backup">Power Backup</mat-option>
-    <mat-option value="Garden">Garden</mat-option>
-  </mat-select>
-</mat-form-field>
+    <div *ngIf="isLoading" class="loading">Loading properties...</div>
 
+    <div class="property-grid" *ngIf="!isLoading">
+      <div class="property-card" *ngFor="let property of filteredProperties" [class.booked]="property.isBooked">
+        <div class="booked-badge" *ngIf="property.isBooked">
+          <mat-icon>block</mat-icon> Booked
+        </div>
+        <img [src]="property.photos && property.photos.length > 0 ? property.photos[0] : 'assets/default-property.jpg'" alt="Property" />
+        <div class="card-content">
+          <h3>{{ property.title }}</h3>
+          <p class="location"><mat-icon>location_on</mat-icon> {{ property.location }}, {{ property.city }}</p>
+          <p class="rent"><mat-icon>currency_rupee</mat-icon> ₹{{ property.rent }}/month</p>
+          <p class="type"><mat-icon>home</mat-icon> {{ property.property_type }} - {{ property.bhk }}</p>
+          <p class="amenities" *ngIf="property.amenities && property.amenities.length > 0">
+            <mat-icon>check_circle</mat-icon> {{ property.amenities.join(', ') }}
+          </p>
+          <p class="owner"><mat-icon>person</mat-icon> {{ property.owner_name }}</p>
+        </div>
+        <div class="card-actions">
+          <button mat-stroked-button [routerLink]="['/tenant/properties', property.id]">View Details</button>
+          <button mat-raised-button color="primary" 
+                  [routerLink]="['/tenant/properties', property.id, 'book']"
+                  [disabled]="property.isBooked"
+                  *ngIf="!property.isBooked">Book Now</button>
+          <button mat-raised-button disabled class="not-available-btn" *ngIf="property.isBooked">Not Available</button>
+        </div>
+      </div>
+    </div>
 
-
-    <button mat-raised-button class="search-btn" (click)="filterProperties()">
-      Search
-    </button>
-
-  </div>
-
-  <!-- ================= PROPERTY GRID ================= -->
-  <div class="property-grid">
-
-    <mat-card class="property-card" *ngFor="let property of filteredProperties">
-
-      <img mat-card-image [src]="property.image" alt="Property Image" />
-
-      <mat-card-content>
-        <h3>{{ property.title }}</h3>
-
-        <p><strong>Location:</strong> {{ property.location }}</p>
-        <p><strong>Rent:</strong> ₹{{ property.rent }}</p>
-        <p><strong>Amenities:</strong> {{ property.amenities.join(', ') }}</p>
-      </mat-card-content>
-
-      <mat-card-actions>
-
-        <!-- ✅ CORRECT ROUTES -->
-        <button
-          mat-stroked-button
-          color="primary"
-          [routerLink]="['/property', property.id]">
-          View Details
-        </button>
-
-        <button
-          mat-raised-button
-          color="primary"
-          [routerLink]="['/booking-request', property.id]">
-          Request Booking
-        </button>
-
-      </mat-card-actions>
-
-    </mat-card>
-
-  </div>
-
-  <!-- ================= EMPTY STATE ================= -->
-  <div class="no-results" *ngIf="filteredProperties.length === 0">
-    No properties found.
-  </div>
-
+    <div class="no-results" *ngIf="!isLoading && filteredProperties.length === 0">
+      <mat-icon>search_off</mat-icon>
+      <p>No properties found. Try adjusting your filters.</p>
+    </div>
+  </main>
 </div>

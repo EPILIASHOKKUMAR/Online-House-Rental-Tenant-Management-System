@@ -1,100 +1,398 @@
-<div class="home-container">
-  <nav class="navbar">
-    <div class="logo">
-      <mat-icon>home_work</mat-icon>
-      <span>HouseRental</span>
+<div class="home-wrapper">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
     </div>
-    <div class="nav-links">
-      <a routerLink="/admin-login" class="admin-link">
-        <mat-icon>admin_panel_settings</mat-icon>
-        Admin
-      </a>
-      <a routerLink="/login" [queryParams]="{role: 'tenant'}" class="login-link">
-        <mat-icon>login</mat-icon>
-        Login
-      </a>
-      <a routerLink="/signup" class="signup-btn">
-        <mat-icon>person_add</mat-icon>
-        Sign Up
-      </a>
-    </div>
-  </nav>
-
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1>Find Your Perfect Home</h1>
-      <p>Discover the best rental properties or list your own. Simple, secure, and hassle-free.</p>
-    </div>
-  </section>
-
-  <section class="roles-section">
-    <h2>Get Started</h2>
-    <p class="section-subtitle">Choose how you want to use our platform</p>
     
-    <div class="cards-container">
-      <mat-card class="role-card tenant-card">
-        <div class="card-icon-wrapper tenant-bg">
-          <mat-icon>search</mat-icon>
-        </div>
-        <mat-card-content>
-          <h3>Tenant</h3>
-          <p>Looking for a house?</p>
-          <ul class="features-list">
-            <li><mat-icon>check_circle</mat-icon> Browse properties</li>
-            <li><mat-icon>check_circle</mat-icon> Book your dream home</li>
-            <li><mat-icon>check_circle</mat-icon> Track your bookings</li>
-          </ul>
-        </mat-card-content>
-        <mat-card-actions>
-          <a mat-raised-button routerLink="/login" [queryParams]="{role: 'tenant'}" class="btn-tenant">
-            Tenant Login
-          </a>
-        </mat-card-actions>
-      </mat-card>
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
 
-      <mat-card class="role-card owner-card">
-        <div class="card-icon-wrapper owner-bg">
-          <mat-icon>apartment</mat-icon>
-        </div>
-        <mat-card-content>
-          <h3>Owner</h3>
-          <p>Want to rent your property?</p>
-          <ul class="features-list">
-            <li><mat-icon>check_circle</mat-icon> List your properties</li>
-            <li><mat-icon>check_circle</mat-icon> Manage bookings</li>
-            <li><mat-icon>check_circle</mat-icon> Connect with tenants</li>
-          </ul>
-        </mat-card-content>
-        <mat-card-actions>
-          <a mat-raised-button routerLink="/login" [queryParams]="{role: 'owner'}" class="btn-owner">
-            Owner Login
-          </a>
-        </mat-card-actions>
-      </mat-card>
 
-      <mat-card class="role-card admin-card">
-        <div class="card-icon-wrapper admin-bg">
+    <nav class="navbar">
+      <div class="logo">HouseRental</div>
+      <div class="nav-actions">
+        <a routerLink="/admin-login" class="nav-btn">
+          <mat-icon>admin_panel_settings</mat-icon>
+          ADMIN
+        </a>
+        <a routerLink="/login" class="nav-btn">
+          <mat-icon>login</mat-icon>
+          LOGIN
+        </a>
+        <a routerLink="/signup" class="nav-btn">
+          <mat-icon>person_add</mat-icon>
+          SIGN UP
+        </a>
+      </div>
+    </nav>
+
+    <!-- HERO CONTENT - SPLIT LAYOUT -->
+    <section class="hero-split">
+      <!-- LEFT SIDE - TEXT CONTENT -->
+      <div class="hero-left">
+        <h1 class="brand-title">
+          <span class="title-house">House</span><span class="title-rental">Rental</span>
+        </h1>
+        <p class="tagline">A unified platform for modern house rental management.</p>
+        <p class="sub-tagline">
+          Allows owners to list houses, tenants to search and book properties, and administrators to manage the platform securely.
+        </p>
+        <div class="hero-buttons">
+          <a routerLink="/login" [queryParams]="{role: 'tenant'}" class="hero-btn primary-btn">
+            <mat-icon>search</mat-icon>
+            Find a Home
+          </a>
+          <a routerLink="/login" [queryParams]="{role: 'owner'}" class="hero-btn secondary-btn">
+            <mat-icon>home</mat-icon>
+            List Property
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE - REALISTIC BUNGALOW -->
+      <div class="hero-right">
+        <div class="bungalow-scene">
+          <!-- Sky Elements -->
+          <div class="sun"></div>
+          <div class="cloud cloud-1"></div>
+          <div class="cloud cloud-2"></div>
+          
+          <!-- Main Bungalow House -->
+          <div class="villa">
+            <!-- Main Roof -->
+            <div class="villa-roof">
+              <div class="roof-tiles"></div>
+              <div class="chimney">
+                <div class="chimney-top"></div>
+              </div>
+            </div>
+            
+            <!-- Upper Floor / Attic -->
+            <div class="villa-attic">
+              <div class="attic-window">
+                <div class="window-pane"></div>
+              </div>
+            </div>
+            
+            <!-- Main Floor -->
+            <div class="villa-main">
+              <!-- Left Wing -->
+              <div class="villa-wing left-wing">
+                <div class="wing-window">
+                  <div class="window-frame">
+                    <div class="window-glass"></div>
+                    <div class="window-divider-v"></div>
+                    <div class="window-divider-h"></div>
+                  </div>
+                </div>
+                <div class="wing-window">
+                  <div class="window-frame">
+                    <div class="window-glass"></div>
+                    <div class="window-divider-v"></div>
+                    <div class="window-divider-h"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Center with Door -->
+              <div class="villa-center">
+                <div class="porch">
+                  <div class="porch-roof"></div>
+                  <div class="porch-pillars">
+                    <div class="pillar"></div>
+                    <div class="pillar"></div>
+                  </div>
+                </div>
+                <div class="main-door">
+                  <div class="door-panel"></div>
+                  <div class="door-window"></div>
+                  <div class="door-knob"></div>
+                </div>
+                <div class="steps">
+                  <div class="step"></div>
+                  <div class="step"></div>
+                </div>
+              </div>
+              
+              <!-- Right Wing -->
+              <div class="villa-wing right-wing">
+                <div class="wing-window">
+                  <div class="window-frame">
+                    <div class="window-glass"></div>
+                    <div class="window-divider-v"></div>
+                    <div class="window-divider-h"></div>
+                  </div>
+                </div>
+                <div class="wing-window">
+                  <div class="window-frame">
+                    <div class="window-glass"></div>
+                    <div class="window-divider-v"></div>
+                    <div class="window-divider-h"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foundation -->
+            <div class="villa-foundation"></div>
+          </div>
+          
+          <!-- Garden Elements -->
+          <div class="garden">
+            <div class="grass"></div>
+            <div class="flower-bed left-bed">
+              <div class="flower flower-1"></div>
+              <div class="flower flower-2"></div>
+              <div class="flower flower-3"></div>
+            </div>
+            <div class="flower-bed right-bed">
+              <div class="flower flower-1"></div>
+              <div class="flower flower-2"></div>
+              <div class="flower flower-3"></div>
+            </div>
+            <div class="tree">
+              <div class="tree-trunk"></div>
+              <div class="tree-leaves"></div>
+            </div>
+            <div class="pathway"></div>
+            <div class="fence">
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-post"></div>
+              <div class="fence-rail"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- ONE PLATFORM THREE EXPERIENCES - ACCESS CARDS -->
+  <section class="experiences-section">
+    <!-- Background Floating Shapes -->
+    <div class="floating-shapes-bg">
+      <div class="bg-shape bg-shape-1"></div>
+      <div class="bg-shape bg-shape-2"></div>
+      <div class="bg-shape bg-shape-3"></div>
+    </div>
+
+    <div class="section-header">
+      <h2 class="section-title">One Platform. Three Experiences.</h2>
+      <p class="section-subtitle">Built for real people.</p>
+    </div>
+
+    <div class="access-cards-grid">
+      <!-- TENANT ACCESS -->
+      <div class="access-card tenant-access">
+        <div class="access-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <h3>Tenant Access</h3>
+        <p>Tenants can only browse properties, submit booking requests, and view the status of their own requests. They cannot access owner data or system-level information.</p>
+      </div>
+
+      <!-- OWNER ACCESS -->
+      <div class="access-card owner-access">
+        <div class="access-icon">
+          <mat-icon>real_estate_agent</mat-icon>
+        </div>
+        <h3>Owner Access</h3>
+        <p>Owners can manage only the properties they have listed and respond to booking requests related to those properties. They cannot view or modify other owners' data.</p>
+      </div>
+
+      <!-- ADMIN ACCESS -->
+      <div class="access-card admin-access">
+        <div class="access-icon">
           <mat-icon>admin_panel_settings</mat-icon>
         </div>
-        <mat-card-content>
-          <h3>Admin</h3>
-          <p>System administration</p>
-          <ul class="features-list">
-            <li><mat-icon>check_circle</mat-icon> Manage users</li>
-            <li><mat-icon>check_circle</mat-icon> Monitor properties</li>
-            <li><mat-icon>check_circle</mat-icon> System overview</li>
-          </ul>
-        </mat-card-content>
-        <mat-card-actions>
-          <a mat-raised-button routerLink="/admin-login" class="btn-admin">
-            Admin Login
-          </a>
-        </mat-card-actions>
-      </mat-card>
+        <h3>Admin Access</h3>
+        <p>Administrators have system-level access to monitor users, properties, and platform activity. All administrative actions are logged and restricted to authorized accounts.</p>
+      </div>
     </div>
   </section>
 
+  <!-- HOW THIS PLATFORM IS USED - TIMELINE DESIGN -->
+  <section class="uses-section">
+    <div class="section-header">
+      <h2 class="section-title">How This Platform Is Used</h2>
+      <p class="section-subtitle">Practical use cases for real situations</p>
+    </div>
+    
+    <div class="uses-timeline">
+      <!-- Timeline Line -->
+      <div class="timeline-line"></div>
+      
+      <!-- Use Case 1 -->
+      <div class="timeline-item">
+        <div class="timeline-marker">
+          <div class="marker-dot"></div>
+        </div>
+        <div class="timeline-icon">
+          <mat-icon>track_changes</mat-icon>
+        </div>
+        <div class="timeline-content">
+          <h3>Tracking Booking Requests Clearly</h3>
+          <p>Instead of phone calls and messages, tenants can track the status of their booking requests — pending, approved, or rejected — directly in the system.</p>
+          <div class="timeline-tags">
+            <span class="tag"><mat-icon>pending</mat-icon> Pending</span>
+            <span class="tag"><mat-icon>check_circle</mat-icon> Approved</span>
+            <span class="tag"><mat-icon>cancel</mat-icon> Rejected</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Use Case 2 -->
+      <div class="timeline-item">
+        <div class="timeline-marker">
+          <div class="marker-dot"></div>
+        </div>
+        <div class="timeline-icon">
+          <mat-icon>dashboard</mat-icon>
+        </div>
+        <div class="timeline-content">
+          <h3>Managing Multiple Properties in One Place</h3>
+          <p>Owners who have more than one house can manage all their properties, booking requests, and tenant details from a single dashboard instead of handling everything manually.</p>
+          <div class="timeline-tags">
+            <span class="tag"><mat-icon>home_work</mat-icon> Properties</span>
+            <span class="tag"><mat-icon>event_note</mat-icon> Bookings</span>
+            <span class="tag"><mat-icon>people</mat-icon> Tenants</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Use Case 3 -->
+      <div class="timeline-item">
+        <div class="timeline-marker">
+          <div class="marker-dot"></div>
+        </div>
+        <div class="timeline-icon">
+          <mat-icon>security</mat-icon>
+        </div>
+        <div class="timeline-content">
+          <h3>Secure Role-Based Access</h3>
+          <p>Each user accesses only what is relevant to their role, ensuring that tenants, owners, and administrators operate within controlled boundaries.</p>
+          <div class="timeline-tags">
+            <span class="tag"><mat-icon>person</mat-icon> Tenant</span>
+            <span class="tag"><mat-icon>real_estate_agent</mat-icon> Owner</span>
+            <span class="tag"><mat-icon>admin_panel_settings</mat-icon> Admin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <!-- BUILT FOR GROWTH -->
+  <section class="growth-section">
+    <div class="growth-content">
+      <div class="growth-text">
+        <h2 class="section-title">Scalable by Design</h2>
+        <p class="section-subtitle">The system is designed to grow with future requirements</p>
+        <ul class="growth-features">
+          <li>
+            <div class="growth-icon">
+              <mat-icon>widgets</mat-icon>
+            </div>
+            <div>
+              <h4>Modular Frontend</h4>
+              <p>Angular standalone components</p>
+            </div>
+          </li>
+          <li>
+            <div class="growth-icon">
+              <mat-icon>api</mat-icon>
+            </div>
+            <div>
+              <h4>REST Architecture</h4>
+              <p>Clean API-based backend</p>
+            </div>
+          </li>
+          <li>
+            <div class="growth-icon">
+              <mat-icon>storage</mat-icon>
+            </div>
+            <div>
+              <h4>Extensible Database</h4>
+              <p>Structure ready for growth</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="growth-visual">
+        <div class="growth-graphic">
+          <!-- Outer Glow -->
+          <div class="outer-glow"></div>
+          <!-- Animated Rings -->
+          <div class="animated-ring ring-1"></div>
+          <div class="animated-ring ring-2"></div>
+          <div class="animated-ring ring-3"></div>
+          <div class="animated-ring ring-4"></div>
+          <!-- Floating Particles -->
+          <div class="particle p1"></div>
+          <div class="particle p2"></div>
+          <div class="particle p3"></div>
+          <div class="particle p4"></div>
+          <div class="particle p5"></div>
+          <div class="particle p6"></div>
+          <!-- Center Icon -->
+          <div class="center-orb">
+            <div class="orb-glow"></div>
+            <mat-icon>rocket_launch</mat-icon>
+          </div>
+          <!-- Orbiting Elements -->
+          <div class="orbit orbit-1">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit orbit-2">
+            <div class="orbit-dot"></div>
+          </div>
+          <div class="orbit orbit-3">
+            <div class="orbit-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2 class="cta-title">Start Your Rental Journey</h2>
+    <div class="cta-buttons">
+      <a routerLink="/login" [queryParams]="{role: 'tenant'}" class="cta-btn">
+        <mat-icon>search</mat-icon>
+        I'm Looking for a Home
+      </a>
+      <a routerLink="/login" [queryParams]="{role: 'owner'}" class="cta-btn">
+        <mat-icon>home</mat-icon>
+        I Want to Rent My Property
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
-    <p>&copy; 2025 HouseRental. All rights reserved.</p>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span>HouseRental</span>
+        <p class="footer-tagline">Built for simplicity. Powered by trust.</p>
+      </div>
+      <div class="footer-info">
+        <span><mat-icon>location_on</mat-icon> Chennai, India</span>
+        <span><mat-icon>email</mat-icon> support&#64;houserental.com</span>
+      </div>
+    </div>
   </footer>
 </div>

@@ -1,0 +1,88 @@
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>apartment</mat-icon>
+        <div class="brand-text">
+          <h3>Owner</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+    <nav class="menu">
+      <a routerLink="/owner/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a class="active"><mat-icon>home_work</mat-icon><span>My Properties</span></a>
+      <a routerLink="/owner/add-property"><mat-icon>add_circle_outline</mat-icon><span>Add Property</span></a>
+      <a routerLink="/owner/edit-property"><mat-icon>edit</mat-icon><span>Edit Property</span></a>
+      <a routerLink="/owner/bookings"><mat-icon>event</mat-icon><span>Booking Requests</span></a>
+      <a routerLink="/owner/tenants"><mat-icon>people</mat-icon><span>Tenants</span></a>
+      <a routerLink="/owner/profile"><mat-icon>person</mat-icon><span>Owner Profile</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
+
+  <main class="content owner-properties">
+    <div class="header">
+      <h1>My Properties</h1>
+      <button class="add-btn" routerLink="/owner/add-property">
+        <mat-icon>add</mat-icon> Add New Property
+      </button>
+    </div>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div><p>Total Properties</p><h2>{{ totalProperties }}</h2></div>
+        <mat-icon class="icon blue">domain</mat-icon>
+      </div>
+      <div class="stat-card">
+        <div><p>Available</p><h2>{{ availableCount }}</h2></div>
+        <mat-icon class="icon green">lock_open</mat-icon>
+      </div>
+      <div class="stat-card">
+        <div><p>Occupied</p><h2>{{ occupiedCount }}</h2></div>
+        <mat-icon class="icon gray">lock</mat-icon>
+      </div>
+    </section>
+
+    <div class="filters">
+      <input type="text" placeholder="Search by title or location..." [(ngModel)]="searchText" (input)="applyFilters()" />
+      <select [(ngModel)]="statusFilter" (change)="applyFilters()">
+        <option value="all">All Properties</option>
+        <option value="available">Available</option>
+        <option value="rented">Occupied</option>
+      </select>
+      <select [(ngModel)]="sortBy" (change)="applyFilters()">
+        <option value="newest">Newest First</option>
+        <option value="rentHigh">Rent: High to Low</option>
+        <option value="rentLow">Rent: Low to High</option>
+        <option value="titleAZ">Title: A to Z</option>
+        <option value="titleZA">Title: Z to A</option>
+      </select>
+      <button class="reset-btn" (click)="resetFilters()"><mat-icon>refresh</mat-icon> Reset</button>
+    </div>
+
+    <div class="property-grid">
+      <div class="property-card" *ngFor="let property of filteredProperties">
+        <img [src]="property.photos && property.photos.length > 0 ? property.photos[0] : 'assets/default-property.jpg'" />
+        <div class="info">
+          <h3>{{ property.title }}</h3>
+          <p>{{ property.location }}</p>
+          <p class="rent">₹{{ property.rent }}/month</p>
+          <span class="status" [class.available]="property.status === 'available'" [class.occupied]="property.status === 'rented'">
+            {{ property.status === 'rented' ? 'Occupied' : 'Available' }}
+          </span>
+        </div>
+        <div class="card-actions">
+          <button class="edit-btn" [routerLink]="['/owner/edit-property', property.id]">
+            <mat-icon>edit</mat-icon> Edit
+          </button>
+          <button class="delete-btn" (click)="deleteProperty(property.id)">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

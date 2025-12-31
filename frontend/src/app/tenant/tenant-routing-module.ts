@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
-import { PropertyListComponent } from './components/property-list/property-list';
-import { PropertyDetailsComponent } from './components/property-details/property-details';
-import { BookingRequestComponent } from './components/booking-request/booking-request';
-import { BookingStatusComponent } from './components/booking-status/booking-status';
 
 export const TENANT_ROUTES: Routes = [
+  {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./components/tenant-dashboard/tenant-dashboard.component')
+        .then(m => m.TenantDashboardComponent)
+  },
   {
     path: 'properties',
     loadComponent: () =>
@@ -24,9 +26,19 @@ export const TENANT_ROUTES: Routes = [
         .then(m => m.BookingRequestComponent)
   },
   {
-    path: 'my-bookings',
+    path: 'bookings',
     loadComponent: () =>
       import('./components/booking-status/booking-status')
         .then(m => m.BookingStatusComponent)
+  },
+  {
+    path: 'my-bookings',
+    redirectTo: 'bookings',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   }
 ];

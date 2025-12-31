@@ -343,3 +343,29 @@
     font-size: 0.75rem;
   }
 }
+
+
+/* Error Message Styles */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(244, 67, 54, 0.15);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: #ff6b6b;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.error-message mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.signup-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

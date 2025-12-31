@@ -1,0 +1,106 @@
+<div class="dashboard-layout">
+
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>apartment</mat-icon>
+        <div class="brand-text">
+          <h3>Owner</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/owner/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/owner/properties">
+        <mat-icon>home_work</mat-icon>
+        <span>My Properties</span>
+      </a>
+      <a routerLink="/owner/add-property">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Add Property</span>
+      </a>
+      <a routerLink="/owner/edit-property">
+        <mat-icon>edit</mat-icon>
+        <span>Edit Property</span>
+      </a>
+      <a routerLink="/owner/bookings">
+        <mat-icon>event</mat-icon>
+        <span>Booking Requests</span>
+      </a>
+      <a class="active" routerLink="/owner/tenants">
+        <mat-icon>people</mat-icon>
+        <span>Tenants</span>
+      </a>
+      <a routerLink="/owner/profile">
+        <mat-icon>person</mat-icon>
+        <span>Owner Profile</span>
+      </a>
+      <a class="logout-link" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="header">
+      <div>
+        <h1>My Tenants</h1>
+        <p>View and manage your current tenants</p>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">
+      <p>Loading tenants...</p>
+    </div>
+
+    <div class="tenants-grid" *ngIf="!isLoading">
+      <div class="tenant-card" *ngFor="let tenant of tenants">
+        <div class="tenant-avatar">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="tenant-info">
+          <h3>{{ tenant.name }}</h3>
+          <p class="property">
+            <mat-icon>home</mat-icon>
+            {{ tenant.property_title }}
+          </p>
+          <p class="location">
+            <mat-icon>location_on</mat-icon>
+            {{ tenant.location }}
+          </p>
+          <p class="rent">
+            <mat-icon>currency_rupee</mat-icon>
+            ₹{{ tenant.rent }}/month
+          </p>
+          <p class="contact">
+            <mat-icon>phone</mat-icon>
+            {{ tenant.phone || 'N/A' }}
+          </p>
+          <p class="contact">
+            <mat-icon>email</mat-icon>
+            {{ tenant.email }}
+          </p>
+        </div>
+        <div class="tenant-status">
+          <span class="status active">Active</span>
+          <p class="since">Since {{ formatDate(tenant.booking_date) }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="!isLoading && tenants.length === 0">
+      <mat-icon>people_outline</mat-icon>
+      <h3>No Tenants Yet</h3>
+      <p>Your approved tenants will appear here</p>
+    </div>
+  </main>
+
+</div>

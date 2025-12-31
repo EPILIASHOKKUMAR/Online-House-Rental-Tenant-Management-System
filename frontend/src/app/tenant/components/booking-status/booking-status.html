@@ -1,16 +1,59 @@
-<div class="tenant-layout">
-  <div class="status-card">
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>person</mat-icon>
+        <div class="brand-text"><h3>Tenant</h3></div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+    <nav class="menu">
+      <a routerLink="/tenant/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a routerLink="/tenant/properties"><mat-icon>search</mat-icon><span>Browse Properties</span></a>
+      <a class="active"><mat-icon>event_note</mat-icon><span>My Bookings</span></a>
+      <a routerLink="/tenant/profile"><mat-icon>person</mat-icon><span>Profile</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
 
-    <h2>Booking Status</h2>
+  <main class="content">
+    <div class="header">
+      <h1>My Booking Requests</h1>
+    </div>
 
-    <p>
-      Status:
-      <span class="status pending">{{ bookingStatus }}</span>
-    </p>
+    <div class="realtime-notification" *ngIf="notification">
+      <mat-icon>notifications_active</mat-icon>
+      <span>{{ notification }}</span>
+    </div>
 
-    <button mat-raised-button color="primary" routerLink="/properties">
-      Back to Properties
-    </button>
+    <div *ngIf="isLoading" class="loading">Loading bookings...</div>
 
-  </div>
+    <div class="bookings-container" *ngIf="!isLoading">
+      <div class="booking-card" *ngFor="let booking of bookings">
+        <div class="booking-header">
+          <h3>{{ booking.property_title }}</h3>
+          <span class="status-badge" [ngClass]="getStatusClass(booking.status)">{{ booking.status | titlecase }}</span>
+        </div>
+        <div class="booking-details">
+          <p><mat-icon>location_on</mat-icon> {{ booking.location }}</p>
+          <p><mat-icon>currency_rupee</mat-icon> ₹{{ booking.rent }}/month</p>
+          <p><mat-icon>person</mat-icon> Owner: {{ booking.owner_name }}</p>
+          <p><mat-icon>phone</mat-icon> {{ booking.owner_phone }}</p>
+          <p><mat-icon>calendar_today</mat-icon> Requested: {{ formatDate(booking.request_time) }}</p>
+          <p *ngIf="booking.message"><mat-icon>message</mat-icon> {{ booking.message }}</p>
+        </div>
+        <div class="booking-actions">
+          <button mat-stroked-button color="warn" *ngIf="booking.status === 'pending'" (click)="cancelBooking(booking.id)">Cancel Request</button>
+        </div>
+      </div>
+
+      <div class="no-bookings" *ngIf="bookings.length === 0">
+        <mat-icon>event_busy</mat-icon>
+        <p>No booking requests yet</p>
+        <button mat-raised-button color="primary" routerLink="/tenant/properties">Browse Properties</button>
+      </div>
+    </div>
+  </main>
 </div>

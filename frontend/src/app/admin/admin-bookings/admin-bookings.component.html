@@ -1,0 +1,75 @@
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>shield</mat-icon>
+        <div class="brand-text">
+          <h3>Admin</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/admin/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a routerLink="/admin/users"><mat-icon>people</mat-icon><span>Manage Users</span></a>
+      <a routerLink="/admin/properties"><mat-icon>apartment</mat-icon><span>All Properties</span></a>
+      <a class="active" routerLink="/admin/bookings"><mat-icon>event_note</mat-icon><span>All Bookings</span></a>
+      <a routerLink="/admin/reports"><mat-icon>analytics</mat-icon><span>Reports</span></a>
+      <a routerLink="/admin/settings"><mat-icon>settings</mat-icon><span>Settings</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="header">
+      <div>
+        <h1>All Bookings</h1>
+        <p>Monitor all booking requests across the platform</p>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">Loading bookings...</div>
+
+    <div class="table-container" *ngIf="!isLoading">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Property</th>
+            <th>Location</th>
+            <th>Rent</th>
+            <th>Tenant</th>
+            <th>Owner</th>
+            <th>Status</th>
+            <th>Request Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookings">
+            <td>#{{ booking.id }}</td>
+            <td>{{ booking.property_title }}</td>
+            <td>{{ booking.location }}</td>
+            <td>₹{{ booking.rent }}</td>
+            <td>{{ booking.tenant_name }}</td>
+            <td>{{ booking.owner_name }}</td>
+            <td>
+              <span class="status-badge" [class]="booking.status">
+                {{ booking.status | titlecase }}
+              </span>
+            </td>
+            <td>{{ formatDate(booking.request_time) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="empty-state" *ngIf="bookings.length === 0">
+        <mat-icon>event_busy</mat-icon>
+        <h3>No Bookings Yet</h3>
+        <p>Booking requests will appear here</p>
+      </div>
+    </div>
+  </main>
+</div>

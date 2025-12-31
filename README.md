@@ -1,1 +1,0 @@
-# Online-House-Rental-Tenant-Management-System

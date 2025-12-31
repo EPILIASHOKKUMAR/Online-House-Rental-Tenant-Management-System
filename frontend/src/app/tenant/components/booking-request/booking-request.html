@@ -3,77 +3,59 @@
 
     <h2 class="page-title">Booking Request</h2>
 
-    <form *ngIf="!submitted" class="form-card">
+    <div *ngIf="isLoading" class="loading">Loading property details...</div>
 
-      <!-- Tenant Name -->
+    <div *ngIf="property && !submitted" class="property-summary">
+      <h3>{{ property.title }}</h3>
+      <p>Location: {{ property.location }}, {{ property.city }}</p>
+      <p>Rent: ₹{{ property.rent }}/month</p>
+    </div>
+
+    <form *ngIf="!submitted && !isLoading" class="form-card">
+
       <mat-form-field appearance="outline">
-        <mat-label>Tenant Name</mat-label>
-        <input
-          matInput
-          [(ngModel)]="booking.tenantName"
-          name="tenantName"
-          required>
+        <mat-label>Your Name</mat-label>
+        <input matInput [(ngModel)]="booking.tenantName" name="tenantName" required>
       </mat-form-field>
 
-      <!-- Email -->
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input
-          matInput
-          type="email"
-          [(ngModel)]="booking.email"
-          name="email"
-          required>
+        <input matInput type="email" [(ngModel)]="booking.email" name="email" required>
       </mat-form-field>
 
-      <!-- Phone -->
       <mat-form-field appearance="outline">
         <mat-label>Phone</mat-label>
-        <input
-          matInput
-          type="tel"
-          [(ngModel)]="booking.phone"
-          name="phone"
-          required>
+        <input matInput type="tel" [(ngModel)]="booking.phone" name="phone" required>
       </mat-form-field>
 
-      <!-- Move-in Date (DD-MM-YYYY) -->
       <mat-form-field appearance="outline">
         <mat-label>Move-in Date</mat-label>
-
-        <input
-          matInput
-          [matDatepicker]="picker"
-          [(ngModel)]="booking.moveInDate"
-          name="moveInDate"
-          placeholder="DD-MM-YYYY"
-          required>
-
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="picker">
-        </mat-datepicker-toggle>
-
+        <input matInput [matDatepicker]="picker" [(ngModel)]="booking.moveInDate" name="moveInDate" placeholder="DD-MM-YYYY">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-
-        <mat-hint>DD-MM-YYYY</mat-hint>
       </mat-form-field>
 
-      <!-- Submit Button -->
-      <button
-        mat-raised-button
-        color="primary"
-        type="button"
-        (click)="submitBooking()">
-        Submit Booking
+      <mat-form-field appearance="outline">
+        <mat-label>Message to Owner</mat-label>
+        <textarea matInput [(ngModel)]="booking.message" name="message" rows="4" placeholder="Tell the owner about yourself..."></textarea>
+      </mat-form-field>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <button mat-raised-button color="primary" type="button" (click)="submitBooking()" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Submitting...' : 'Submit Booking Request' }}
       </button>
+
+      <button mat-stroked-button type="button" (click)="goBack()">Cancel</button>
 
     </form>
 
-    <!-- Success Message -->
     <div *ngIf="submitted" class="success-box">
-      <h3>✅ Booking Submitted</h3>
-      <p>Status: <strong>{{ booking.status }}</strong></p>
+      <h3>Booking Request Submitted!</h3>
+      <p>Your booking request has been sent to the owner.</p>
+      <p>Status: <strong>Pending</strong></p>
+      <button mat-raised-button color="primary" routerLink="/tenant/bookings">View My Bookings</button>
+      <button mat-stroked-button routerLink="/tenant/properties">Browse More Properties</button>
     </div>
 
   </div>

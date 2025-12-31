@@ -1,0 +1,170 @@
+<div class="dashboard-layout">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>apartment</mat-icon>
+        <div class="brand-text">
+          <h3>Owner</h3>
+        </div>
+      </div>
+
+      <!-- Collapse Button -->
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>
+          {{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}
+        </mat-icon>
+      </button>
+    </div>
+
+    <!-- Menu -->
+    <nav class="menu">
+      <a class="active" routerLink="/owner/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+
+      <a routerLink="/owner/properties">
+        <mat-icon>home_work</mat-icon>
+        <span>My Properties</span>
+      </a>
+
+      <a routerLink="/owner/add-property">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Add Property</span>
+      </a>
+
+      <a routerLink="/owner/edit-property">
+        <mat-icon>edit</mat-icon>
+        <span>Edit Property</span>
+      </a>
+
+      <a routerLink="/owner/bookings">
+        <mat-icon>event</mat-icon>
+        <span>Booking Requests</span>
+      </a>
+
+      <a routerLink="/owner/tenants">
+        <mat-icon>people</mat-icon>
+        <span>Tenants</span>
+      </a>
+
+      <a routerLink="/owner/profile">
+        <mat-icon>person</mat-icon>
+        <span>Owner Profile</span>
+      </a>
+
+      <a class="logout-link" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="content">
+
+    <div class="header">
+      <div>
+        <h1>Owner Dashboard</h1>
+        <p>Welcome back! Here's an overview of your rental portfolio</p>
+      </div>
+
+      <button class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+
+    <!-- ================= STATS ================= -->
+    <section class="stats-grid">
+
+      <div class="stat-card">
+        <div>
+          <p>Total Properties</p>
+          <h2>{{ totalProperties }}</h2>
+          <span
+            [class.positive]="totalPropertiesDiff >= 0"
+            [class.negative]="totalPropertiesDiff < 0">
+            {{ totalPropertiesDiff >= 0 ? '↑' : '↓' }}
+            {{ totalPropertiesDiff >= 0 ? totalPropertiesDiff : -totalPropertiesDiff }}
+            vs last month
+          </span>
+        </div>
+        <mat-icon class="icon blue">domain</mat-icon>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <p>Active Rentals</p>
+          <h2>{{ activeRentals }}</h2>
+          <span
+            [class.positive]="activeRentalsDiff >= 0"
+            [class.negative]="activeRentalsDiff < 0">
+            {{ activeRentalsDiff >= 0 ? '↑' : '↓' }}
+            {{ activeRentalsDiff >= 0 ? activeRentalsDiff : -activeRentalsDiff }}
+            vs last month
+          </span>
+        </div>
+        <mat-icon class="icon green">home</mat-icon>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <p>Pending Requests</p>
+          <h2>{{ pendingRequests }}</h2>
+          <span
+            [class.positive]="pendingRequestsDiff >= 0"
+            [class.negative]="pendingRequestsDiff < 0">
+            {{ pendingRequestsDiff >= 0 ? '↑' : '↓' }}
+            {{ pendingRequestsDiff >= 0 ? pendingRequestsDiff : -pendingRequestsDiff }}
+            vs last month
+          </span>
+        </div>
+        <mat-icon class="icon orange">schedule</mat-icon>
+      </div>
+
+      <div class="stat-card">
+        <div>
+          <p>Approved Bookings</p>
+          <h2>{{ approvedBookings }}</h2>
+          <span
+            [class.positive]="approvedBookingsDiff >= 0"
+            [class.negative]="approvedBookingsDiff < 0">
+            {{ approvedBookingsDiff >= 0 ? '↑' : '↓' }}
+            {{ approvedBookingsDiff >= 0 ? approvedBookingsDiff : -approvedBookingsDiff }}
+            vs last month
+          </span>
+        </div>
+        <mat-icon class="icon sky">check_circle</mat-icon>
+      </div>
+
+    </section>
+
+    <!-- ================= QUICK ACTIONS ================= -->
+    <section class="actions">
+      <h3>Quick Actions</h3>
+
+      <div class="action-buttons">
+        <button class="primary" routerLink="/owner/add-property">
+          <mat-icon>add</mat-icon>
+          Add New Property
+        </button>
+
+        <button routerLink="/owner/properties">
+          <mat-icon>list</mat-icon>
+          View All Properties
+        </button>
+
+        <button routerLink="/owner/bookings">
+          <mat-icon>event_note</mat-icon>
+          Manage Requests
+        </button>
+      </div>
+    </section>
+
+  </main>
+</div>

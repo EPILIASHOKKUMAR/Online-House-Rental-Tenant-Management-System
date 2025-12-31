@@ -1,0 +1,127 @@
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>shield</mat-icon>
+        <div class="brand-text">
+          <h3>Admin</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/admin/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a routerLink="/admin/users"><mat-icon>people</mat-icon><span>Manage Users</span></a>
+      <a routerLink="/admin/properties"><mat-icon>apartment</mat-icon><span>All Properties</span></a>
+      <a routerLink="/admin/bookings"><mat-icon>event_note</mat-icon><span>All Bookings</span></a>
+      <a routerLink="/admin/reports"><mat-icon>analytics</mat-icon><span>Reports</span></a>
+      <a class="active" routerLink="/admin/settings"><mat-icon>settings</mat-icon><span>Settings</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="header">
+      <div>
+        <h1>Settings</h1>
+        <p>Configure platform settings</p>
+      </div>
+    </div>
+
+    <div class="settings-container">
+      
+      <div class="settings-card">
+        <div class="card-header">
+          <mat-icon>business</mat-icon>
+          <h3>General Settings</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Site Name</label>
+            <input type="text" [(ngModel)]="settings.siteName" />
+          </div>
+          <div class="form-group">
+            <label>Contact Email</label>
+            <input type="email" [(ngModel)]="settings.contactEmail" />
+          </div>
+          <div class="form-group">
+            <label>Contact Phone</label>
+            <input type="tel" [(ngModel)]="settings.contactPhone" />
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <div class="card-header">
+          <mat-icon>security</mat-icon>
+          <h3>Registration Settings</h3>
+        </div>
+        <div class="card-body">
+          <div class="toggle-group">
+            <div class="toggle-info">
+              <span class="toggle-label">Allow New Registrations</span>
+              <span class="toggle-desc">Enable or disable new user registrations</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" [(ngModel)]="settings.allowRegistration" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="toggle-group">
+            <div class="toggle-info">
+              <span class="toggle-label">Require Admin Approval</span>
+              <span class="toggle-desc">New users need admin approval before access</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" [(ngModel)]="settings.requireApproval" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <div class="card-header">
+          <mat-icon>photo_library</mat-icon>
+          <h3>Property Settings</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Max Photos Per Property</label>
+            <input type="number" [(ngModel)]="settings.maxPhotosPerProperty" min="1" max="20" />
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-card danger">
+        <div class="card-header">
+          <mat-icon>warning</mat-icon>
+          <h3>Maintenance Mode</h3>
+        </div>
+        <div class="card-body">
+          <div class="toggle-group">
+            <div class="toggle-info">
+              <span class="toggle-label">Enable Maintenance Mode</span>
+              <span class="toggle-desc">Temporarily disable the platform for maintenance</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" [(ngModel)]="settings.maintenanceMode" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="save-btn" (click)="saveSettings()">
+          <mat-icon>save</mat-icon>
+          Save Settings
+        </button>
+      </div>
+
+    </div>
+  </main>
+</div>

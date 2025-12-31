@@ -1,52 +1,164 @@
-<div class="tenant-layout">
-  <div class="details-container" *ngIf="property">
-
-    <div class="details-card">
-
-      <!-- Property Image -->
-      <img
-        [src]="property.image"
-        alt="Property Image"
-        class="property-image"
-      />
-
-      <!-- Content -->
-      <div class="details-content">
-
-        <h2>{{ property.title }}</h2>
-
-        <p><strong>Location:</strong> {{ property.location }}</p>
-        <p><strong>Rent:</strong> ₹{{ property.rent }}</p>
-
-        <div class="amenities">
-          <strong>Amenities</strong>
-          <ul>
-            <li *ngFor="let a of property.amenities">{{ a }}</li>
-          </ul>
-        </div>
-
-        <!-- Actions -->
-        <div class="actions">
-          <button
-            mat-raised-button
-            class="primary-btn"
-            [routerLink]="['/booking-request', property.id]"
-          >
-            Request Booking
-          </button>
-
-          <button
-            mat-stroked-button
-            class="secondary-btn"
-            routerLink="/properties"
-          >
-            Back
-          </button>
-        </div>
-
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>person</mat-icon>
+        <div class="brand-text"><h3>Tenant</h3></div>
       </div>
-
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
     </div>
+    <nav class="menu">
+      <a routerLink="/tenant/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a routerLink="/tenant/properties" class="active"><mat-icon>search</mat-icon><span>Browse Properties</span></a>
+      <a routerLink="/tenant/bookings"><mat-icon>event_note</mat-icon><span>My Bookings</span></a>
+      <a routerLink="/tenant/profile"><mat-icon>person</mat-icon><span>Profile</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
 
-  </div>
+  <main class="content">
+    <div *ngIf="isLoading" class="loading">Loading property details...</div>
+
+    <div class="property-details" *ngIf="!isLoading && property">
+      <button class="back-btn" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon> Back to Properties
+      </button>
+
+      <div class="details-grid">
+        <div class="images-section">
+          <div class="main-image">
+            <img [src]="property.photos && property.photos.length > 0 ? property.photos[selectedImage] : 'assets/default-property.jpg'" alt="Property" />
+          </div>
+          <div class="thumbnails" *ngIf="property.photos && property.photos.length > 1">
+            <img *ngFor="let photo of property.photos; let i = index" 
+                 [src]="photo" 
+                 [class.active]="i === selectedImage"
+                 (click)="selectImage(i)" />
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h1>{{ property.title }}</h1>
+          <p class="location"><mat-icon>location_on</mat-icon> {{ property.location }}, {{ property.city }}, {{ property.state }} - {{ property.pincode }}</p>
+
+          <div class="price-box">
+            <div class="rent-row">
+              <span class="rent">₹{{ property.rent }}</span>
+              <span class="period">/month</span>
+            </div>
+            <div class="deposit-row" *ngIf="property.security_deposit">
+              <span class="deposit-label">Security Deposit:</span>
+              <span class="deposit-amount">₹{{ property.security_deposit }}</span>
+            </div>
+          </div>
+
+          <div class="details-row">
+            <div class="detail-item">
+              <mat-icon>home</mat-icon>
+              <div>
+                <span class="label">Property Type</span>
+                <span class="value">{{ property.property_type }}</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <mat-icon>bed</mat-icon>
+              <div>
+                <span class="label">Configuration</span>
+                <span class="value">{{ property.bhk }}</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <mat-icon>weekend</mat-icon>
+              <div>
+                <span class="label">Furnishing</span>
+                <span class="value">{{ property.furnishing }}</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <mat-icon>square_foot</mat-icon>
+              <div>
+                <span class="label">Area</span>
+                <span class="value">{{ property.area }} sq.ft</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <mat-icon>stairs</mat-icon>
+              <div>
+                <span class="label">Floor</span>
+                <span class="value">{{ property.floor_number }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="amenities-section" *ngIf="property.amenities && property.amenities.length > 0">
+            <h3>Amenities</h3>
+            <div class="amenities-grid">
+              <div class="amenity-item" *ngFor="let amenity of property.amenities">
+                <mat-icon>check_circle</mat-icon> {{ amenity }}
+              </div>
+            </div>
+          </div>
+
+          <div class="description-section" *ngIf="property.description">
+            <h3>Description</h3>
+            <p>{{ property.description }}</p>
+          </div>
+
+          <div class="contact-section">
+            <h3>Contact Information</h3>
+            <div class="contact-details">
+              <p><mat-icon>person</mat-icon> {{ property.contact_name || property.owner_name }}</p>
+              <p><mat-icon>phone</mat-icon> {{ property.contact_phone || property.owner_phone }}</p>
+              <p><mat-icon>email</mat-icon> {{ property.contact_email || property.owner_email }}</p>
+            </div>
+          </div>
+
+          <!-- PROPERTY LOCATION MAP -->
+          <div class="map-section" *ngIf="property.latitude && property.longitude">
+            <h3><mat-icon>location_on</mat-icon> Property Location</h3>
+            <div id="propertyMap" class="leaflet-map"></div>
+            <div class="map-actions">
+              <a class="directions-btn" 
+                 [href]="'https://www.google.com/maps/dir/?api=1&destination=' + property.latitude + ',' + property.longitude" 
+                 target="_blank">
+                <mat-icon>directions</mat-icon>
+                Get Directions
+              </a>
+              <a class="view-map-btn" 
+                 [href]="'https://www.google.com/maps?q=' + property.latitude + ',' + property.longitude" 
+                 target="_blank">
+                <mat-icon>open_in_new</mat-icon>
+                Open in Google Maps
+              </a>
+            </div>
+          </div>
+
+          <div class="booked-banner" *ngIf="property.isBooked">
+            <mat-icon>block</mat-icon>
+            <div class="booked-text">
+              <h4>Already Booked</h4>
+              <p>This property has been booked by another tenant. You cannot book this flat.</p>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button mat-raised-button color="primary" 
+                    [routerLink]="['/tenant/properties', property.id, 'book']"
+                    [disabled]="property.isBooked"
+                    *ngIf="!property.isBooked">
+              <mat-icon>event</mat-icon> Request Booking
+            </button>
+            <button mat-raised-button disabled class="booked-btn" *ngIf="property.isBooked">
+              <mat-icon>block</mat-icon> Not Available
+            </button>
+            <button mat-stroked-button (click)="goBack()">
+              <mat-icon>arrow_back</mat-icon> Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>

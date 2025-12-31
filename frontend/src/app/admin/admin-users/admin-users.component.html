@@ -1,75 +1,77 @@
-<div class="admin-layout">
-  <mat-toolbar class="admin-header">
-    <mat-icon>admin_panel_settings</mat-icon>
-    <span class="header-title">Admin Panel</span>
-    <span class="spacer"></span>
-    <button mat-button (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      Logout
-    </button>
-  </mat-toolbar>
-
-  <div class="admin-body">
-    <mat-sidenav-container class="sidenav-container">
-      <mat-sidenav mode="side" opened class="sidebar">
-        <div class="sidebar-menu">
-          <a routerLink="/admin/dashboard" class="menu-item">
-            <mat-icon>dashboard</mat-icon>
-            <span>Dashboard</span>
-          </a>
-          <a routerLink="/admin/users" class="menu-item active">
-            <mat-icon>people</mat-icon>
-            <span>Users</span>
-          </a>
-          <a routerLink="/admin/properties" class="menu-item">
-            <mat-icon>apartment</mat-icon>
-            <span>Properties</span>
-          </a>
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>shield</mat-icon>
+        <div class="brand-text">
+          <h3>Admin</h3>
         </div>
-      </mat-sidenav>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
 
-      <mat-sidenav-content class="main-content">
-        <div class="page-content">
-          <h2 class="page-title">
-            <mat-icon>people</mat-icon>
-            Users Monitoring
-          </h2>
-          
-          <mat-card class="table-card">
-            <mat-card-content>
-              <table mat-table [dataSource]="users" class="data-table">
-                <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef>User ID</th>
-                  <td mat-cell *matCellDef="let user">#{{ user.id }}</td>
-                </ng-container>
+    <nav class="menu">
+      <a routerLink="/admin/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a class="active" routerLink="/admin/users"><mat-icon>people</mat-icon><span>Manage Users</span></a>
+      <a routerLink="/admin/properties"><mat-icon>apartment</mat-icon><span>All Properties</span></a>
+      <a routerLink="/admin/bookings"><mat-icon>event_note</mat-icon><span>All Bookings</span></a>
+      <a routerLink="/admin/reports"><mat-icon>analytics</mat-icon><span>Reports</span></a>
+      <a routerLink="/admin/settings"><mat-icon>settings</mat-icon><span>Settings</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
 
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef>Name</th>
-                  <td mat-cell *matCellDef="let user">{{ user.name }}</td>
-                </ng-container>
+  <main class="content">
+    <div class="header">
+      <div>
+        <h1>Manage Users</h1>
+        <p>View and manage all registered users</p>
+      </div>
+    </div>
 
-                <ng-container matColumnDef="role">
-                  <th mat-header-cell *matHeaderCellDef>Role</th>
-                  <td mat-cell *matCellDef="let user">
-                    <span class="role-badge" [class.tenant]="user.role === 'Tenant'" [class.owner]="user.role === 'Owner'">
-                      <mat-icon>{{ getRoleIcon(user.role) }}</mat-icon>
-                      {{ user.role }}
-                    </span>
-                  </td>
-                </ng-container>
+    <div *ngIf="isLoading" class="loading">Loading users...</div>
 
-                <ng-container matColumnDef="email">
-                  <th mat-header-cell *matHeaderCellDef>Email</th>
-                  <td mat-cell *matCellDef="let user">{{ user.email }}</td>
-                </ng-container>
+    <div class="table-container" *ngIf="!isLoading">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Registered</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>#{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone || 'N/A' }}</td>
+            <td>
+              <span class="role-badge" [class]="user.role">
+                {{ user.role | titlecase }}
+              </span>
+            </td>
+            <td>{{ formatDate(user.created_at) }}</td>
+            <td>
+              <button class="action-btn delete" (click)="deleteUser(user.id)" *ngIf="user.role !== 'admin'">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-                <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: userColumns;"></tr>
-              </table>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
+      <div class="empty-state" *ngIf="users.length === 0">
+        <mat-icon>people_outline</mat-icon>
+        <h3>No Users Yet</h3>
+        <p>Registered users will appear here</p>
+      </div>
+    </div>
+  </main>
 </div>

@@ -1,0 +1,191 @@
+<div class="dashboard-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>apartment</mat-icon>
+        <div class="brand-text">
+          <h3>Owner</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/owner/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/owner/properties">
+        <mat-icon>home_work</mat-icon>
+        <span>My Properties</span>
+      </a>
+      <a routerLink="/owner/add-property">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span>Add Property</span>
+      </a>
+      <a class="active" routerLink="/owner/edit-property">
+        <mat-icon>edit</mat-icon>
+        <span>Edit Property</span>
+      </a>
+      <a routerLink="/owner/bookings">
+        <mat-icon>event</mat-icon>
+        <span>Booking Requests</span>
+      </a>
+      <a routerLink="/owner/tenants">
+        <mat-icon>people</mat-icon>
+        <span>Tenants</span>
+      </a>
+      <a routerLink="/owner/profile">
+        <mat-icon>person</mat-icon>
+        <span>Owner Profile</span>
+      </a>
+      <a class="logout-link" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+    <div *ngIf="isLoading" class="loading">Loading property details...</div>
+
+    <div class="edit-property-page" *ngIf="!isLoading">
+
+      <!-- PAGE HEADER -->
+      <div class="page-header">
+        <button class="back-btn" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div>
+          <h1>Edit Property</h1>
+          <p class="subtitle">Update property details and manage listing information</p>
+        </div>
+      </div>
+
+      <!-- FORM CARD -->
+      <div class="form-card">
+        <form [formGroup]="propertyForm" (ngSubmit)="updateProperty()">
+
+          <!-- PROPERTY DETAILS -->
+          <div class="section-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label>Property Title <span class="required">*</span></label>
+                <input type="text" formControlName="title" placeholder="e.g., Spacious 2BHK Apartment" />
+              </div>
+
+              <div class="form-field">
+                <label>Property Type <span class="required">*</span></label>
+                <select formControlName="type">
+                  <option value="">Select</option>
+                  <option>Apartment</option>
+                  <option>Villa</option>
+                  <option>Independent House</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label>BHK <span class="required">*</span></label>
+                <select formControlName="bhk">
+                  <option value="">Select</option>
+                  <option>1 BHK</option>
+                  <option>2 BHK</option>
+                  <option>3 BHK</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label>Monthly Rent (₹) <span class="required">*</span></label>
+                <input type="number" formControlName="rent" placeholder="e.g., 85000" />
+              </div>
+
+              <div class="form-field">
+                <label>Location <span class="required">*</span></label>
+                <input type="text" formControlName="location" placeholder="e.g., Chennai, Tamil Nadu" />
+              </div>
+
+              <div class="form-field">
+                <label>Status <span class="required">*</span></label>
+                <select formControlName="status">
+                  <option>Available</option>
+                  <option>Occupied</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- AMENITIES -->
+          <div class="amenities-section">
+            <div class="amenities-header">
+              <h3>Amenities <span class="required">*</span></h3>
+              <p>Select all amenities available at this property</p>
+            </div>
+
+            <div class="amenities-grid" formGroupName="amenities">
+              <label class="amenity-card" *ngFor="let amenity of amenitiesList">
+                <input type="checkbox" [formControlName]="amenity.key" />
+                <mat-icon class="amenity-icon">{{ amenity.icon }}</mat-icon>
+                <span class="amenity-label">{{ amenity.label }}</span>
+              </label>
+            </div>
+
+            <div class="amenities-info">
+              <mat-icon>info</mat-icon>
+              {{ selectedAmenitiesCount }} amenities selected. Select at least 3 for better visibility.
+            </div>
+          </div>
+
+          <!-- DESCRIPTION -->
+          <div class="description-card">
+            <label class="section-title">Property Description</label>
+            <p class="section-subtitle">Detailed description including features and nearby landmarks</p>
+            <textarea formControlName="description" placeholder="Describe your property..." rows="4"></textarea>
+            <div class="description-info">
+              {{ propertyForm.get('description')?.value?.length || 0 }} characters
+            </div>
+          </div>
+
+          <!-- IMAGES -->
+          <div class="images-section">
+            <div class="images-header">
+              <div>
+                <h3>Property Images</h3>
+                <p>Upload property photos</p>
+              </div>
+              <button type="button" class="add-images-btn" (click)="fileInput.click()">
+                <mat-icon class="upload-icon">file_upload</mat-icon>
+                Add Images
+              </button>
+              <input #fileInput type="file" multiple accept="image/*" hidden (change)="onImagesSelected($event)" />
+            </div>
+
+            <div class="images-grid" *ngIf="images.length > 0">
+              <div class="image-card" *ngFor="let img of images; let i = index">
+                <button type="button" class="remove-btn" (click)="removeImage(i)">✕</button>
+                <img [src]="img" />
+              </div>
+            </div>
+
+            <p class="images-info">{{ images.length }} images uploaded.</p>
+          </div>
+
+          <!-- ACTIONS -->
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="goBack()">Cancel</button>
+            <button type="submit" class="save-btn" [disabled]="propertyForm.invalid">
+              <mat-icon class="btn-icon">save</mat-icon>
+              Save Changes
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+
+</div>

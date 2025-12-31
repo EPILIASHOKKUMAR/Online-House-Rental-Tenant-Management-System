@@ -1,93 +1,86 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MaterialModule } from '../../../material.module';
-import { Property } from '../../models/property.model';
+import { HttpClient } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+
+interface Property {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  city: string;
+  rent: number;
+  property_type: string;
+  bhk: string;
+  furnishing: string;
+  amenities: string[];
+  photos: string[];
+  status: string;
+  owner_name: string;
+  isBooked: boolean;
+}
 
 @Component({
   selector: 'app-property-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    MaterialModule
-  ],
+  imports: [CommonModule, FormsModule, RouterModule, MaterialModule, MatIconModule],
   templateUrl: './property-list.html',
   styleUrls: ['./property-list.css']
 })
 export class PropertyListComponent implements OnInit {
 
-  /* ================= DATA ================= */
+  private apiUrl = 'http://localhost:3000/api/properties';
 
+  constructor(private http: HttpClient, private router: Router) {}
+
+  isSidebarCollapsed = false;
   properties: Property[] = [];
   filteredProperties: Property[] = [];
-
-  /* ================= FILTER MODEL ================= */
+  isLoading = true;
 
   location: string = '';
   maxBudget: number | null = null;
-
-  // ✅ IMPORTANT FIX
   amenity: string | null = null;
-
-  /* ================= LIFECYCLE ================= */
 
   ngOnInit(): void {
     this.loadProperties();
   }
 
-  /* ================= METHODS ================= */
+  toggleSidebar(): void {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
 
   loadProperties(): void {
-    this.properties = [
-      {
-        id: 1,
-        title: '2BHK Apartment',
-        location: 'Hyderabad',
-        rent: 15000,
-        amenities: ['Parking', 'Lift'],
-        image: 'assets/images/house1.jpg'
+    this.isLoading = true;
+    this.http.get<Property[]>(this.apiUrl).subscribe({
+      next: (properties) => {
+        this.properties = properties.map(p => ({
+          ...p,
+          amenities: typeof p.amenities === 'string' ? JSON.parse(p.amenities) : p.amenities || [],
+          photos: typeof p.photos === 'string' ? JSON.parse(p.photos) : p.photos || []
+        }));
+        this.filteredProperties = [...this.properties];
+        this.isLoading = false;
       },
-      {
-        id: 2,
-        title: '1BHK Flat',
-        location: 'Bangalore',
-        rent: 12000,
-        amenities: ['Power Backup'],
-        image: 'assets/images/house2.jpg'
-      },
-      {
-        id: 3,
-        title: '3BHK Villa',
-        location: 'Chennai',
-        rent: 25000,
-        amenities: ['Parking', 'Garden'],
-        image: 'assets/images/house3.jpg'
+      error: (error) => {
+        console.error('Error loading properties:', error);
+        this.isLoading = false;
       }
-    ];
-
-    this.filteredProperties = [...this.properties];
+    });
   }
 
   filterProperties(): void {
     this.filteredProperties = this.properties.filter(property => {
+      const locationMatch = !this.location ||
+        property.location?.toLowerCase().includes(this.location.trim().toLowerCase()) ||
+        property.city?.toLowerCase().includes(this.location.trim().toLowerCase());
 
-      const locationMatch =
-        !this.location ||
-        property.location
-          .toLowerCase()
-          .includes(this.location.trim().toLowerCase());
+      const budgetMatch = this.maxBudget === null || property.rent <= this.maxBudget;
 
-      const budgetMatch =
-        this.maxBudget === null ||
-        property.rent <= this.maxBudget;
-
-      // ✅ CORRECT LOGIC
-      const amenityMatch =
-        !this.amenity ||
-        property.amenities.includes(this.amenity);
+      const amenityMatch = !this.amenity || property.amenities?.includes(this.amenity);
 
       return locationMatch && budgetMatch && amenityMatch;
     });
@@ -96,7 +89,13 @@ export class PropertyListComponent implements OnInit {
   resetFilters(): void {
     this.location = '';
     this.maxBudget = null;
-    this.amenity = null; // ✅ reset correctly
+    this.amenity = null;
     this.filteredProperties = [...this.properties];
+  }
+
+  logout(): void {
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/']);
   }
 }

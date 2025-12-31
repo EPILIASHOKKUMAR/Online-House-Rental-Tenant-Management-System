@@ -1,291 +1,337 @@
-/* =========================================================
-   PAGE BACKGROUND
-   ========================================================= */
-
-.property-list-page {
+.dashboard-layout {
+  display: flex;
   min-height: 100vh;
-  padding: 40px 32px;
-  max-width: 1400px;
-  margin: 0 auto;
-
-  background:
-    radial-gradient(circle at top left, rgba(99,102,241,0.25), transparent 40%),
-    radial-gradient(circle at bottom right, rgba(59,130,246,0.25), transparent 40%),
-    linear-gradient(180deg, #020617 0%, #030712 100%);
-
-  color: #e5e7eb;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
 
-.page-title {
-  font-size: 2.2rem;
-  font-weight: 700;
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+  padding: 25px 15px;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  transition: width 0.25s ease, padding 0.25s ease;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+  padding: 25px 10px;
+}
+
+.sidebar.collapsed .brand-text,
+.sidebar.collapsed .menu a span {
+  display: none;
+}
+
+.sidebar.collapsed .menu a {
+  justify-content: center;
+  padding: 16px;
+}
+
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-right: 48px;
+}
+
+.brand-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand mat-icon {
+  font-size: 36px;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-text h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.collapse-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.collapse-btn:hover {
+  background: rgba(59, 130, 246, 0.4);
+}
+
+.collapse-btn mat-icon {
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 1;
+  width: auto;
+  height: auto;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 20px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.menu a mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.menu a:hover {
+  background: rgba(59, 130, 246, 0.25);
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+.menu a.active {
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0.4), rgba(6, 182, 212, 0.4));
+  border-left: 4px solid #06b6d4;
+  color: #ffffff;
+}
+
+.menu a.logout-link {
+  margin-top: auto;
+  color: #f87171;
+  border-left: 4px solid transparent;
+}
+
+.menu a.logout-link:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+  cursor: pointer;
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.header h1 {
   color: #f8fafc;
-  margin-bottom: 32px;
+  font-size: 28px;
+  margin-bottom: 24px;
 }
-
-
-/* =========================================================
-   FILTER BAR – FINAL ALIGNMENT
-   ========================================================= */
 
 .filters {
   display: grid;
-  grid-template-columns: 1.5fr 1.2fr 1.2fr 1fr;
-  gap: 20px;
-  align-items: center;
-  padding: 26px;
-  margin-bottom: 40px;
-
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: flex-end;
+  padding: 20px;
   background: rgba(30, 41, 59, 0.6);
-  backdrop-filter: blur(16px);
-  border-radius: 20px;
-  border: 1px solid rgba(148,163,184,0.35);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  margin-bottom: 30px;
 }
-
-
-/* =========================================================
-   MATERIAL INPUTS – DARK, BORDERED, SAME HEIGHT
-   ========================================================= */
 
 :host ::ng-deep .mat-mdc-form-field {
   width: 100%;
-  height: 64px;
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
 }
 
 :host ::ng-deep .mat-mdc-text-field-wrapper {
-  height: 64px;
-  background: rgba(2, 6, 23, 0.95) !important;
-  border: 1px solid rgba(148,163,184,0.45);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
+  background: rgba(15, 23, 42, 0.8) !important;
+  border-radius: 10px;
 }
 
 :host ::ng-deep .mat-mdc-input-element,
 :host ::ng-deep .mat-mdc-select-value {
   color: #f8fafc !important;
-  font-weight: 500;
 }
 
 :host ::ng-deep .mat-mdc-form-field-label,
 :host ::ng-deep .mdc-floating-label {
-  color: #a5b4fc !important;
+  color: #94a3b8 !important;
 }
 
-:host ::ng-deep .mat-mdc-select-arrow {
-  color: #c7d2fe !important;
-}
-
-
-/* =========================================================
-   SEARCH BUTTON – PERFECTLY ALIGNED
-   ========================================================= */
-
-.search-button,
 .search-btn {
-  height: 64px;
-  margin: 0 !important;
-  border-radius: 14px;
+  height: 56px;
+  min-width: 120px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+  color: white !important;
+  border-radius: 10px;
   font-weight: 600;
-
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-shadow: 0 12px 30px rgba(99,102,241,0.6);
+  margin-bottom: 0;
 }
 
-.search-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(99,102,241,0.8);
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: #94a3b8;
+  font-size: 18px;
 }
-
-
-/* =========================================================
-   PROPERTY GRID
-   ========================================================= */
 
 .property-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 34px;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
 }
 
-
-/* =========================================================
-   PROPERTY CARD – DARK + BORDERED
-   ========================================================= */
-
 .property-card {
-  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
   overflow: hidden;
-
-  background: linear-gradient(
-    180deg,
-    rgba(15, 23, 42, 0.95),
-    rgba(2, 6, 23, 0.95)
-  ) !important;
-
-  border: 1px solid rgba(148,163,184,0.4);
-  box-shadow: 0 30px 70px rgba(0,0,0,0.85);
-  transition: all 0.35s ease;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .property-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 40px 90px rgba(0,0,0,0.95);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* REMOVE ALL MATERIAL WHITE LAYERS */
-:host ::ng-deep .mat-mdc-card,
-:host ::ng-deep .mat-mdc-card-content,
-:host ::ng-deep .mat-mdc-card-actions {
-  background: transparent !important;
-}
-
-
-/* Image */
 .property-card img {
   width: 100%;
-  height: 220px;
+  height: 200px;
   object-fit: cover;
-  display: block;
 }
 
-
-/* =========================================================
-   CARD CONTENT
-   ========================================================= */
-
-.property-card mat-card-content {
-  padding: 22px;
+.card-content {
+  padding: 20px;
 }
 
-.property-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
+.card-content h3 {
   color: #f8fafc;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin: 0 0 12px 0;
 }
 
-.property-card p {
-  font-size: 0.95rem;
-  color: #c7d2fe;
-  margin: 6px 0;
+.card-content p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+  margin: 8px 0;
+  font-size: 14px;
 }
 
-.property-card p strong {
+.card-content mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #6366f1;
+}
+
+.card-content .rent {
+  color: #22c55e;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.card-content .amenities {
   color: #a5b4fc;
 }
 
-
-/* =========================================================
-   CARD ACTIONS
-   ========================================================= */
-
-.property-card mat-card-actions {
-  padding: 18px 22px 24px;
+.card-actions {
+  padding: 16px 20px;
   display: flex;
-  justify-content: space-between;
   gap: 12px;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
 }
 
-/* View Details */
-.property-card mat-card-actions button:first-child {
-  border: 1px solid #6366f1 !important;
-  background: transparent !important;
+.card-actions button {
+  flex: 1;
+  border-radius: 8px;
+}
+
+.card-actions button:first-child {
+  border-color: #6366f1 !important;
   color: #6366f1 !important;
-  border-radius: 999px;
-  padding: 8px 22px;
-  font-weight: 600;
 }
-
-.property-card mat-card-actions button:first-child:hover {
-  background: rgba(99,102,241,0.15) !important;
-}
-
-/* Request Booking */
-.property-card mat-card-actions button:last-child {
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  color: white;
-  border-radius: 999px;
-  padding: 8px 22px;
-  font-weight: 600;
-}
-
-
-/* =========================================================
-   EMPTY STATE
-   ========================================================= */
 
 .no-results {
   text-align: center;
-  margin-top: 70px;
-  font-size: 1.1rem;
+  padding: 60px;
   color: #94a3b8;
 }
 
-/* =========================================================
-   CLICK FIX – ENABLE BUTTON INTERACTION
-   ========================================================= */
+.no-results mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #475569;
+  margin-bottom: 16px;
+}
 
-/* Ensure card content is above overlays */
+.no-results p {
+  font-size: 18px;
+}
+
+
 .property-card {
   position: relative;
-  z-index: 1;
 }
 
-/* Kill any overlay click blocking */
-.property-card::before,
-.property-card::after {
-  pointer-events: none !important;
+.property-card.booked {
+  opacity: 0.85;
 }
 
-/* Ensure Material card layers allow clicks */
-:host ::ng-deep .mat-mdc-card,
-:host ::ng-deep .mat-mdc-card-content,
-:host ::ng-deep .mat-mdc-card-actions {
-  position: relative;
-  z-index: 2;
-  pointer-events: auto !important;
+.property-card.booked img {
+  filter: grayscale(30%);
 }
 
-/* Explicitly enable buttons */
-.property-card button {
-  position: relative;
-  z-index: 5;
-  pointer-events: auto !important;
-}
-
-/* ================================
-   FIX MAT-SELECT LABEL ALIGNMENT
-   ================================ */
-
-:host ::ng-deep .mat-mdc-form-field {
-  height: 56px;
-}
-
-/* Center the selected value ("All") */
-:host ::ng-deep .mat-mdc-select-value {
+.booked-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  padding-top: 2px;
+  gap: 6px;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
 }
 
-/* Fix floating label position */
-:host ::ng-deep .mdc-floating-label {
-  top: 50% !important;
-  transform: translateY(-50%) scale(1) !important;
+.booked-badge mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: white;
 }
 
-/* When focused / value selected */
-:host ::ng-deep
-.mat-mdc-form-field.mat-form-field-should-float
-.mdc-floating-label {
-  top: 0 !important;
-  transform: translateY(-50%) scale(0.75) !important;
+.not-available-btn {
+  background: rgba(239, 68, 68, 0.2) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  cursor: not-allowed !important;
 }
