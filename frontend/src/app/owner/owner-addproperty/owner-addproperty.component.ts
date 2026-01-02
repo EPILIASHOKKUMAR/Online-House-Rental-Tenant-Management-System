@@ -40,6 +40,9 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
   locationLoading = false;
   locationError = '';
   locationAccuracy: number | null = null;
+  private watchId: number | null = null;
+  addressSearch: string = '';
+  searchLoading: boolean = false;
 
   storedImages: File[] = [];
   imagePreviews: string[] = [];
@@ -83,6 +86,9 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.watchId !== null) {
+      navigator.geolocation.clearWatch(this.watchId);
+    }
     if (this.map) {
       this.map.remove();
     }
@@ -97,10 +103,11 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
         this.map.remove();
       }
 
-      this.map = L.map('locationMap').setView([lat, lng], 17);
+      this.map = L.map('locationMap').setView([lat, lng], 18);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
+        attribution: '© OpenStreetMap',
+        maxZoom: 19
       }).addTo(this.map);
 
       const redIcon = L.icon({
@@ -140,9 +147,169 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
     this.locationError = '';
 
     if (!navigator.geolocation) {
-      this.fallbackToIPLocation();
+      this.locationError = 'Geolocation is not supported by this browser';
+      this.locationLoading = false;
       return;
     }
+
+    let bestPosition: GeolocationPosition | null = null;
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    const tryGetLocation = () => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          attempts++;
+          
+          if (!bestPosition || position.coords.accuracy < bestPosition.coords.accuracy) {
+            bestPosition = position;
+          }
+
+          if (position.coords.accuracy < 50 || attempts >= maxAttempts) {
+            this.ngZone.run(() => {
+              this.latitude = bestPosition!.coords.latitude;
+              this.longitude = bestPosition!.coords.longitude;
+              this.locationAccuracy = bestPosition!.coords.accuracy;
+              this.locationEnabled = true;
+              this.locationLoading = false;
+              this.locationError = '';
+              
+              setTimeout(() => {
+                this.initLeafletMapWithLocation(this.latitude!, this.longitude!, this.locationAccuracy!);
+              }, 100);
+            });
+          } else {
+            setTimeout(tryGetLocation, 1000);
+          }
+        },
+        (error) => {
+          if (bestPosition) {
+            this.ngZone.run(() => {
+              this.latitude = bestPosition!.coords.latitude;
+              this.longitude = bestPosition!.coords.longitude;
+              this.locationAccuracy = bestPosition!.coords.accuracy;
+              this.locationEnabled = true;
+              this.locationLoading = false;
+              
+              setTimeout(() => {
+                this.initLeafletMapWithLocation(this.latitude!, this.longitude!, this.locationAccuracy!);
+              }, 100);
+            });
+          } else {
+            this.ngZone.run(() => {
+              this.locationLoading = false;
+              switch(error.code) {
+                case error.PERMISSION_DENIED:
+                  this.locationError = 'Location permission denied. Please allow location access in browser settings.';
+                  break;
+                case error.POSITION_UNAVAILABLE:
+                case error.TIMEOUT:
+                default:
+                  this.getLocationByIP();
+                  return;
+              }
+            });
+          }
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        }
+      );
+    };
+
+    tryGetLocation();
+  }
+
+  getLocationByIP(): void {
+    this.http.get<any>('https://ipapi.co/json/').subscribe({
+      next: (data) => {
+        this.ngZone.run(() => {
+          if (data.latitude && data.longitude) {
+            this.latitude = data.latitude;
+            this.longitude = data.longitude;
+            this.locationAccuracy = 5000;
+            this.locationEnabled = true;
+            this.locationLoading = false;
+            this.locationError = '';
+            
+            setTimeout(() => {
+              this.initLeafletMapWithLocation(this.latitude!, this.longitude!, this.locationAccuracy!);
+            }, 100);
+          } else {
+            this.locationLoading = false;
+            this.locationError = 'Could not get location. Please use address search.';
+          }
+        });
+      },
+      error: () => {
+        this.ngZone.run(() => {
+          this.locationLoading = false;
+          this.locationError = 'Could not get location. Please use address search below.';
+        });
+      }
+    });
+  }
+
+  initLeafletMapWithLocation(lat: number, lng: number, accuracy: number): void {
+    const mapElement = document.getElementById('locationMap');
+    if (!mapElement) return;
+
+    if (this.map) {
+      this.map.remove();
+    }
+
+    this.map = L.map('locationMap').setView([lat, lng], 18);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap',
+      maxZoom: 19
+    }).addTo(this.map);
+
+    const redIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    this.marker = L.marker([lat, lng], { icon: redIcon, draggable: true }).addTo(this.map);
+    this.marker.bindPopup('<b>Your Current Location</b><br>Accuracy: ' + Math.round(accuracy) + 'm<br>Drag to adjust').openPopup();
+
+    L.circle([lat, lng], {
+      color: '#3b82f6',
+      fillColor: '#3b82f6',
+      fillOpacity: 0.15,
+      radius: accuracy
+    }).addTo(this.map);
+
+    this.marker.on('dragend', (e: any) => {
+      this.ngZone.run(() => {
+        const pos = e.target.getLatLng();
+        this.latitude = pos.lat;
+        this.longitude = pos.lng;
+      });
+    });
+
+    this.map.on('click', (e: L.LeafletMouseEvent) => {
+      this.ngZone.run(() => {
+        this.latitude = e.latlng.lat;
+        this.longitude = e.latlng.lng;
+        if (this.marker) {
+          this.marker.setLatLng(e.latlng);
+        }
+      });
+    });
+  }
+
+  refreshLocation(): void {
+    if (!this.map) return;
+    
+    this.locationLoading = true;
+    this.locationError = '';
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -150,46 +317,27 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
           this.locationAccuracy = position.coords.accuracy;
-          this.locationEnabled = true;
           this.locationLoading = false;
-          this.locationError = '';
-          this.initLeafletMap(this.latitude, this.longitude);
-        });
-      },
-      (error) => {
-        console.log('GPS Error:', error.code, error.message);
-        this.fallbackToIPLocation();
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-    );
-  }
 
-  fallbackToIPLocation(): void {
-    this.http.get<any>('https://ipapi.co/json/').subscribe({
-      next: (data) => {
-        this.ngZone.run(() => {
-          if (data.latitude && data.longitude) {
-            this.latitude = data.latitude;
-            this.longitude = data.longitude;
-            this.locationAccuracy = 5000; // IP location is ~5km accurate
-            this.locationEnabled = true;
-            this.locationLoading = false;
-            this.locationError = '';
-            this.initLeafletMap(data.latitude, data.longitude);
-            alert('GPS unavailable. Using approximate location from IP. Drag the marker to set exact location.');
-          } else {
-            this.locationLoading = false;
-            this.locationError = 'Could not get location. Please enter coordinates manually.';
+          if (this.marker && this.map) {
+            this.marker.setLatLng([this.latitude, this.longitude]);
+            this.map.setView([this.latitude, this.longitude], 18);
+            this.marker.setPopupContent('<b>Your Location</b><br>Accuracy: ' + Math.round(this.locationAccuracy) + 'm');
           }
         });
       },
-      error: () => {
+      (error) => {
         this.ngZone.run(() => {
           this.locationLoading = false;
-          this.locationError = 'Location failed. Please enter coordinates manually below.';
+          this.locationError = 'Could not refresh location';
         });
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 30000,
+        maximumAge: 0
       }
-    });
+    );
   }
 
   removeLocation(): void {
@@ -204,31 +352,6 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
     this.locationAccuracy = null;
   }
 
-  refreshLocation(): void {
-    this.locationLoading = true;
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        this.ngZone.run(() => {
-          this.latitude = position.coords.latitude;
-          this.longitude = position.coords.longitude;
-          this.locationAccuracy = position.coords.accuracy;
-          this.locationLoading = false;
-          if (this.marker && this.map) {
-            this.marker.setLatLng([this.latitude, this.longitude]);
-            this.map.setView([this.latitude, this.longitude], 17);
-          }
-        });
-      },
-      () => {
-        this.ngZone.run(() => {
-          this.locationLoading = false;
-          this.locationError = 'Failed to refresh';
-        });
-      },
-      { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
-    );
-  }
-
   setManualLocation(lat: string, lng: string): void {
     const latNum = parseFloat(lat);
     const lngNum = parseFloat(lng);
@@ -241,6 +364,38 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
     this.locationEnabled = true;
     this.locationError = '';
     this.initLeafletMap(latNum, lngNum);
+  }
+
+  searchAddress(): void {
+    if (!this.addressSearch.trim()) {
+      this.locationError = 'Please enter an address to search';
+      return;
+    }
+
+    this.searchLoading = true;
+    this.locationError = '';
+
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(this.addressSearch)}&limit=1`;
+
+    this.http.get<any[]>(url).subscribe({
+      next: (results) => {
+        this.searchLoading = false;
+        if (results && results.length > 0) {
+          const result = results[0];
+          this.latitude = parseFloat(result.lat);
+          this.longitude = parseFloat(result.lon);
+          this.locationEnabled = true;
+          this.locationAccuracy = null;
+          this.initLeafletMap(this.latitude, this.longitude);
+        } else {
+          this.locationError = 'Address not found. Try a different search.';
+        }
+      },
+      error: () => {
+        this.searchLoading = false;
+        this.locationError = 'Search failed. Please try again.';
+      }
+    });
   }
 
   toggleSidebar(): void {

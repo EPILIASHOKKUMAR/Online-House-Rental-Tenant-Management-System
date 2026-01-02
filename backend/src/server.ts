@@ -9,6 +9,8 @@ import authRoutes from './routes/auth.routes';
 import propertyRoutes from './routes/property.routes';
 import bookingRoutes from './routes/booking.routes';
 import adminRoutes from './routes/admin.routes';
+import chatbotRoutes from './routes/chatbot.routes';
+import { checkAIConnection } from './controllers/chatbot.controller';
 
 dotenv.config();
 
@@ -89,6 +91,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
@@ -99,7 +102,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   res.status(500).json({ error: 'Internal server error' });
 });
 
-httpServer.listen(PORT, () => {
+httpServer.listen(PORT, async () => {
   console.log('\n========================================');
   console.log('   HOUSE RENTAL API SERVER');
   console.log('========================================\n');
@@ -118,7 +121,11 @@ httpServer.listen(PORT, () => {
   console.log('            GET  /api/bookings/owner/:id');
   console.log('Admin:      GET  /api/admin/users');
   console.log('            GET  /api/admin/stats');
+  console.log('Chatbot:    POST /api/chatbot/chat');
+  console.log('            GET  /api/chatbot/stats');
   console.log('----------------------------------------\n');
+  
+  await checkAIConnection();
 });
 
 export { io };

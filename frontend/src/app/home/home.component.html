@@ -78,13 +78,6 @@
               </div>
             </div>
             
-            <!-- Upper Floor / Attic -->
-            <div class="villa-attic">
-              <div class="attic-window">
-                <div class="window-pane"></div>
-              </div>
-            </div>
-            
             <!-- Main Floor -->
             <div class="villa-main">
               <!-- Left Wing -->
@@ -151,27 +144,46 @@
           <!-- Garden Elements -->
           <div class="garden">
             <div class="grass"></div>
-            <div class="flower-bed left-bed">
-              <div class="flower flower-1"></div>
-              <div class="flower flower-2"></div>
-              <div class="flower flower-3"></div>
+            <!-- Left side flowering plants -->
+            <div class="plant plant-1">
+              <div class="plant-trunk"></div>
+              <div class="branch branch-left"></div>
+              <div class="branch branch-right"></div>
+              <div class="branch branch-top"></div>
+              <div class="plant-flower pf-left flower-red"></div>
+              <div class="plant-flower pf-right flower-yellow"></div>
+              <div class="plant-flower pf-top flower-pink"></div>
             </div>
-            <div class="flower-bed right-bed">
-              <div class="flower flower-1"></div>
-              <div class="flower flower-2"></div>
-              <div class="flower flower-3"></div>
+            <div class="plant plant-2">
+              <div class="plant-trunk"></div>
+              <div class="branch branch-left"></div>
+              <div class="branch branch-right"></div>
+              <div class="branch branch-top"></div>
+              <div class="plant-flower pf-left flower-orange"></div>
+              <div class="plant-flower pf-right flower-purple"></div>
+              <div class="plant-flower pf-top flower-red"></div>
             </div>
-            <div class="tree">
-              <div class="tree-trunk"></div>
-              <div class="tree-leaves"></div>
+            <!-- Right side flowering plants -->
+            <div class="plant plant-3">
+              <div class="plant-trunk"></div>
+              <div class="branch branch-left"></div>
+              <div class="branch branch-right"></div>
+              <div class="branch branch-top"></div>
+              <div class="plant-flower pf-left flower-yellow"></div>
+              <div class="plant-flower pf-right flower-red"></div>
+              <div class="plant-flower pf-top flower-purple"></div>
             </div>
+            <div class="plant plant-4">
+              <div class="plant-trunk"></div>
+              <div class="branch branch-left"></div>
+              <div class="branch branch-right"></div>
+              <div class="branch branch-top"></div>
+              <div class="plant-flower pf-left flower-pink"></div>
+              <div class="plant-flower pf-right flower-orange"></div>
+              <div class="plant-flower pf-top flower-yellow"></div>
+            </div>
+            <!-- Big tree removed - using flowering plants instead -->
             <div class="pathway"></div>
-            <div class="fence">
-              <div class="fence-post"></div>
-              <div class="fence-post"></div>
-              <div class="fence-post"></div>
-              <div class="fence-rail"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -395,4 +407,73 @@
       </div>
     </div>
   </footer>
+
+  <div class="chatbot-container" [class.fullscreen]="isFullscreen">
+    <button class="chat-toggle-btn" (click)="toggleChat()" *ngIf="!isChatOpen">
+      <mat-icon>smart_toy</mat-icon>
+    </button>
+
+    <div class="chat-window" *ngIf="isChatOpen" [class.fullscreen]="isFullscreen">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <mat-icon>smart_toy</mat-icon>
+          <span>HouseRental Assistant</span>
+        </div>
+        <div class="chat-header-actions">
+          <button class="header-btn" (click)="toggleFullscreen()" [title]="isFullscreen ? 'Exit Fullscreen' : 'Fullscreen'">
+            <mat-icon>{{ isFullscreen ? 'fullscreen_exit' : 'fullscreen' }}</mat-icon>
+          </button>
+          <button class="header-btn" (click)="toggleChat()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="chat-messages" #chatMessages>
+        <div *ngFor="let message of messages" 
+             class="message" 
+             [class.user-message]="message.isUser" 
+             [class.bot-message]="!message.isUser">
+          <div class="message-content">
+            <mat-icon class="message-icon" *ngIf="!message.isUser">smart_toy</mat-icon>
+            <div class="message-text">{{ message.text }}</div>
+            <mat-icon class="message-icon user-icon" *ngIf="message.isUser">person</mat-icon>
+          </div>
+        </div>
+        <div class="typing-indicator" *ngIf="isTyping">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="quick-actions" *ngIf="messages.length <= 1">
+        <button class="quick-btn" (click)="sendQuickMessage('How many properties are available?')">
+          <mat-icon>home</mat-icon> Properties Count
+        </button>
+        <button class="quick-btn" (click)="sendQuickMessage('Properties in Chennai')">
+          <mat-icon>location_on</mat-icon> Chennai Properties
+        </button>
+        <button class="quick-btn" (click)="sendQuickMessage('What are the user roles?')">
+          <mat-icon>people</mat-icon> User Roles
+        </button>
+        <button class="quick-btn" (click)="sendQuickMessage('How does booking work?')">
+          <mat-icon>event</mat-icon> Booking Process
+        </button>
+      </div>
+
+      <div class="chat-input-container">
+        <input 
+          type="text" 
+          class="chat-input" 
+          placeholder="Ask me anything about HouseRental..."
+          [(ngModel)]="userInput"
+          (keyup.enter)="sendMessage()"
+        />
+        <button class="send-btn" (click)="sendMessage()" [disabled]="!userInput.trim()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

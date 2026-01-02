@@ -1,0 +1,60 @@
+<div class="dashboard-layout">
+  <aside class="sidebar" [class.collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand-left">
+        <mat-icon>person</mat-icon>
+        <div class="brand-text">
+          <h3>Tenant</h3>
+        </div>
+      </div>
+      <button class="collapse-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+    <nav class="menu">
+      <a routerLink="/tenant/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
+      <a routerLink="/tenant/properties"><mat-icon>search</mat-icon><span>Browse Properties</span></a>
+      <a routerLink="/tenant/bookings"><mat-icon>event_note</mat-icon><span>My Bookings</span></a>
+      <a class="active" routerLink="/tenant/saved"><mat-icon>favorite</mat-icon><span>Saved Properties</span></a>
+      <a routerLink="/tenant/profile"><mat-icon>person</mat-icon><span>My Profile</span></a>
+      <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <div class="header">
+      <div>
+        <h1>Saved Properties</h1>
+        <p>Properties you've saved for later</p>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="loading">Loading saved properties...</div>
+
+    <div class="property-grid" *ngIf="!isLoading && savedProperties.length > 0">
+      <div class="property-card" *ngFor="let property of savedProperties">
+        <button class="remove-btn" (click)="removeFromSaved(property.id)">
+          <mat-icon>close</mat-icon>
+        </button>
+        <img [src]="property.photos && property.photos.length > 0 ? property.photos[0] : 'assets/default-property.jpg'" alt="Property" />
+        <div class="card-content">
+          <h3>{{ property.title }}</h3>
+          <p class="location"><mat-icon>location_on</mat-icon> {{ property.location }}, {{ property.city }}</p>
+          <p class="rent"><mat-icon>currency_rupee</mat-icon> ₹{{ property.rent }}/month</p>
+          <p class="type"><mat-icon>home</mat-icon> {{ property.property_type }} - {{ property.bhk }}</p>
+        </div>
+        <div class="card-actions">
+          <button class="view-btn" [routerLink]="['/tenant/properties', property.id]">View Details</button>
+          <button class="book-btn" [routerLink]="['/tenant/properties', property.id, 'book']">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-saved" *ngIf="!isLoading && savedProperties.length === 0">
+      <mat-icon>favorite_border</mat-icon>
+      <h3>No Saved Properties</h3>
+      <p>You haven't saved any properties yet. Browse properties and click the heart icon to save them.</p>
+      <button routerLink="/tenant/properties">Browse Properties</button>
+    </div>
+  </main>
+</div>

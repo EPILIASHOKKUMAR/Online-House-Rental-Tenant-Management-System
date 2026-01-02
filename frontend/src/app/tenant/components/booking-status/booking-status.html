@@ -12,8 +12,9 @@
     <nav class="menu">
       <a routerLink="/tenant/dashboard"><mat-icon>dashboard</mat-icon><span>Dashboard</span></a>
       <a routerLink="/tenant/properties"><mat-icon>search</mat-icon><span>Browse Properties</span></a>
-      <a class="active"><mat-icon>event_note</mat-icon><span>My Bookings</span></a>
-      <a routerLink="/tenant/profile"><mat-icon>person</mat-icon><span>Profile</span></a>
+      <a class="active" routerLink="/tenant/bookings"><mat-icon>event_note</mat-icon><span>My Bookings</span></a>
+      <a routerLink="/tenant/saved"><mat-icon>favorite</mat-icon><span>Saved Properties</span></a>
+      <a routerLink="/tenant/profile"><mat-icon>person</mat-icon><span>My Profile</span></a>
       <a class="logout-link" (click)="logout()"><mat-icon>logout</mat-icon><span>Logout</span></a>
     </nav>
   </aside>

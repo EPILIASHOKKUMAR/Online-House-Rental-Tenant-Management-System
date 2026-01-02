@@ -24,6 +24,10 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'admin-login', component: AdminLoginComponent },
+  {
+    path: 'forgot-password',
+    loadComponent: () => import('./auth/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+  },
 
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [adminGuard] },
   { path: 'admin/users', component: AdminUsersComponent, canActivate: [adminGuard] },
@@ -73,6 +77,11 @@ export const routes: Routes = [
     path: 'tenant/bookings',
     canActivate: [tenantGuard],
     loadComponent: () => import('./tenant/components/booking-status/booking-status').then(m => m.BookingStatusComponent)
+  },
+  {
+    path: 'tenant/saved',
+    canActivate: [tenantGuard],
+    loadComponent: () => import('./tenant/components/saved-properties/saved-properties').then(m => m.SavedPropertiesComponent)
   },
   {
     path: 'tenant/profile',

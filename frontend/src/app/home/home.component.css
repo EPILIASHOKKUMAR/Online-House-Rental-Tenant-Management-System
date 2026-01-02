@@ -1,3 +1,6 @@
+/* =========================================================
+   DESIGN SYSTEM - STUNNING VISUALS
+   ========================================================= */
 
 :host {
   --accent: #2196F3;
@@ -35,11 +38,10 @@
 
 .hero-section {
   position: relative;
-  min-height: auto;
+  min-height: 100vh;
   background: transparent;
   overflow: hidden;
-  padding-top: 60px;
-  padding-bottom: 20px;
+  padding-top: 80px; /* Account for fixed navbar */
 }
 
 /* Animated Gradient Orbs */
@@ -237,31 +239,21 @@
   z-index: 10;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: flex-start;
-  min-height: auto;
-  padding: 40px 80px 20px;
-  gap: 80px;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 60px 80px 40px;
+  gap: 60px;
 }
 
 .hero-left {
   text-align: left;
-  padding-top: 30px;
-}
-
-.hero-right {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 80px;
-  opacity: 0;
-  animation: fadeInRight 1s ease 0.5s forwards;
 }
 
 .brand-title {
   font-size: 80px;
   font-weight: 800;
   color: var(--text-white);
-  margin-bottom: 30px;
+  margin-bottom: 28px;
   letter-spacing: -2px;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   opacity: 0;
@@ -285,9 +277,9 @@
 .sub-tagline {
   font-size: 18px;
   color: rgba(255, 255, 255, 0.8);
-  max-width: 550px;
+  max-width: 520px;
   line-height: 1.8;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   opacity: 0;
   animation: fadeInUp 1s ease 0.6s forwards;
 }
@@ -303,7 +295,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 18px 38px;
+  padding: 18px 36px;
   border-radius: var(--radius-pill);
   text-decoration: none;
   font-weight: 600;
@@ -354,6 +346,14 @@
    REALISTIC BUNGALOW - RIGHT SIDE (HERO)
    ========================================================= */
 
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeInRight 1s ease 0.5s forwards;
+}
+
 @keyframes fadeInRight {
   from {
     opacity: 0;
@@ -368,20 +368,20 @@
 /* Bungalow Scene Container */
 .bungalow-scene {
   position: relative;
-  width: 550px;
-  height: 500px;
+  width: 620px;
+  height: 580px;
 }
 
 /* Sky Elements */
 .sun {
   position: absolute;
-  top: 0;
-  right: 10px;
-  width: 80px;
-  height: 80px;
+  top: 10px;
+  right: 30px;
+  width: 100px;
+  height: 100px;
   background: linear-gradient(135deg, #FFE066 0%, #FFB347 100%);
   border-radius: 50%;
-  box-shadow: 0 0 60px rgba(255, 179, 71, 0.6);
+  box-shadow: 0 0 70px rgba(255, 179, 71, 0.7);
 }
 
 .cloud {
@@ -399,62 +399,61 @@
 }
 
 .cloud-1 {
-  width: 100px;
-  height: 40px;
+  width: 120px;
+  height: 48px;
   top: 30px;
-  left: 20px;
+  left: 30px;
 }
 
 .cloud-1::before {
-  width: 50px;
-  height: 50px;
-  top: -25px;
-  left: 15px;
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  left: 18px;
 }
 
 .cloud-1::after {
-  width: 45px;
-  height: 45px;
-  top: -20px;
-  right: 15px;
+  width: 52px;
+  height: 52px;
+  top: -24px;
+  right: 18px;
 }
 
 .cloud-2 {
-  width: 80px;
-  height: 32px;
-  top: 65px;
-  left: 140px;
+  width: 90px;
+  height: 36px;
+  top: 80px;
+  left: 180px;
 }
 
 .cloud-2::before {
-  width: 40px;
-  height: 40px;
-  top: -20px;
-  left: 10px;
+  width: 45px;
+  height: 45px;
+  top: -22px;
+  left: 12px;
 }
 
 .cloud-2::after {
-  width: 35px;
-  height: 35px;
-  top: -14px;
-  right: 10px;
+  width: 38px;
+  height: 38px;
+  top: -16px;
+  right: 12px;
 }
 
 /* Main Villa */
 .villa {
   position: absolute;
-  bottom: 110px;
+  bottom: 130px;
   left: 50%;
   transform: translateX(-50%);
-  width: 540px;
+  width: 520px;
 }
 
 /* Main Roof */
 .villa-roof {
   position: relative;
-  width: 580px;
+  width: 520px;
   height: 130px;
-  margin-left: -20px;
 }
 
 .roof-tiles {
@@ -469,8 +468,8 @@
   position: absolute;
   top: 20px;
   right: 100px;
-  width: 45px;
-  height: 65px;
+  width: 48px;
+  height: 70px;
   background: linear-gradient(90deg, #C0392B 0%, #E74C3C 50%, #C0392B 100%);
   border-radius: 4px 4px 0 0;
 }
@@ -479,47 +478,17 @@
   position: absolute;
   top: -12px;
   left: -5px;
-  width: 55px;
+  width: 58px;
   height: 14px;
   background: linear-gradient(90deg, #922B21 0%, #C0392B 50%, #922B21 100%);
   border-radius: 3px;
 }
 
-/* Attic */
-.villa-attic {
-  position: relative;
-  width: 160px;
-  height: 80px;
-  margin: -40px auto 0;
-  background: linear-gradient(180deg, #FDF2E9 0%, #FDEBD0 100%);
-  border-radius: 0 0 6px 6px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-}
-
-.attic-window {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 55px;
-  background: #2C3E50;
-  border-radius: 35px 35px 6px 6px;
-  border: 6px solid #FDEBD0;
-  overflow: hidden;
-}
-
-.window-pane {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #85C1E9 0%, #5DADE2 50%, #3498DB 100%);
-}
-
 /* Main Floor */
 .villa-main {
   display: flex;
-  width: 540px;
-  height: 200px;
+  width: 520px;
+  height: 220px;
   background: linear-gradient(180deg, #FDF2E9 0%, #FDEBD0 100%);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
@@ -536,8 +505,8 @@
 }
 
 .wing-window {
-  width: 75px;
-  height: 70px;
+  width: 80px;
+  height: 72px;
   background: #2C3E50;
   border-radius: 4px;
   border: 7px solid #FDEBD0;
@@ -589,16 +558,17 @@
 .porch {
   position: absolute;
   bottom: 0;
-  width: 130px;
+  width: 140px;
   height: 100%;
 }
 
 .porch-roof {
   position: absolute;
-  top: -20px;
-  left: -10px;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 150px;
-  height: 28px;
+  height: 30px;
   background: linear-gradient(180deg, #D35400 0%, #E67E22 100%);
   border-radius: 4px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -607,16 +577,16 @@
 .porch-pillars {
   position: absolute;
   top: 8px;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
   display: flex;
   justify-content: space-between;
-  padding: 0 15px;
 }
 
 .pillar {
   width: 16px;
-  height: 130px;
+  height: 140px;
   background: linear-gradient(90deg, #ECF0F1 0%, #FFFFFF 50%, #ECF0F1 100%);
   border-radius: 3px;
   box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
@@ -627,8 +597,8 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px;
-  height: 120px;
+  width: 75px;
+  height: 130px;
   background: linear-gradient(90deg, #6B4423 0%, #8B5A2B 50%, #6B4423 100%);
   border-radius: 6px 6px 0 0;
   border: 6px solid #5D4037;
@@ -637,11 +607,11 @@
 
 .door-panel {
   position: absolute;
-  top: 70px;
+  top: 75px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
-  height: 35px;
+  width: 52px;
+  height: 38px;
   background: linear-gradient(90deg, #5D4037 0%, #6B4423 50%, #5D4037 100%);
   border-radius: 3px;
 }
@@ -651,10 +621,10 @@
   top: 14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 42px;
-  height: 45px;
+  width: 45px;
+  height: 48px;
   background: linear-gradient(135deg, #85C1E9 0%, #5DADE2 100%);
-  border-radius: 21px 21px 4px 4px;
+  border-radius: 22px 22px 4px 4px;
   border: 5px solid #5D4037;
 }
 
@@ -666,7 +636,7 @@
   height: 12px;
   background: linear-gradient(135deg, #F1C40F 0%, #F39C12 100%);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(241, 196, 15, 0.7);
+  box-shadow: 0 0 14px rgba(241, 196, 15, 0.7);
 }
 
 .steps {
@@ -697,7 +667,7 @@
 
 /* Foundation */
 .villa-foundation {
-  width: 540px;
+  width: 520px;
   height: 22px;
   background: linear-gradient(180deg, #7F8C8D 0%, #5D6D7E 100%);
   border-radius: 0 0 6px 6px;
@@ -709,7 +679,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 110px;
+  height: 130px;
 }
 
 .grass {
@@ -717,69 +687,186 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 110px;
+  height: 130px;
   background: linear-gradient(180deg, #27AE60 0%, #1E8449 50%, #196F3D 100%);
-  border-radius: 320px 320px 0 0;
+  border-radius: 310px 310px 0 0;
 }
 
-.flower-bed {
-  position: absolute;
-  bottom: 95px;
-  display: flex;
-  gap: 12px;
-}
-
-.left-bed {
-  left: 80px;
-}
-
-.right-bed {
-  right: 80px;
-}
-
-.flower {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-
-.flower-1 {
-  background: #E74C3C;
-  box-shadow: 0 0 14px rgba(231, 76, 60, 0.6);
-}
-
-.flower-2 {
-  background: #F1C40F;
-  box-shadow: 0 0 14px rgba(241, 196, 15, 0.6);
-}
-
-.flower-3 {
-  background: #9B59B6;
-  box-shadow: 0 0 14px rgba(155, 89, 182, 0.6);
-}
+/* Old flower-bed styles removed - replaced with small flowering trees */
 
 .tree {
   position: absolute;
-  bottom: 95px;
+  bottom: 115px;
   left: 15px;
 }
 
 .tree-trunk {
-  width: 30px;
-  height: 70px;
+  width: 32px;
+  height: 80px;
   background: linear-gradient(90deg, #6B4423 0%, #8B5A2B 50%, #6B4423 100%);
   border-radius: 4px;
   margin: 0 auto;
 }
 
 .tree-leaves {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   background: linear-gradient(180deg, #27AE60 0%, #1E8449 100%);
   border-radius: 50%;
-  margin-top: -40px;
-  margin-left: -35px;
+  margin-top: -45px;
+  margin-left: -39px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Small Flowering Trees */
+/* Flowering Plants with Stems and Real Leaves */
+.plant {
+  position: absolute;
+  bottom: 115px;
+  width: 50px;
+  height: 60px;
+}
+
+.plant-trunk {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 42px;
+  background: linear-gradient(90deg, #5D4037 0%, #8B5A2B 50%, #5D4037 100%);
+  border-radius: 2px;
+}
+
+/* Branches - brown stems connected to trunk */
+.branch {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(90deg, #6D4C41 0%, #8D6E63 50%, #6D4C41 100%);
+  border-radius: 2px;
+}
+
+.branch-left {
+  height: 18px;
+  bottom: 25px;
+  left: 50%;
+  margin-left: -1px;
+  transform: rotate(-50deg);
+  transform-origin: bottom center;
+}
+
+.branch-right {
+  height: 18px;
+  bottom: 25px;
+  left: 50%;
+  margin-left: -1px;
+  transform: rotate(50deg);
+  transform-origin: bottom center;
+}
+
+.branch-top {
+  height: 15px;
+  bottom: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Plant Flowers positioned at branch ends */
+.plant-flower {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.plant-flower::before,
+.plant-flower::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.plant-flower::before {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.plant-flower::after {
+  top: 2px;
+  left: 0;
+}
+
+/* Flower positions at end of branches */
+.pf-left {
+  bottom: 38px;
+  left: 5px;
+}
+
+.pf-right {
+  bottom: 38px;
+  right: 5px;
+}
+
+.pf-top {
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Flower Colors */
+.flower-red::before,
+.flower-red::after {
+  background: #E53935;
+  box-shadow: 3px 2px 0 #E53935, -3px 2px 0 #E53935, 0 0 6px rgba(229, 57, 53, 0.5);
+}
+
+.flower-yellow::before,
+.flower-yellow::after {
+  background: #FDD835;
+  box-shadow: 3px 2px 0 #FDD835, -3px 2px 0 #FDD835, 0 0 6px rgba(253, 216, 53, 0.5);
+}
+
+.flower-pink::before,
+.flower-pink::after {
+  background: #EC407A;
+  box-shadow: 3px 2px 0 #EC407A, -3px 2px 0 #EC407A, 0 0 6px rgba(236, 64, 122, 0.5);
+}
+
+.flower-orange::before,
+.flower-orange::after {
+  background: #FF7043;
+  box-shadow: 3px 2px 0 #FF7043, -3px 2px 0 #FF7043, 0 0 6px rgba(255, 112, 67, 0.5);
+}
+
+.flower-purple::before,
+.flower-purple::after {
+  background: #AB47BC;
+  box-shadow: 3px 2px 0 #AB47BC, -3px 2px 0 #AB47BC, 0 0 6px rgba(171, 71, 188, 0.5);
+}
+
+.flower-white::before,
+.flower-white::after {
+  background: #FFFFFF;
+  box-shadow: 3px 2px 0 #FFFFFF, -3px 2px 0 #FFFFFF, 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+/* Plant Positions */
+.plant-1 {
+  left: 80px;
+}
+
+.plant-2 {
+  left: 140px;
+}
+
+.plant-3 {
+  right: 140px;
+}
+
+.plant-4 {
+  right: 80px;
 }
 
 .pathway {
@@ -787,24 +874,24 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 110px;
+  width: 90px;
+  height: 130px;
   background: linear-gradient(180deg, #BDC3C7 0%, #95A5A6 100%);
   border-radius: 6px 6px 0 0;
 }
 
 .fence {
   position: absolute;
-  bottom: 95px;
-  right: 10px;
+  bottom: 115px;
+  right: 15px;
   display: flex;
-  gap: 20px;
+  gap: 22px;
   align-items: flex-end;
 }
 
 .fence-post {
   width: 12px;
-  height: 48px;
+  height: 52px;
   background: linear-gradient(90deg, #FDEBD0 0%, #FFFFFF 50%, #FDEBD0 100%);
   border-radius: 3px 3px 0 0;
 }
@@ -813,7 +900,7 @@
   position: absolute;
   top: 14px;
   left: 0;
-  width: 75px;
+  width: 80px;
   height: 10px;
   background: linear-gradient(90deg, #FDEBD0 0%, #FFFFFF 50%, #FDEBD0 100%);
   border-radius: 3px;
@@ -851,7 +938,7 @@
    ========================================================= */
 
 .experiences-section {
-  padding: 30px 60px 60px;
+  padding: 60px 60px;
   position: relative;
   overflow: hidden;
   background: transparent;
@@ -2181,5 +2268,396 @@
     width: 100%;
     max-width: 300px;
     justify-content: center;
+  }
+}
+
+/* =========================================================
+   AI CHATBOT STYLES
+   ========================================================= */
+
+.chatbot-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+}
+
+/* Chat Toggle Button */
+.chat-toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6B73D9 0%, #8B5DAF 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(107, 115, 217, 0.4);
+  transition: all 0.3s ease;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.chat-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(107, 115, 217, 0.6);
+}
+
+.chat-toggle-btn mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 8px 25px rgba(107, 115, 217, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 35px rgba(107, 115, 217, 0.7);
+  }
+}
+
+/* Chat Window */
+.chat-window {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 380px;
+  height: 520px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+.chat-window.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Chat Header */
+.chat-header {
+  background: linear-gradient(135deg, #6B73D9 0%, #8B5DAF 100%);
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+}
+
+.chat-header-info mat-icon {
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+}
+
+.chat-header-info span {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.chat-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.header-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.header-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.header-btn mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+/* Chat Messages */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #f8f9fa;
+}
+
+.message {
+  display: flex;
+  animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 85%;
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.user-message .message-content {
+  flex-direction: row-reverse;
+}
+
+.message-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px !important;
+}
+
+.bot-message .message-icon {
+  background: linear-gradient(135deg, #6B73D9 0%, #8B5DAF 100%);
+  color: white;
+}
+
+.user-message .message-icon {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.message-text {
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.bot-message .message-text {
+  background: white;
+  color: #333;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  white-space: pre-line;
+}
+
+.user-message .message-text {
+  background: linear-gradient(135deg, #6B73D9 0%, #8B5DAF 100%);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 18px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: #6B73D9;
+  border-radius: 50%;
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 20px;
+  background: white;
+  border-top: 1px solid #eee;
+}
+
+.quick-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #f0f2ff;
+  border: 1px solid #d0d5ff;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #6B73D9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quick-btn:hover {
+  background: #6B73D9;
+  color: white;
+  border-color: #6B73D9;
+}
+
+.quick-btn mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Chat Input */
+.chat-input-container {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  background: white;
+  border-top: 1px solid #eee;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 18px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.chat-input:focus {
+  border-color: #6B73D9;
+}
+
+.chat-input::placeholder {
+  color: #999;
+}
+
+.send-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6B73D9 0%, #8B5DAF 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(107, 115, 217, 0.4);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.send-btn mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: white;
+}
+
+/* Responsive Chatbot */
+@media (max-width: 480px) {
+  .chatbot-container {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .chat-toggle-btn {
+    width: 55px;
+    height: 55px;
+  }
+
+  .chat-window {
+    bottom: 85px;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    height: 70vh;
+  }
+
+  .quick-actions {
+    padding: 10px 15px;
+  }
+
+  .quick-btn {
+    padding: 6px 10px;
+    font-size: 11px;
   }
 }

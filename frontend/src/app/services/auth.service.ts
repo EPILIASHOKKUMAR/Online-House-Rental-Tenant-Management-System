@@ -9,6 +9,7 @@ export interface User {
   email: string;
   phone: string;
   role: 'owner' | 'tenant' | 'admin';
+  profile_photo?: string;
 }
 
 export interface LoginResponse {
@@ -56,6 +57,29 @@ export class AuthService {
           this.currentUserSubject.next(response.user);
         })
       );
+  }
+
+  googleLogin(credential: string, role: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/google-login`, { credential, role })
+      .pipe(
+        tap(response => {
+          localStorage.setItem('currentUser', JSON.stringify(response.user));
+          localStorage.setItem('userRole', response.user.role);
+          this.currentUserSubject.next(response.user);
+        })
+      );
+  }
+
+  forgotPassword(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  verifyOTP(email: string, otp: string): Observable<{ message: string; verified: boolean }> {
+    return this.http.post<{ message: string; verified: boolean }>(`${this.apiUrl}/verify-otp`, { email, otp });
+  }
+
+  resetPassword(email: string, otp: string, newPassword: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/reset-password`, { email, otp, newPassword });
   }
 
   logout(): void {

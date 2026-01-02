@@ -568,9 +568,9 @@ form {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #1e293b;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -611,15 +611,15 @@ form {
 }
 
 .options-row a {
-  font-size: 0.8rem;
-  color: #667eea;
+  font-size: 0.85rem;
+  color: #1e293b;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .options-row a:hover {
-  color: #764ba2;
+  color: #667eea;
 }
 
 /* =========================================================

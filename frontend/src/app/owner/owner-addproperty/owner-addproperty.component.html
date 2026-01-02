@@ -418,7 +418,7 @@ Describe your property in detail... Include information about the neighborhood, 
     Property Location
   </h2>
   <p class="location-subtitle">
-    Capture property location. If GPS fails, we'll use your approximate location - then drag the marker to set exact position.
+    Get your current location using Leaflet GPS tracking.
   </p>
 
   <div class="location-box" *ngIf="!locationEnabled">
@@ -426,43 +426,55 @@ Describe your property in detail... Include information about the neighborhood, 
       <mat-icon>my_location</mat-icon>
     </div>
     
-    <h3>Get Property Location</h3>
-    <p>Click the button to get location. You can adjust the marker on the map.</p>
+    <h3>Get Current Location</h3>
     
-    <button type="button" class="location-btn" (click)="enableLocation()" [disabled]="locationLoading">
-      <mat-icon>{{ locationLoading ? 'sync' : 'gps_fixed' }}</mat-icon>
-      <span *ngIf="!locationLoading">Enable Live Location</span>
-      <span *ngIf="locationLoading">Getting Location...</span>
-    </button>
+    <div class="location-buttons">
+      <button type="button" class="location-btn" (click)="enableLocation()" [disabled]="locationLoading">
+        <mat-icon [class.spinning]="locationLoading">{{ locationLoading ? 'sync' : 'gps_fixed' }}</mat-icon>
+        <span *ngIf="!locationLoading">Get My Location</span>
+        <span *ngIf="locationLoading">Locating...</span>
+      </button>
+    </div>
     
     <div class="location-error" *ngIf="locationError">
       <mat-icon>error</mat-icon>
       {{ locationError }}
     </div>
 
-    <div class="location-tip" style="margin-top: 15px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 10px; color: rgba(255,255,255,0.7); font-size: 0.85rem;">
-      <strong>Tip:</strong> If browser blocks location, click the lock icon 🔒 in address bar → Site Settings → Allow Location
+    <div class="location-divider">
+      <span>OR</span>
+    </div>
+
+    <div class="address-search">
+      <p class="manual-text">Search by address:</p>
+      <div class="search-inputs">
+        <input type="text" placeholder="Enter address, city or landmark" [(ngModel)]="addressSearch" [ngModelOptions]="{standalone: true}" />
+        <button type="button" class="search-btn" (click)="searchAddress()" [disabled]="searchLoading">
+          <mat-icon [class.spinning]="searchLoading">{{ searchLoading ? 'sync' : 'search' }}</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="location-divider">
+      <span>OR</span>
     </div>
 
     <div class="manual-location">
-      <p class="manual-text">Or enter coordinates manually (get from Google Maps):</p>
+      <p class="manual-text">Enter coordinates manually:</p>
       <div class="manual-inputs">
-        <input type="number" step="any" placeholder="Latitude (e.g., 12.9716)" #manualLat />
-        <input type="number" step="any" placeholder="Longitude (e.g., 77.5946)" #manualLng />
+        <input type="number" step="any" placeholder="Latitude" #manualLat />
+        <input type="number" step="any" placeholder="Longitude" #manualLng />
         <button type="button" class="manual-btn" (click)="setManualLocation(manualLat.value, manualLng.value)">
           <mat-icon>check</mat-icon> Set
         </button>
       </div>
-      <p style="margin-top: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.5);">
-        To get coordinates: Open Google Maps → Right-click on location → Copy coordinates
-      </p>
     </div>
   </div>
 
   <div class="location-success" *ngIf="locationEnabled">
     <div class="location-header">
       <mat-icon class="success-icon">check_circle</mat-icon>
-      <span>Live Location Captured!</span>
+      <span>Location Found!</span>
     </div>
     
     <div class="coordinates">
@@ -476,25 +488,25 @@ Describe your property in detail... Include information about the neighborhood, 
       </div>
       <div class="coord-item" *ngIf="locationAccuracy">
         <span class="coord-label">Accuracy</span>
-        <span class="coord-value">~{{ locationAccuracy | number:'1.0-0' }}m</span>
+        <span class="coord-value">{{ locationAccuracy | number:'1.0-0' }}m</span>
       </div>
     </div>
     
     <div class="map-container">
       <div id="locationMap" class="leaflet-map"></div>
-      <p class="map-hint"><mat-icon>info</mat-icon> Click on map or drag marker to adjust location</p>
+      <p class="map-hint"><mat-icon>info</mat-icon> Blue circle shows accuracy. Drag marker to adjust.</p>
     </div>
 
     <div class="location-actions">
       <button type="button" class="refresh-btn" (click)="refreshLocation()" [disabled]="locationLoading">
-        <mat-icon>{{ locationLoading ? 'sync' : 'refresh' }}</mat-icon>
-        Refresh Location
+        <mat-icon [class.spinning]="locationLoading">{{ locationLoading ? 'sync' : 'refresh' }}</mat-icon>
+        Refresh
       </button>
       <a class="view-map-btn" 
          [href]="'https://www.google.com/maps?q=' + latitude + ',' + longitude" 
          target="_blank">
         <mat-icon>open_in_new</mat-icon>
-        View on Google Maps
+        Google Maps
       </a>
       <button type="button" class="remove-location-btn" (click)="removeLocation()">
         <mat-icon>close</mat-icon>
