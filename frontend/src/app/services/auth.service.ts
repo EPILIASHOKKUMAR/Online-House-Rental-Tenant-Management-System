@@ -26,7 +26,7 @@ export interface RegisterResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/auth';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   
   currentUser$ = this.currentUserSubject.asObservable();

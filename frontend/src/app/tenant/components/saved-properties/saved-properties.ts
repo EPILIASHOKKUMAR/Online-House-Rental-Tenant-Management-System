@@ -45,7 +45,7 @@ export class SavedPropertiesComponent implements OnInit {
       const savedIds = JSON.parse(saved);
       if (savedIds.length > 0) {
         this.isLoading = true;
-        this.http.get<Property[]>('http://localhost:3000/api/properties').subscribe({
+        this.http.get<Property[]>('https://online-house-rental-tenant-management.onrender.com/api/properties').subscribe({
           next: (properties) => {
             this.savedProperties = properties.filter(p => savedIds.includes(p.id)).map(p => ({
               ...p,

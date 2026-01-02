@@ -24,7 +24,7 @@ export interface Property {
   providedIn: 'root'
 })
 export class PropertyService {
-  private apiUrl = 'http://localhost:3000/api/properties';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/properties';
 
   constructor(private http: HttpClient) {}
 

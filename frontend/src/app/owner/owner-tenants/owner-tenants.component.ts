@@ -24,7 +24,7 @@ interface Tenant {
 })
 export class OwnerTenantsComponent implements OnInit {
 
-  private apiUrl = 'http://localhost:3000/api/bookings';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/bookings';
 
   isSidebarCollapsed = false;
   tenants: Tenant[] = [];

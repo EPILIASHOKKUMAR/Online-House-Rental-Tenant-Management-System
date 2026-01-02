@@ -25,7 +25,7 @@ interface Booking {
 })
 export class AdminBookingsComponent implements OnInit {
 
-  private apiUrl = 'http://localhost:3000/api/admin';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/admin';
 
   isSidebarCollapsed = false;
   isLoading = true;

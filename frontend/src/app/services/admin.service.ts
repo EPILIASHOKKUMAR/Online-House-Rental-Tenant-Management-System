@@ -26,7 +26,7 @@ export interface DashboardStats {
   providedIn: 'root'
 })
 export class AdminService {
-  private apiUrl = 'http://localhost:3000/api/admin';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/admin';
 
   constructor(private http: HttpClient) {}
 

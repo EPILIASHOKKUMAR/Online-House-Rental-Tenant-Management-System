@@ -45,7 +45,7 @@ export class TenantProfileComponent implements OnInit {
   }
 
   loadBookingStats(userId: number): void {
-    this.http.get<any[]>(`http://localhost:3000/api/bookings/tenant/${userId}`).subscribe({
+    this.http.get<any[]>(`https://online-house-rental-tenant-management.onrender.com/api/bookings/tenant/${userId}`).subscribe({
       next: (bookings) => {
         this.bookingCount = bookings.length;
         this.approvedCount = bookings.filter(b => b.status === 'approved').length;
@@ -64,7 +64,7 @@ export class TenantProfileComponent implements OnInit {
     reader.onload = () => {
       const photoData = reader.result as string;
       
-      this.http.put(`http://localhost:3000/api/auth/profile/${this.tenant.id}/photo`, {
+      this.http.put(`https://online-house-rental-tenant-management.onrender.com/api/auth/profile/${this.tenant.id}/photo`, {
         profile_photo: photoData
       }).subscribe({
         next: () => {

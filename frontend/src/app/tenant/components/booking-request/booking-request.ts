@@ -42,7 +42,7 @@ export const MY_DATE_FORMATS = {
 })
 export class BookingRequestComponent implements OnInit {
 
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api';
 
   constructor(
     private route: ActivatedRoute,

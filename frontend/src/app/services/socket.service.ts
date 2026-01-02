@@ -30,7 +30,7 @@ export class SocketService {
   connect(): void {
     if (this.socket?.connected) return;
 
-    this.socket = io('http://localhost:3000', {
+    this.socket = io('https://online-house-rental-tenant-management.onrender.com', {
       transports: ['websocket', 'polling']
     });
 

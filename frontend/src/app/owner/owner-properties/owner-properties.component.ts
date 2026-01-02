@@ -28,7 +28,7 @@ interface Property {
 })
 export class OwnerPropertiesComponent implements OnInit {
 
-  private apiUrl = 'http://localhost:3000/api/properties';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/properties';
 
   constructor(
     private http: HttpClient,

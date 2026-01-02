@@ -25,7 +25,7 @@ export interface ChatStats {
   providedIn: 'root'
 })
 export class ChatbotService {
-  private apiUrl = 'http://localhost:3000/api/chatbot';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/chatbot';
 
   constructor(private http: HttpClient) {}
 

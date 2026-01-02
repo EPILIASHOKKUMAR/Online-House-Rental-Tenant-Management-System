@@ -19,7 +19,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OwnerEditPropertyComponent implements OnInit {
 
-  private apiUrl = 'http://localhost:3000/api/properties';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/properties';
   propertyId = 0;
   isLoading = true;
   propertyForm!: FormGroup;

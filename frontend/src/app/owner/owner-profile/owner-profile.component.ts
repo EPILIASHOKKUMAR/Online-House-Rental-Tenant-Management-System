@@ -54,7 +54,7 @@ export class OwnerProfileComponent implements OnInit {
   }
 
   loadPropertyCount(ownerId: number): void {
-    this.http.get<any[]>(`http://localhost:3000/api/properties/owner/${ownerId}`).subscribe({
+    this.http.get<any[]>(`https://online-house-rental-tenant-management.onrender.com/api/properties/owner/${ownerId}`).subscribe({
       next: (properties) => {
         this.propertyCount = properties.length;
       },
@@ -74,7 +74,7 @@ export class OwnerProfileComponent implements OnInit {
     reader.onload = () => {
       const photoData = reader.result as string;
       
-      this.http.put(`http://localhost:3000/api/auth/profile/${this.owner.id}/photo`, {
+      this.http.put(`https://online-house-rental-tenant-management.onrender.com/api/auth/profile/${this.owner.id}/photo`, {
         profile_photo: photoData
       }).subscribe({
         next: () => {

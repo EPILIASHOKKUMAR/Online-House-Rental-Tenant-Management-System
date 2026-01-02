@@ -45,7 +45,7 @@ interface Property {
 })
 export class PropertyDetailsComponent implements OnInit, OnDestroy {
 
-  private apiUrl = 'http://localhost:3000/api/properties';
+  private apiUrl = 'https://online-house-rental-tenant-management.onrender.com/api/properties';
   private map: L.Map | null = null;
 
   property: Property | null = null;
