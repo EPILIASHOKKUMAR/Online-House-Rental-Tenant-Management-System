@@ -8,7 +8,10 @@ const otpStore: Map<string, { otp: string; expires: number }> = new Map();
 
 const sendEmailViaBrevoAPI = (to: string, subject: string, htmlContent: string): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const apiKey = process.env.SMTP_PASS?.replace('xsmtpsib-', '') || '';
+    const smtpPass = process.env.SMTP_PASS || '';
+    const apiKey = smtpPass.startsWith('xsmtpsib-') ? smtpPass.substring(9) : smtpPass;
+    
+    console.log('Sending email via Brevo API to:', to);
     
     const data = JSON.stringify({
       sender: { name: 'House Rental', email: process.env.SMTP_FROM || 'exploreai45@gmail.com' },
@@ -24,7 +27,7 @@ const sendEmailViaBrevoAPI = (to: string, subject: string, htmlContent: string):
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'api-key': apiKey,
+        'api-key': smtpPass,
         'content-type': 'application/json',
         'content-length': Buffer.byteLength(data)
       }
@@ -34,6 +37,7 @@ const sendEmailViaBrevoAPI = (to: string, subject: string, htmlContent: string):
       let body = '';
       res.on('data', chunk => body += chunk);
       res.on('end', () => {
+        console.log('Brevo API response:', res.statusCode, body);
         if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
           resolve();
         } else {
@@ -42,7 +46,10 @@ const sendEmailViaBrevoAPI = (to: string, subject: string, htmlContent: string):
       });
     });
 
-    req.on('error', reject);
+    req.on('error', (err) => {
+      console.error('Brevo API request error:', err);
+      reject(err);
+    });
     req.write(data);
     req.end();
   });
