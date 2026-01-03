@@ -1,13 +1,11 @@
 /* =========================================================
    UNIQUE CIRCULAR LOGIN - ENHANCED ANIMATIONS
    ========================================================= */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 .login-page {
   width: 100vw;
   height: 100vh;
@@ -21,53 +19,43 @@
   overflow: hidden;
   font-family: 'Poppins', -apple-system, sans-serif;
 }
-
 /* =========================================================
    ANIMATED BACKGROUND
    ========================================================= */
-
 .bg-animation {
   position: absolute;
   width: 100%;
   height: 100%;
   pointer-events: none;
 }
-
-/* Fixed Background Circles - No Movement */
 .circle-bg {
   position: absolute;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
 }
-
 .circle-1 {
   width: 500px;
   height: 500px;
   top: -150px;
   right: -100px;
 }
-
 .circle-2 {
   width: 400px;
   height: 400px;
   bottom: -120px;
   left: -100px;
 }
-
 .circle-3 {
   width: 200px;
   height: 200px;
   top: 35%;
   left: 5%;
 }
-
-/* Animated Particles */
 .particles {
   position: absolute;
   width: 100%;
   height: 100%;
 }
-
 .particles span {
   position: absolute;
   width: 6px;
@@ -77,7 +65,6 @@
   animation: particleFloat 8s ease-in-out infinite;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
-
 .particles span:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
 .particles span:nth-child(2) { left: 20%; top: 60%; animation-delay: 1s; width: 4px; height: 4px; }
 .particles span:nth-child(3) { left: 35%; top: 15%; animation-delay: 2s; }
@@ -88,7 +75,6 @@
 .particles span:nth-child(8) { left: 90%; top: 55%; animation-delay: 2.5s; width: 4px; height: 4px; }
 .particles span:nth-child(9) { left: 5%; top: 75%; animation-delay: 3.5s; }
 .particles span:nth-child(10) { left: 45%; top: 10%; animation-delay: 4.5s; width: 7px; height: 7px; }
-
 @keyframes particleFloat {
   0%, 100% { 
     transform: translateY(0) scale(1);
@@ -99,60 +85,50 @@
     opacity: 1;
   }
 }
-
-/* Glowing Lines */
 .glow-lines {
   position: absolute;
   width: 100%;
   height: 100%;
 }
-
 .line {
   position: absolute;
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   animation: lineSweep 8s ease-in-out infinite;
 }
-
 .line-1 {
   width: 300px;
   top: 20%;
   left: -300px;
   animation-delay: 0s;
 }
-
 .line-2 {
   width: 200px;
   top: 50%;
   left: -200px;
   animation-delay: 2s;
 }
-
 .line-3 {
   width: 250px;
   top: 75%;
   left: -250px;
   animation-delay: 4s;
 }
-
 @keyframes lineSweep {
   0% { transform: translateX(0); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 1; }
   100% { transform: translateX(calc(100vw + 300px)); opacity: 0; }
 }
-
 /* =========================================================
    ORBITING RINGS
    ========================================================= */
-
 .orbit-container {
   position: absolute;
   width: 600px;
   height: 600px;
   pointer-events: none;
 }
-
 .orbit {
   position: absolute;
   border: 1px dashed rgba(255, 255, 255, 0.15);
@@ -160,28 +136,24 @@
   top: 50%;
   left: 50%;
 }
-
 .orbit-1 {
   width: 450px;
   height: 450px;
   margin: -225px 0 0 -225px;
   animation: orbitSpin 25s linear infinite;
 }
-
 .orbit-2 {
   width: 550px;
   height: 550px;
   margin: -275px 0 0 -275px;
   animation: orbitSpin 35s linear infinite reverse;
 }
-
 .orbit-3 {
   width: 650px;
   height: 650px;
   margin: -325px 0 0 -325px;
   animation: orbitSpin 45s linear infinite;
 }
-
 .orbit-dot {
   position: absolute;
   width: 10px;
@@ -193,27 +165,21 @@
   transform: translateX(-50%);
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
 }
-
 .orbit-2 .orbit-dot {
   background: linear-gradient(135deg, #60a5fa, #3b82f6);
   box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
 }
-
 .orbit-3 .orbit-dot {
   background: linear-gradient(135deg, #f472b6, #ec4899);
   box-shadow: 0 0 20px rgba(244, 114, 182, 0.6);
 }
-
 @keyframes orbitSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-
 /* =========================================================
    LOGIN CARD WITH ANIMATED BORDER
    ========================================================= */
-
 .login-circle {
   width: 380px;
   background: rgba(255, 255, 255, 0.95);
@@ -227,7 +193,6 @@
     0 30px 60px rgba(0, 0, 0, 0.15),
     0 0 100px rgba(139, 92, 246, 0.2);
 }
-
 @keyframes cardFloat {
   from {
     opacity: 0;
@@ -238,13 +203,10 @@
     transform: scale(1) translateY(0);
   }
 }
-
 @keyframes cardHover {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-
-/* Animated Gradient Border */
 .card-border {
   position: absolute;
   top: -3px;
@@ -258,17 +220,14 @@
   animation: borderGlow 6s ease infinite;
   opacity: 0.7;
 }
-
 @keyframes borderGlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 /* =========================================================
    TOP ICON WITH ANIMATED RINGS
    ========================================================= */
-
 .top-icon {
   position: absolute;
   top: -45px;
@@ -277,7 +236,6 @@
   width: 90px;
   height: 90px;
 }
-
 .icon-ring {
   position: absolute;
   top: 50%;
@@ -286,25 +244,21 @@
   border: 2px solid rgba(102, 126, 234, 0.3);
   transform: translate(-50%, -50%);
 }
-
 .icon-ring.ring-1 {
   width: 100px;
   height: 100px;
   animation: ringPulse 2s ease-in-out infinite;
 }
-
 .icon-ring.ring-2 {
   width: 120px;
   height: 120px;
   animation: ringPulse 2s ease-in-out infinite 0.3s;
 }
-
 .icon-ring.ring-3 {
   width: 140px;
   height: 140px;
   animation: ringPulse 2s ease-in-out infinite 0.6s;
 }
-
 @keyframes ringPulse {
   0%, 100% { 
     transform: translate(-50%, -50%) scale(1);
@@ -315,7 +269,6 @@
     opacity: 0.2;
   }
 }
-
 .icon-glow {
   position: absolute;
   top: 50%;
@@ -329,12 +282,10 @@
   opacity: 0.5;
   animation: glowPulse 3s ease-in-out infinite;
 }
-
 @keyframes glowPulse {
   0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
   50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.2); }
 }
-
 .icon-circle {
   position: absolute;
   top: 50%;
@@ -350,7 +301,6 @@
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
   animation: iconBounce 3s ease-in-out infinite;
 }
-
 .icon-circle mat-icon {
   font-size: 36px;
   width: 36px;
@@ -358,21 +308,17 @@
   color: white;
   animation: iconRotate 0.5s ease;
 }
-
 @keyframes iconBounce {
   0%, 100% { transform: translate(-50%, -50%) scale(1); }
   50% { transform: translate(-50%, -50%) scale(1.05); }
 }
-
 @keyframes iconRotate {
   from { transform: rotateY(90deg); opacity: 0; }
   to { transform: rotateY(0deg); opacity: 1; }
 }
-
 /* =========================================================
    ROLE TOGGLE WITH SLIDING BACKGROUND
    ========================================================= */
-
 .role-toggle {
   display: flex;
   background: #f1f5f9;
@@ -382,7 +328,6 @@
   position: relative;
   overflow: hidden;
 }
-
 .toggle-bg {
   position: absolute;
   top: 5px;
@@ -394,11 +339,9 @@
   transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
-
 .toggle-bg.owner {
   transform: translateX(100%);
 }
-
 .role-toggle button {
   flex: 1;
   display: flex;
@@ -417,25 +360,20 @@
   position: relative;
   z-index: 2;
 }
-
 .role-toggle button mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
 }
-
 .role-toggle button.active {
   color: white;
 }
-
 /* =========================================================
    TITLE SECTION
    ========================================================= */
-
 .title-section {
   margin-bottom: 18px;
 }
-
 .title-section h2 {
   font-size: 1.5rem;
   font-weight: 700;
@@ -443,18 +381,15 @@
   margin-bottom: 4px;
   animation: titleSlide 0.5s ease;
 }
-
 @keyframes titleSlide {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
 .subtitle {
   font-size: 0.85rem;
   color: #374151;
   margin-bottom: 8px;
 }
-
 .title-underline {
   width: 60px;
   height: 3px;
@@ -463,22 +398,18 @@
   margin: 0 auto;
   animation: underlineExpand 0.8s ease forwards;
 }
-
 @keyframes underlineExpand {
   from { width: 0; }
   to { width: 60px; }
 }
-
 /* =========================================================
    FORM INPUTS WITH ANIMATIONS
    ========================================================= */
-
 form {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-
 .input-group {
   display: flex;
   align-items: center;
@@ -490,12 +421,10 @@ form {
   transition: all 0.3s ease;
   overflow: hidden;
 }
-
 .input-group:focus-within {
   background: white;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15), 0 8px 25px rgba(0, 0, 0, 0.08);
 }
-
 .input-icon-wrap {
   width: 36px;
   height: 36px;
@@ -506,11 +435,9 @@ form {
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .input-group:focus-within .input-icon-wrap {
   background: linear-gradient(135deg, #667eea, #764ba2);
 }
-
 .input-icon-wrap mat-icon {
   font-size: 18px;
   width: 18px;
@@ -518,11 +445,9 @@ form {
   color: #667eea;
   transition: color 0.3s ease;
 }
-
 .input-group:focus-within .input-icon-wrap mat-icon {
   color: white;
 }
-
 .input-group input {
   flex: 1;
   border: none;
@@ -531,11 +456,9 @@ form {
   color: #1e293b;
   outline: none;
 }
-
 .input-group input::placeholder {
   color: #94a3b8;
 }
-
 .input-line {
   position: absolute;
   bottom: 0;
@@ -546,16 +469,12 @@ form {
   transition: all 0.4s ease;
   transform: translateX(-50%);
 }
-
 .input-group:focus-within .input-line {
   width: 90%;
 }
-
-
 /* =========================================================
    OPTIONS ROW
    ========================================================= */
-
 .options-row {
   display: flex;
   justify-content: space-between;
@@ -563,7 +482,6 @@ form {
   margin: 4px 0;
   padding: 0 5px;
 }
-
 .checkbox-label {
   display: flex;
   align-items: center;
@@ -573,11 +491,9 @@ form {
   font-weight: 600;
   cursor: pointer;
 }
-
 .checkbox-label input {
   display: none;
 }
-
 .custom-check {
   width: 18px;
   height: 18px;
@@ -586,12 +502,10 @@ form {
   position: relative;
   transition: all 0.3s ease;
 }
-
 .checkbox-label input:checked + .custom-check {
   background: linear-gradient(135deg, #667eea, #764ba2);
   border-color: transparent;
 }
-
 .checkbox-label input:checked + .custom-check::after {
   content: '✓';
   position: absolute;
@@ -603,13 +517,11 @@ form {
   font-weight: bold;
   animation: checkPop 0.3s ease;
 }
-
 @keyframes checkPop {
   0% { transform: translate(-50%, -50%) scale(0); }
   50% { transform: translate(-50%, -50%) scale(1.3); }
   100% { transform: translate(-50%, -50%) scale(1); }
 }
-
 .options-row a {
   font-size: 0.85rem;
   color: #1e293b;
@@ -617,15 +529,12 @@ form {
   font-weight: 600;
   transition: all 0.3s ease;
 }
-
 .options-row a:hover {
   color: #667eea;
 }
-
 /* =========================================================
    LOGIN BUTTON WITH SHINE EFFECT
    ========================================================= */
-
 .login-btn {
   display: flex;
   align-items: center;
@@ -646,26 +555,22 @@ form {
   position: relative;
   overflow: hidden;
 }
-
 .btn-text {
   position: relative;
   z-index: 2;
 }
-
 .btn-icon {
   position: relative;
   z-index: 2;
   display: flex;
   align-items: center;
 }
-
 .btn-icon mat-icon {
   font-size: 20px;
   width: 20px;
   height: 20px;
   transition: transform 0.3s ease;
 }
-
 .btn-shine {
   position: absolute;
   top: 0;
@@ -675,39 +580,31 @@ form {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
   animation: btnShine 3s ease-in-out infinite;
 }
-
 @keyframes btnShine {
   0% { left: -100%; }
   50%, 100% { left: 100%; }
 }
-
 .login-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
 }
-
 .login-btn:hover .btn-icon mat-icon {
   transform: translateX(5px);
 }
-
 .login-btn:active {
   transform: translateY(-1px);
 }
-
 /* =========================================================
    SOCIAL SECTION
    ========================================================= */
-
 .social-row {
   margin-top: 16px;
 }
-
 .divider-line {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
 }
-
 .divider-line::before,
 .divider-line::after {
   content: '';
@@ -715,14 +612,11 @@ form {
   height: 1px;
   background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
 }
-
 .divider-line span {
   padding: 0 12px;
   font-size: 0.8rem;
   color: #94a3b8;
 }
-
-/* Google Button */
 .google-btn {
   display: flex;
   align-items: center;
@@ -739,29 +633,24 @@ form {
   color: #64748b;
   transition: all 0.3s ease;
 }
-
 .google-btn svg {
   flex-shrink: 0;
 }
-
 .google-btn:hover {
   border-color: #4285F4;
   background: #f8fafc;
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(66, 133, 244, 0.2);
 }
-
 /* =========================================================
    SIGNUP LINK
    ========================================================= */
-
 .signup-link {
   margin-top: 14px;
   font-size: 0.85rem;
   color: #1e293b;
   font-weight: 500;
 }
-
 .signup-link a {
   color: #4f46e5;
   text-decoration: none;
@@ -771,26 +660,21 @@ form {
   gap: 4px;
   transition: all 0.3s ease;
 }
-
 .signup-link a mat-icon {
   font-size: 16px;
   width: 16px;
   height: 16px;
   transition: transform 0.3s ease;
 }
-
 .signup-link a:hover {
   color: #764ba2;
 }
-
 .signup-link a:hover mat-icon {
   transform: translateX(4px);
 }
-
 /* =========================================================
    BACK BUTTON
    ========================================================= */
-
 .back-btn {
   position: fixed;
   top: 25px;
@@ -809,7 +693,6 @@ form {
   z-index: 100;
   overflow: hidden;
 }
-
 .back-btn mat-icon {
   font-size: 24px;
   width: 24px;
@@ -817,7 +700,6 @@ form {
   position: relative;
   z-index: 2;
 }
-
 .btn-pulse {
   position: absolute;
   width: 100%;
@@ -826,21 +708,17 @@ form {
   border-radius: 50%;
   animation: btnPulseAnim 2s ease-in-out infinite;
 }
-
 @keyframes btnPulseAnim {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.3); opacity: 0; }
 }
-
 .back-btn:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: translateX(-5px);
 }
-
 /* =========================================================
    CORNER DECORATIONS
    ========================================================= */
-
 .corner-decor {
   position: fixed;
   width: 150px;
@@ -848,12 +726,10 @@ form {
   pointer-events: none;
   z-index: 1;
 }
-
 .corner-decor svg {
   width: 100%;
   height: 100%;
 }
-
 .corner-decor svg circle {
   fill: none;
   stroke: rgba(255, 255, 255, 0.1);
@@ -861,40 +737,33 @@ form {
   stroke-dasharray: 10 5;
   animation: rotateDash 20s linear infinite;
 }
-
 .top-right {
   top: -30px;
   right: -30px;
 }
-
 .bottom-left {
   bottom: -30px;
   left: -30px;
   animation-direction: reverse;
 }
-
 @keyframes rotateDash {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
 /* =========================================================
    RESPONSIVE
    ========================================================= */
-
 @media (max-height: 700px) {
   .login-circle {
     padding: 50px 30px 25px;
     border-radius: 35px;
   }
-  
   .top-icon { top: -40px; }
   .icon-circle { width: 70px; height: 70px; }
   .icon-circle mat-icon { font-size: 30px; width: 30px; height: 30px; }
   .icon-ring.ring-1 { width: 85px; height: 85px; }
   .icon-ring.ring-2 { width: 100px; height: 100px; }
   .icon-ring.ring-3 { width: 115px; height: 115px; }
-  
   .role-toggle button { padding: 10px 14px; }
   .title-section h2 { font-size: 1.3rem; }
   .subtitle { margin-bottom: 6px; }
@@ -904,30 +773,23 @@ form {
   .google-btn { padding: 10px 16px; font-size: 0.85rem; }
   .signup-link { margin-top: 10px; }
 }
-
 @media (max-width: 420px) {
   .login-circle {
     width: 340px;
     padding: 50px 25px 28px;
   }
-  
   .orbit-container { display: none; }
 }
-
 @media (max-width: 360px) {
   .login-circle {
     width: 300px;
     padding: 45px 20px 25px;
   }
-  
   .role-toggle button {
     font-size: 0.8rem;
     padding: 10px 12px;
   }
 }
-
-
-/* Error Message Styles */
 .error-message {
   display: flex;
   align-items: center;
@@ -942,13 +804,11 @@ form {
   width: 100%;
   box-sizing: border-box;
 }
-
 .error-message mat-icon {
   font-size: 20px;
   width: 20px;
   height: 20px;
 }
-
 .login-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;

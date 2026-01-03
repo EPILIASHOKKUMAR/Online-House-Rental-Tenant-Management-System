@@ -1,13 +1,11 @@
 * {
   box-sizing: border-box;
 }
-
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
-
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
@@ -15,12 +13,10 @@
   border-right: 1px solid rgba(255,255,255,0.1);
   transition: width 0.25s ease, padding 0.25s ease;
 }
-
 .sidebar.collapsed {
   width: 80px;
   padding: 25px 10px;
 }
-
 .brand {
   position: relative;
   display: flex;
@@ -28,13 +24,11 @@
   margin-bottom: 30px;
   padding-right: 48px;
 }
-
 .brand-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .brand mat-icon {
   font-size: 36px;
   background: linear-gradient(135deg, #667eea, #764ba2);
@@ -42,7 +36,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .brand-text h3 {
   margin: 0;
   font-size: 1.4rem;
@@ -50,7 +43,6 @@
   color: #ffffff;
   letter-spacing: 0.5px;
 }
-
 .collapse-btn {
   position: absolute;
   right: 0;
@@ -67,11 +59,9 @@
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .collapse-btn:hover {
   background: rgba(102, 126, 234, 0.4);
 }
-
 .collapse-btn mat-icon {
   font-size: 20px;
   color: #ffffff;
@@ -79,7 +69,6 @@
   width: auto;
   height: auto;
 }
-
 .menu a {
   display: flex;
   align-items: center;
@@ -95,85 +84,70 @@
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
 }
-
 .menu a mat-icon {
   font-size: 24px;
   width: 24px;
   height: 24px;
 }
-
 .menu a:hover {
   background: rgba(102, 126, 234, 0.25);
   color: #ffffff;
   transform: translateX(5px);
 }
-
 .menu a.active {
   background: linear-gradient(90deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
   border-left: 4px solid #a78bfa;
   color: #ffffff;
 }
-
 .menu a.logout-link {
   color: #f87171;
 }
-
 .menu a.logout-link:hover {
   background: rgba(239, 68, 68, 0.25);
   color: #ef4444;
   cursor: pointer;
 }
-
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .menu span {
   display: none;
 }
-
 .sidebar.collapsed .menu a {
   justify-content: center;
   padding: 16px;
 }
-
 .content {
   flex: 1;
   padding: 30px;
 }
-
 .loading {
   text-align: center;
   padding: 60px;
   color: rgba(255,255,255,0.7);
   font-size: 18px;
 }
-
 .edit-property-page {
   width: 100%;
 }
-
 .page-header {
   display: flex;
   gap: 18px;
   align-items: flex-start;
   margin-bottom: 25px;
 }
-
 .page-header h1 {
   margin: 0;
   font-size: 1.8rem;
   font-weight: 600;
   color: #ffffff;
 }
-
 .required {
   color: #f5576c;
 }
-
 .subtitle {
   margin-top: 6px;
   color: rgba(255,255,255,0.6);
   font-size: 0.95rem;
 }
-
 .back-btn {
   width: 46px;
   height: 46px;
@@ -186,16 +160,13 @@
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .back-btn:hover {
   background: rgba(255,255,255,0.1);
 }
-
 .back-btn mat-icon {
   color: #ffffff;
   font-size: 24px;
 }
-
 .form-card {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
@@ -203,7 +174,6 @@
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 .section-card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
@@ -211,29 +181,24 @@
   padding: 25px;
   margin-bottom: 25px;
 }
-
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-
 .form-field {
   display: flex;
   flex-direction: column;
 }
-
 .form-field.full {
   grid-column: span 3;
 }
-
 label {
   font-size: 0.9rem;
   font-weight: 500;
   color: rgba(255,255,255,0.8);
   margin-bottom: 8px;
 }
-
 input,
 select,
 textarea {
@@ -245,18 +210,15 @@ textarea {
   color: #ffffff;
   transition: all 0.3s ease;
 }
-
 select option {
   background: #1a1a2e;
   color: #ffffff;
   padding: 10px;
 }
-
 input::placeholder,
 textarea::placeholder {
   color: rgba(255,255,255,0.4);
 }
-
 input:focus,
 select:focus,
 textarea:focus {
@@ -265,24 +227,20 @@ textarea:focus {
   background: rgba(255,255,255,0.08);
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
-
 input[type="number"] {
   appearance: textfield;
 }
-
 textarea {
   resize: vertical;
   min-height: 120px;
   line-height: 1.6;
 }
-
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
   margin-top: 30px;
 }
-
 .cancel-btn {
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.1);
@@ -293,11 +251,9 @@ textarea {
   font-size: 1rem;
   transition: all 0.3s ease;
 }
-
 .cancel-btn:hover {
   background: rgba(255,255,255,0.15);
 }
-
 .save-btn {
   background: linear-gradient(90deg, #667eea, #764ba2);
   color: #ffffff;
@@ -312,18 +268,15 @@ textarea {
   gap: 8px;
   transition: all 0.3s ease;
 }
-
 .save-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
 }
-
 .save-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
 }
-
 .amenities-section {
   margin-top: 0;
   padding: 25px;
@@ -332,27 +285,23 @@ textarea {
   border: 1px solid rgba(255,255,255,0.08);
   margin-bottom: 25px;
 }
-
 .amenities-header h3 {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
 }
-
 .amenities-header p {
   margin-top: 4px;
   color: rgba(255,255,255,0.5);
   font-size: 0.9rem;
 }
-
 .amenities-grid {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
 }
-
 .amenity-card {
   display: flex;
   align-items: center;
@@ -364,29 +313,24 @@ textarea {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .amenity-card:hover {
   background: rgba(102, 126, 234, 0.15);
   border-color: rgba(102, 126, 234, 0.5);
 }
-
 .amenity-card input {
   width: 18px;
   height: 18px;
   accent-color: #667eea;
 }
-
 .amenity-icon {
   font-size: 22px;
   color: #a78bfa;
 }
-
 .amenity-label {
   font-size: 0.95rem;
   font-weight: 500;
   color: #ffffff;
 }
-
 .amenities-info {
   margin-top: 18px;
   display: flex;
@@ -399,12 +343,10 @@ textarea {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.6);
 }
-
 .amenities-info mat-icon {
   font-size: 20px;
   color: rgba(255,255,255,0.5);
 }
-
 .description-card {
   margin-top: 0;
   padding: 25px;
@@ -413,7 +355,6 @@ textarea {
   background: rgba(255,255,255,0.03);
   margin-bottom: 25px;
 }
-
 .section-title {
   font-size: 1.1rem;
   font-weight: 600;
@@ -421,13 +362,11 @@ textarea {
   display: block;
   margin-bottom: 6px;
 }
-
 .section-subtitle {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 15px;
 }
-
 .description-card textarea {
   width: 100%;
   max-width: 100%;
@@ -440,20 +379,17 @@ textarea {
   font-size: 0.95rem;
   color: #ffffff;
 }
-
 .description-card textarea:focus {
   outline: none;
   background: rgba(255,255,255,0.08);
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
-
 .description-info {
   margin-top: 10px;
   font-size: 0.85rem;
   color: rgba(255,255,255,0.5);
 }
-
 .images-section {
   margin-top: 0;
   padding: 25px;
@@ -462,27 +398,23 @@ textarea {
   background: rgba(255,255,255,0.03);
   margin-bottom: 25px;
 }
-
 .images-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
 }
-
 .images-header h3 {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
 }
-
 .images-header p {
   margin-top: 4px;
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
 }
-
 .add-images-btn {
   display: inline-flex;
   align-items: center;
@@ -496,23 +428,19 @@ textarea {
   color: #a78bfa;
   transition: all 0.3s ease;
 }
-
 .add-images-btn:hover {
   background: rgba(102, 126, 234, 0.3);
 }
-
 .upload-icon {
   font-size: 22px;
   color: #a78bfa;
 }
-
 .images-grid {
   margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 18px;
 }
-
 .image-card {
   position: relative;
   border-radius: 16px;
@@ -520,13 +448,11 @@ textarea {
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.05);
 }
-
 .image-card img {
   width: 100%;
   height: 150px;
   object-fit: cover;
 }
-
 .primary-badge {
   position: absolute;
   top: 10px;
@@ -537,7 +463,6 @@ textarea {
   padding: 5px 12px;
   border-radius: 999px;
 }
-
 .remove-btn {
   position: absolute;
   top: 10px;
@@ -555,78 +480,63 @@ textarea {
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .remove-btn:hover {
   background: #ef4444;
   transform: scale(1.1);
 }
-
 .images-info {
   margin-top: 15px;
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
 }
-
 .btn-icon {
   font-size: 20px;
   margin-right: 4px;
   vertical-align: middle;
 }
-
 @media (max-width: 1024px) {
   .form-grid,
   .amenities-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .form-field.full {
     grid-column: span 2;
   }
 }
-
 @media (max-width: 768px) {
   .sidebar {
     display: none;
   }
-
   .dashboard-layout {
     flex-direction: column;
   }
-
   .content {
     padding: 20px;
   }
-
   .form-card {
     padding: 20px;
   }
-
   .section-card,
   .amenities-section,
   .description-card,
   .images-section {
     padding: 20px;
   }
-
   .form-grid,
   .amenities-grid {
     grid-template-columns: 1fr;
   }
-
   .form-field.full {
     grid-column: span 1;
   }
-
   .form-actions {
     flex-direction: column;
   }
-
   .save-btn,
   .cancel-btn {
     width: 100%;
     justify-content: center;
   }
-
   .images-header {
     flex-direction: column;
     align-items: flex-start;

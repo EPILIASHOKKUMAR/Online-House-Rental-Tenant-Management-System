@@ -1,13 +1,11 @@
 * {
   box-sizing: border-box;
 }
-
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
-
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
@@ -16,12 +14,10 @@
   transition: width 0.25s ease, padding 0.25s ease;
   flex-shrink: 0;
 }
-
 .sidebar.collapsed {
   width: 80px;
   padding: 25px 10px;
 }
-
 .brand {
   position: relative;
   display: flex;
@@ -29,13 +25,11 @@
   margin-bottom: 30px;
   padding-right: 48px;
 }
-
 .brand-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .brand mat-icon {
   font-size: 36px;
   background: linear-gradient(135deg, #667eea, #764ba2);
@@ -43,14 +37,12 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .brand-text {
   font-size: 1.4rem;
   font-weight: 600;
   color: #ffffff;
   letter-spacing: 0.5px;
 }
-
 .collapse-btn {
   position: absolute;
   right: 0;
@@ -67,17 +59,14 @@
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .collapse-btn:hover {
   background: rgba(102, 126, 234, 0.4);
 }
-
 .arrow {
   font-size: 26px;
   font-weight: 700;
   color: #ffffff;
 }
-
 .menu a {
   display: flex;
   align-items: center;
@@ -92,43 +81,35 @@
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
 }
-
 .menu a mat-icon {
   font-size: 24px;
   width: 24px;
   height: 24px;
 }
-
 .menu a:hover {
   background: rgba(102, 126, 234, 0.25);
   color: #ffffff;
   transform: translateX(5px);
 }
-
 .menu a.active {
   background: linear-gradient(90deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
   border-left: 4px solid #a78bfa;
   color: #ffffff;
 }
-
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .menu span {
   display: none;
 }
-
 .sidebar.collapsed .menu a {
   justify-content: center;
 }
-
 .content {
   flex: 1;
   padding: 30px;
 }
-
 .add-property-container {
   max-width: 1100px;
 }
-
 .page-header h1 {
   font-size: 1.8rem;
   margin: 0 0 8px 0;
@@ -138,7 +119,6 @@
   align-items: center;
   gap: 10px;
 }
-
 .page-header h1::before {
   content: '';
   width: 5px;
@@ -146,12 +126,10 @@
   background: linear-gradient(180deg, #667eea, #764ba2);
   border-radius: 3px;
 }
-
 .page-header p {
   color: rgba(255,255,255,0.6);
   margin: 0 0 25px 0;
 }
-
 .form-card {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
@@ -159,36 +137,30 @@
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 .section-title {
   margin-bottom: 20px;
   color: #ffffff;
   font-size: 1.2rem;
   font-weight: 600;
 }
-
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-
 .form-field {
   display: flex;
   flex-direction: column;
 }
-
 .form-field.full {
   grid-column: span 2;
 }
-
 label {
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 8px;
   color: rgba(255,255,255,0.8);
 }
-
 input,
 select {
   height: 48px;
@@ -200,11 +172,9 @@ select {
   color: #ffffff;
   transition: all 0.3s ease;
 }
-
 input::placeholder {
   color: rgba(255,255,255,0.5);
 }
-
 select {
   color: #ffffff;
   cursor: pointer;
@@ -214,30 +184,25 @@ select {
   background-position: right 16px center;
   padding-right: 40px;
 }
-
 select option {
   background: #1a1a2e;
   color: #ffffff;
   padding: 12px 16px;
   font-size: 0.95rem;
 }
-
 select option:hover,
 select option:focus,
 select option:checked {
   background: #667eea;
   color: #ffffff;
 }
-
 datalist {
   background: #1a1a2e;
 }
-
 input[list] {
   background: rgba(30, 30, 50, 0.9);
   color: #ffffff;
 }
-
 input:focus,
 select:focus {
   outline: none;
@@ -245,20 +210,17 @@ select:focus {
   background: rgba(30, 30, 50, 1);
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
 }
-
 small {
   font-size: 0.8rem;
   color: rgba(255,255,255,0.5);
   margin-top: 6px;
 }
-
 .actions {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
   margin-top: 30px;
 }
-
 button {
   height: 50px;
   padding: 0 28px;
@@ -269,52 +231,43 @@ button {
   font-weight: 500;
   transition: all 0.3s ease;
 }
-
 button.primary {
   background: linear-gradient(90deg, #667eea, #764ba2);
   color: #ffffff;
 }
-
 button.primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
 }
-
 button.secondary {
   background: rgba(255,255,255,0.1);
   color: rgba(255,255,255,0.8);
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 button.secondary:hover {
   background: rgba(255,255,255,0.15);
 }
-
 .property-container {
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 16px;
   padding: 25px;
   background: rgba(255,255,255,0.02);
 }
-
 .add-more-section {
   margin-top: 30px;
   padding-top: 25px;
   border-top: 1px dashed rgba(255,255,255,0.1);
 }
-
 .add-more-section h3 {
   margin-bottom: 8px;
   font-size: 1rem;
   color: #ffffff;
 }
-
 .add-more-section p {
   font-size: 0.85rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 15px;
 }
-
 .add-more-btn {
   background: rgba(102, 126, 234, 0.2);
   color: #a78bfa;
@@ -325,11 +278,9 @@ button.secondary:hover {
   font-size: 0.95rem;
   transition: all 0.3s ease;
 }
-
 .add-more-btn:hover {
   background: rgba(102, 126, 234, 0.3);
 }
-
 .amenities-container {
   margin-top: 30px;
   background: rgba(255,255,255,0.03);
@@ -337,25 +288,21 @@ button.secondary:hover {
   border-radius: 20px;
   padding: 30px;
 }
-
 .amenities-title {
   font-size: 1.2rem;
   margin-bottom: 8px;
   color: #ffffff;
 }
-
 .amenities-subtitle {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 25px;
 }
-
 .amenities-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-
 .amenity-item {
   display: flex;
   gap: 14px;
@@ -367,33 +314,28 @@ button.secondary:hover {
   border: 1px solid rgba(255,255,255,0.08);
   transition: all 0.3s ease;
 }
-
 .amenity-item:hover {
   background: rgba(102, 126, 234, 0.1);
   border-color: rgba(102, 126, 234, 0.3);
 }
-
 .amenity-item input {
   width: 18px;
   height: 18px;
   margin-top: 3px;
   accent-color: #667eea;
 }
-
 .amenity-name {
   font-size: 0.95rem;
   font-weight: 600;
   color: #ffffff;
   display: block;
 }
-
 .amenity-desc {
   font-size: 0.8rem;
   color: rgba(255,255,255,0.5);
   display: block;
   margin-top: 4px;
 }
-
 .description-container {
   margin-top: 30px;
   background: rgba(255,255,255,0.03);
@@ -401,19 +343,16 @@ button.secondary:hover {
   border-radius: 20px;
   padding: 30px;
 }
-
 .description-title {
   font-size: 1.2rem;
   margin-bottom: 8px;
   color: #ffffff;
 }
-
 .description-subtitle {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 20px;
 }
-
 .description-textarea {
   width: 100%;
   min-height: 180px;
@@ -426,18 +365,15 @@ button.secondary:hover {
   color: #ffffff;
   resize: vertical;
 }
-
 .description-textarea::placeholder {
   color: rgba(255,255,255,0.4);
 }
-
 .description-textarea:focus {
   outline: none;
   background: rgba(255,255,255,0.08);
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
-
 .description-footer {
   display: flex;
   justify-content: space-between;
@@ -445,7 +381,6 @@ button.secondary:hover {
   font-size: 0.85rem;
   color: rgba(255,255,255,0.5);
 }
-
 .images-container {
   margin-top: 30px;
   background: rgba(255,255,255,0.03);
@@ -453,19 +388,16 @@ button.secondary:hover {
   border-radius: 20px;
   padding: 30px;
 }
-
 .images-title {
   font-size: 1.2rem;
   margin-bottom: 8px;
   color: #ffffff;
 }
-
 .images-subtitle {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 25px;
 }
-
 .upload-box {
   border: 2px dashed rgba(102, 126, 234, 0.4);
   border-radius: 16px;
@@ -474,30 +406,25 @@ button.secondary:hover {
   background: rgba(102, 126, 234, 0.05);
   transition: all 0.3s ease;
 }
-
 .upload-box:hover {
   border-color: rgba(102, 126, 234, 0.6);
   background: rgba(102, 126, 234, 0.1);
 }
-
 .upload-icon {
   margin-bottom: 15px;
   color: #667eea;
 }
-
 .upload-box h3 {
   font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 6px;
   color: #ffffff;
 }
-
 .upload-box p {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 15px;
 }
-
 .browse-btn {
   display: inline-flex;
   align-items: center;
@@ -511,30 +438,25 @@ button.secondary:hover {
   transition: all 0.3s ease;
   user-select: none;
 }
-
 .browse-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
 }
-
 .browse-btn input {
   display: none;
 }
-
 .upload-box small {
   display: block;
   margin-top: 15px;
   font-size: 0.8rem;
   color: rgba(255,255,255,0.4);
 }
-
 .image-preview-grid {
   margin-top: 25px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 15px;
 }
-
 .preview-card {
   position: relative;
   border-radius: 14px;
@@ -542,7 +464,6 @@ button.secondary:hover {
   border: 1px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.05);
 }
-
 .preview-card img {
   width: 100%;
   height: 160px;
@@ -551,11 +472,9 @@ button.secondary:hover {
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-
 .preview-card:hover img {
   transform: scale(1.05);
 }
-
 .image-modal {
   position: fixed;
   inset: 0;
@@ -565,13 +484,11 @@ button.secondary:hover {
   justify-content: center;
   z-index: 9999;
 }
-
 .image-modal img {
   max-width: 90%;
   max-height: 90%;
   border-radius: 12px;
 }
-
 .close-btn {
   position: absolute;
   top: 25px;
@@ -581,7 +498,6 @@ button.secondary:hover {
   cursor: pointer;
   font-weight: bold;
 }
-
 .remove-btn {
   position: absolute;
   top: 8px;
@@ -601,12 +517,10 @@ button.secondary:hover {
   border: none;
   transition: all 0.3s ease;
 }
-
 .remove-btn:hover {
   background: #ef4444;
   transform: scale(1.1);
 }
-
 .contact-container {
   margin-top: 30px;
   background: rgba(255,255,255,0.03);
@@ -614,31 +528,26 @@ button.secondary:hover {
   border-radius: 20px;
   padding: 30px;
 }
-
 .contact-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 8px;
   color: #ffffff;
 }
-
 .contact-subtitle {
   font-size: 0.9rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 25px;
 }
-
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
-
 .contact-container .form-field {
   display: flex;
   flex-direction: column;
 }
-
 .contact-container input {
   height: 48px;
   padding: 0 16px;
@@ -648,86 +557,67 @@ button.secondary:hover {
   background: rgba(255,255,255,0.05);
   color: #ffffff;
 }
-
 .contact-container input:focus {
   outline: none;
   background: rgba(255,255,255,0.08);
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
 }
-
 .contact-container small {
   font-size: 0.8rem;
   color: rgba(255,255,255,0.5);
   margin-top: 6px;
 }
-
 .btn-cancel {
   background: rgba(255,255,255,0.1);
   color: rgba(255,255,255,0.8);
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 .btn-cancel:hover {
   background: rgba(255,255,255,0.15);
 }
-
 .btn-save {
   background: linear-gradient(90deg, #667eea, #764ba2);
   color: #ffffff;
 }
-
 .btn-save:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
 }
-
 .icon {
   font-size: 20px;
   line-height: 1;
 }
-
 @media (max-width: 768px) {
   .dashboard-layout {
     flex-direction: column;
   }
-
   .sidebar {
     width: 100%;
   }
-
   .form-grid {
     grid-template-columns: 1fr;
   }
-
   .form-field.full {
     grid-column: span 1;
   }
-
   .amenities-grid {
     grid-template-columns: 1fr;
   }
-
   .contact-grid {
     grid-template-columns: 1fr;
   }
-
   .actions {
     flex-direction: column;
   }
-
   button {
     width: 100%;
   }
-
   .description-footer {
     flex-direction: column;
     gap: 6px;
   }
 }
-
-
-/* GEOLOCATION STYLES */
 .location-container {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.1);
@@ -735,7 +625,6 @@ button.secondary:hover {
   padding: 30px;
   margin-bottom: 30px;
 }
-
 .location-title {
   display: flex;
   align-items: center;
@@ -745,17 +634,14 @@ button.secondary:hover {
   color: #ffffff;
   margin: 0 0 8px 0;
 }
-
 .location-title mat-icon {
   color: #10b981;
 }
-
 .location-subtitle {
   color: rgba(255,255,255,0.6);
   font-size: 0.95rem;
   margin: 0 0 25px 0;
 }
-
 .location-box {
   background: rgba(255,255,255,0.05);
   border: 2px dashed rgba(255,255,255,0.2);
@@ -763,7 +649,6 @@ button.secondary:hover {
   padding: 40px;
   text-align: center;
 }
-
 .location-icon {
   width: 80px;
   height: 80px;
@@ -775,31 +660,26 @@ button.secondary:hover {
   margin: 0 auto 20px;
   animation: pulse 2s infinite;
 }
-
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
   70% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
-
 .location-icon mat-icon {
   font-size: 40px;
   width: 40px;
   height: 40px;
   color: #ffffff;
 }
-
 .location-box h3 {
   color: #ffffff;
   font-size: 1.3rem;
   margin: 0 0 10px 0;
 }
-
 .location-box p {
   color: rgba(255,255,255,0.6);
   margin: 0 0 25px 0;
 }
-
 .location-btn {
   display: inline-flex;
   align-items: center;
@@ -814,23 +694,19 @@ button.secondary:hover {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .location-btn:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
 }
-
 .location-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
-
 .location-btn mat-icon {
   font-size: 24px;
   width: 24px;
   height: 24px;
 }
-
 .location-buttons {
   display: flex;
   gap: 15px;
@@ -838,24 +714,19 @@ button.secondary:hover {
   justify-content: center;
   margin-bottom: 20px;
 }
-
 .location-btn.address-btn {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
 }
-
 .location-btn.address-btn:hover:not(:disabled) {
   box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
 }
-
 .spinning {
   animation: spin 1s linear infinite;
 }
-
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
 .address-search {
   display: flex;
   gap: 10px;
@@ -864,7 +735,6 @@ button.secondary:hover {
   margin-left: auto;
   margin-right: auto;
 }
-
 .address-search input {
   flex: 1;
   padding: 14px 18px;
@@ -876,16 +746,13 @@ button.secondary:hover {
   outline: none;
   transition: all 0.3s ease;
 }
-
 .address-search input:focus {
   border-color: #3b82f6;
   background: rgba(59, 130, 246, 0.1);
 }
-
 .address-search input::placeholder {
   color: rgba(255, 255, 255, 0.4);
 }
-
 .search-btn {
   display: flex;
   align-items: center;
@@ -900,24 +767,20 @@ button.secondary:hover {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .search-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
 }
-
 .search-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
-
 .location-divider {
   display: flex;
   align-items: center;
   margin: 25px 0;
   color: rgba(255, 255, 255, 0.4);
 }
-
 .location-divider::before,
 .location-divider::after {
   content: '';
@@ -925,12 +788,10 @@ button.secondary:hover {
   height: 1px;
   background: rgba(255, 255, 255, 0.1);
 }
-
 .location-divider span {
   padding: 0 15px;
   font-size: 0.9rem;
 }
-
 .location-error {
   display: flex;
   align-items: center;
@@ -944,46 +805,39 @@ button.secondary:hover {
   color: #ef4444;
   font-size: 0.9rem;
 }
-
 .location-error mat-icon {
   font-size: 20px;
   width: 20px;
   height: 20px;
 }
-
 .location-success {
   background: rgba(255,255,255,0.05);
   border-radius: 16px;
   padding: 25px;
 }
-
 .location-header {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 20px;
 }
-
 .success-icon {
   font-size: 28px;
   width: 28px;
   height: 28px;
   color: #10b981;
 }
-
 .location-header span {
   font-size: 1.1rem;
   font-weight: 600;
   color: #10b981;
 }
-
 .coordinates {
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
-
 .coord-item {
   flex: 1;
   min-width: 120px;
@@ -991,32 +845,27 @@ button.secondary:hover {
   border-radius: 12px;
   padding: 15px 20px;
 }
-
 .coord-label {
   display: block;
   font-size: 0.85rem;
   color: rgba(255,255,255,0.5);
   margin-bottom: 5px;
 }
-
 .coord-value {
   display: block;
   font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
 }
-
 .map-container {
   margin-bottom: 20px;
 }
-
 .leaflet-map {
   width: 100%;
   height: 350px;
   border-radius: 12px;
   z-index: 1;
 }
-
 .map-hint {
   display: flex;
   align-items: center;
@@ -1025,13 +874,11 @@ button.secondary:hover {
   font-size: 0.85rem;
   color: rgba(255,255,255,0.5);
 }
-
 .map-hint mat-icon {
   font-size: 16px;
   width: 16px;
   height: 16px;
 }
-
 .remove-location-btn {
   display: inline-flex;
   align-items: center;
@@ -1045,44 +892,34 @@ button.secondary:hover {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .remove-location-btn:hover {
   background: rgba(239, 68, 68, 0.2);
 }
-
 .remove-location-btn mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
 }
-
-
-/* Manual Location Input */
 .manual-location {
   margin-top: 25px;
   padding-top: 25px;
   border-top: 1px solid rgba(255,255,255,0.1);
 }
-
 .manual-text {
   color: rgba(255,255,255,0.6);
   font-size: 0.9rem;
   margin-bottom: 15px;
 }
-
-/* Address Search */
 .address-search {
   margin-top: 25px;
   padding-top: 25px;
   border-top: 1px solid rgba(255,255,255,0.1);
 }
-
 .search-inputs {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
-
 .search-inputs input {
   padding: 12px 16px;
   background: rgba(255,255,255,0.08);
@@ -1092,17 +929,14 @@ button.secondary:hover {
   font-size: 0.95rem;
   width: 300px;
 }
-
 .search-inputs input::placeholder {
   color: rgba(255,255,255,0.4);
 }
-
 .search-inputs input:focus {
   outline: none;
   border-color: #667eea;
   background: rgba(255,255,255,0.1);
 }
-
 .search-inputs .search-btn {
   display: flex;
   align-items: center;
@@ -1115,24 +949,20 @@ button.secondary:hover {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .search-inputs .search-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
-
 .search-inputs .search-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
-
 .manual-inputs {
   display: flex;
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
 }
-
 .manual-inputs input {
   padding: 12px 16px;
   background: rgba(255,255,255,0.08);
@@ -1142,17 +972,14 @@ button.secondary:hover {
   font-size: 0.95rem;
   width: 180px;
 }
-
 .manual-inputs input::placeholder {
   color: rgba(255,255,255,0.4);
 }
-
 .manual-inputs input:focus {
   outline: none;
   border-color: #667eea;
   background: rgba(255,255,255,0.1);
 }
-
 .manual-btn {
   display: flex;
   align-items: center;
@@ -1166,27 +993,21 @@ button.secondary:hover {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .manual-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
-
 .manual-btn mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
 }
-
-
-/* Location Actions */
 .location-actions {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 15px;
 }
-
 .view-map-btn {
   display: inline-flex;
   align-items: center;
@@ -1200,12 +1021,10 @@ button.secondary:hover {
   font-weight: 500;
   transition: all 0.3s ease;
 }
-
 .view-map-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
-
 .refresh-btn {
   display: inline-flex;
   align-items: center;
@@ -1220,12 +1039,10 @@ button.secondary:hover {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .refresh-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
 }
-
 .view-map-btn mat-icon,
 .refresh-btn mat-icon {
   font-size: 18px;
