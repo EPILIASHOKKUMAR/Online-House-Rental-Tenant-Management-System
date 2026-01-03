@@ -50,14 +50,14 @@ export const getDashboardStats = async (req: Request, res: Response) => {
     `);
 
     res.json({
-      totalUsers: userCounts[0].totalUsers || 0,
-      totalOwners: userCounts[0].totalOwners || 0,
-      totalTenants: userCounts[0].totalTenants || 0,
-      totalProperties: propertyCounts[0].totalProperties || 0,
-      availableProperties: propertyCounts[0].availableProperties || 0,
-      pendingBookings: bookingCounts[0].pendingBookings || 0,
-      approvedBookings: bookingCounts[0].approvedBookings || 0,
-      rejectedBookings: bookingCounts[0].rejectedBookings || 0
+      totalUsers: Number(userCounts[0].totalUsers) || 0,
+      totalOwners: Number(userCounts[0].totalOwners) || 0,
+      totalTenants: Number(userCounts[0].totalTenants) || 0,
+      totalProperties: Number(propertyCounts[0].totalProperties) || 0,
+      availableProperties: Number(propertyCounts[0].availableProperties) || 0,
+      pendingBookings: Number(bookingCounts[0].pendingBookings) || 0,
+      approvedBookings: Number(bookingCounts[0].approvedBookings) || 0,
+      rejectedBookings: Number(bookingCounts[0].rejectedBookings) || 0
     });
   } catch (error) {
     console.error('Get stats error:', error);
