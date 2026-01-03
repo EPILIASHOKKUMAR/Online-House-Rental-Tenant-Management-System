@@ -8,8 +8,7 @@ const otpStore: Map<string, { otp: string; expires: number }> = new Map();
 
 const sendEmailViaBrevoAPI = (to: string, subject: string, htmlContent: string): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const smtpPass = process.env.SMTP_PASS || '';
-    const apiKey = smtpPass.startsWith('xsmtpsib-') ? smtpPass.substring(9) : smtpPass;
+    const apiKey = process.env.BREVO_API_KEY || process.env.SMTP_PASS || '';
     
     console.log('Sending email via Brevo API to:', to);
     
@@ -27,7 +26,7 @@ const sendEmailViaBrevoAPI = (to: string, subject: string, htmlContent: string):
       method: 'POST',
       headers: {
         'accept': 'application/json',
-        'api-key': smtpPass,
+        'api-key': apiKey,
         'content-type': 'application/json',
         'content-length': Buffer.byteLength(data)
       }
