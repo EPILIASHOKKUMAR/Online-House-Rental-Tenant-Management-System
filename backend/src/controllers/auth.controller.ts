@@ -6,14 +6,20 @@ import nodemailer from 'nodemailer';
 const otpStore: Map<string, { otp: string; expires: number }> = new Map();
 
 const getTransporter = () => {
+  const port = parseInt(process.env.SMTP_PORT || '587');
+  const isSecure = port === 465;
+  
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: false,
+    port: port,
+    secure: isSecure,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS
-    }
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000
   });
 };
 
