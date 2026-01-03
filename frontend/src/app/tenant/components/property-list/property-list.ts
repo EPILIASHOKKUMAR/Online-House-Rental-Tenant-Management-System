@@ -43,7 +43,7 @@ export class PropertyListComponent implements OnInit {
 
   location: string = '';
   maxBudget: number | null = null;
-  amenity: string | null = null;
+  amenity: string = '';
 
   ngOnInit(): void {
     this.loadProperties();
@@ -89,7 +89,7 @@ export class PropertyListComponent implements OnInit {
   resetFilters(): void {
     this.location = '';
     this.maxBudget = null;
-    this.amenity = null;
+    this.amenity = '';
     this.filteredProperties = [...this.properties];
   }
 

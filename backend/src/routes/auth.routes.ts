@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, googleLogin, getProfile, updateProfilePhoto, forgotPassword, verifyOTP, resetPassword } from '../controllers/auth.controller';
+import { register, login, googleLogin, getProfile, updateProfile, changePassword, updateProfilePhoto, forgotPassword, verifyOTP, resetPassword } from '../controllers/auth.controller';
 
 const router = Router();
 
@@ -10,6 +10,8 @@ router.post('/forgot-password', forgotPassword);
 router.post('/verify-otp', verifyOTP);
 router.post('/reset-password', resetPassword);
 router.get('/profile/:id', getProfile);
+router.put('/profile/:id', updateProfile);
+router.put('/change-password/:id', changePassword);
 router.put('/profile/:id/photo', updateProfilePhoto);
 
 export default router;

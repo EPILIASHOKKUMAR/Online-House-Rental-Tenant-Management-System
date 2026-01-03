@@ -1,13 +1,11 @@
 * {
   box-sizing: border-box;
 }
-
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
-
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
@@ -15,12 +13,10 @@
   border-right: 1px solid rgba(255,255,255,0.1);
   transition: width 0.25s ease, padding 0.25s ease;
 }
-
 .sidebar.collapsed {
   width: 80px;
   padding: 25px 10px;
 }
-
 .brand {
   position: relative;
   display: flex;
@@ -28,13 +24,11 @@
   margin-bottom: 30px;
   padding-right: 48px;
 }
-
 .brand-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .brand mat-icon {
   font-size: 36px;
   background: linear-gradient(135deg, #3b82f6, #06b6d4);
@@ -42,7 +36,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .brand-text h3 {
   margin: 0;
   font-size: 1.4rem;
@@ -50,7 +43,6 @@
   color: #ffffff;
   letter-spacing: 0.5px;
 }
-
 .collapse-btn {
   position: absolute;
   right: 0;
@@ -67,11 +59,9 @@
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .collapse-btn:hover {
   background: rgba(59, 130, 246, 0.4);
 }
-
 .collapse-btn mat-icon {
   font-size: 20px;
   color: #ffffff;
@@ -79,7 +69,6 @@
   width: auto;
   height: auto;
 }
-
 .menu a {
   display: flex;
   align-items: center;
@@ -95,57 +84,47 @@
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
 }
-
 .menu a mat-icon {
   font-size: 24px;
   width: 24px;
   height: 24px;
 }
-
 .menu a:hover {
   background: rgba(59, 130, 246, 0.25);
   color: #ffffff;
   transform: translateX(5px);
 }
-
 .menu a.active {
   background: linear-gradient(90deg, rgba(59, 130, 246, 0.4), rgba(6, 182, 212, 0.4));
   border-left: 4px solid #06b6d4;
   color: #ffffff;
 }
-
 .menu a.logout-link {
   margin-top: auto;
   color: #f87171;
   border-left: 4px solid transparent;
 }
-
 .menu a.logout-link:hover {
   background: rgba(239, 68, 68, 0.25);
   color: #ef4444;
   cursor: pointer;
 }
-
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .menu a span {
   display: none;
 }
-
 .sidebar.collapsed .menu a {
   justify-content: center;
   padding: 16px;
 }
-
 .content {
   flex: 1;
   padding: 30px;
   max-width: 1400px;
 }
-
 .header {
   margin-bottom: 30px;
 }
-
 .header h1 {
   font-size: 1.8rem;
   margin: 0;
@@ -155,7 +134,6 @@
   align-items: center;
   gap: 10px;
 }
-
 .header h1::before {
   content: '';
   width: 5px;
@@ -163,26 +141,22 @@
   background: linear-gradient(180deg, #3b82f6, #06b6d4);
   border-radius: 3px;
 }
-
 .header p {
   margin-top: 8px;
   color: rgba(255,255,255,0.6);
   font-size: 1rem;
 }
-
 .loading {
   text-align: center;
   padding: 60px;
   color: rgba(255,255,255,0.6);
   font-size: 1.1rem;
 }
-
 .property-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 25px;
 }
-
 .property-card {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
@@ -192,12 +166,10 @@
   transition: all 0.3s ease;
   position: relative;
 }
-
 .property-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
-
 .remove-btn {
   position: absolute;
   top: 12px;
@@ -214,34 +186,28 @@
   z-index: 10;
   transition: all 0.3s ease;
 }
-
 .remove-btn:hover {
   background: #ef4444;
   transform: scale(1.1);
 }
-
 .remove-btn mat-icon {
   font-size: 20px;
   color: white;
 }
-
 .property-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
-
 .card-content {
   padding: 20px;
 }
-
 .card-content h3 {
   margin: 0 0 12px;
   font-size: 1.2rem;
   color: #ffffff;
   font-weight: 600;
 }
-
 .card-content p {
   display: flex;
   align-items: center;
@@ -250,26 +216,22 @@
   color: rgba(255,255,255,0.7);
   font-size: 0.95rem;
 }
-
 .card-content mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
   color: #3b82f6;
 }
-
 .card-content .rent {
   color: #34d399;
   font-weight: 600;
 }
-
 .card-actions {
   padding: 15px 20px;
   display: flex;
   gap: 12px;
   border-top: 1px solid rgba(255,255,255,0.1);
 }
-
 .card-actions button {
   flex: 1;
   padding: 12px;
@@ -279,28 +241,23 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .view-btn {
   background: transparent;
   border: 1px solid rgba(59, 130, 246, 0.5);
   color: #3b82f6;
 }
-
 .view-btn:hover {
   background: rgba(59, 130, 246, 0.2);
 }
-
 .book-btn {
   background: linear-gradient(90deg, #3b82f6, #06b6d4);
   border: none;
   color: white;
 }
-
 .book-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
-
 .no-saved {
   text-align: center;
   padding: 80px 40px;
@@ -308,7 +265,6 @@
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 .no-saved mat-icon {
   font-size: 80px;
   width: 80px;
@@ -316,19 +272,16 @@
   color: rgba(255,255,255,0.3);
   margin-bottom: 20px;
 }
-
 .no-saved h3 {
   margin: 0 0 10px;
   font-size: 1.5rem;
   color: #ffffff;
 }
-
 .no-saved p {
   margin: 0 0 25px;
   color: rgba(255,255,255,0.6);
   font-size: 1rem;
 }
-
 .no-saved button {
   padding: 14px 30px;
   border-radius: 12px;
@@ -340,12 +293,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .no-saved button:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
 }
-
 @media (max-width: 768px) {
   .sidebar {
     display: none;

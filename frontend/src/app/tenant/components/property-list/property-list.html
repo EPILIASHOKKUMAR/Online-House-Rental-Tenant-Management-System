@@ -39,8 +39,8 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Amenities</mat-label>
-        <mat-select [(ngModel)]="amenity">
-          <mat-option [value]="null">All</mat-option>
+        <mat-select [(ngModel)]="amenity" placeholder="Select amenity">
+          <mat-option value="">All</mat-option>
           <mat-option value="Parking">Parking</mat-option>
           <mat-option value="Lift">Lift</mat-option>
           <mat-option value="Power Backup">Power Backup</mat-option>

@@ -375,7 +375,7 @@ export class OwnerAddPropertyComponent implements AfterViewInit, OnDestroy {
     this.searchLoading = true;
     this.locationError = '';
 
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(this.addressSearch)}&limit=1`;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(this.addressSearch)}&key=YOUR_API_KEY`;
 
     this.http.get<any[]>(url).subscribe({
       next: (results) => {

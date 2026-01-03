@@ -288,6 +288,81 @@ export const getProfile = async (req: Request, res: Response) => {
   }
 };
 
+export const changePassword = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.id;
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ error: 'Current password and new password are required' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ error: 'New password must be at least 6 characters long' });
+    }
+
+    const [users] = await pool.query<RowDataPacket[]>(
+      'SELECT password FROM users WHERE id = ?',
+      [userId]
+    );
+
+    if (users.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (users[0].password !== currentPassword) {
+      return res.status(400).json({ error: 'Current password is incorrect' });
+    }
+
+    const [result] = await pool.query<ResultSetHeader>(
+      'UPDATE users SET password = ? WHERE id = ?',
+      [newPassword, userId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({ message: 'Password changed successfully' });
+  } catch (error) {
+    console.error('Change password error:', error);
+    res.status(500).json({ error: 'Failed to change password' });
+  }
+};
+
+export const updateProfile = async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.id;
+    const { name, phone } = req.body;
+
+    if (!name || name.trim() === '') {
+      return res.status(400).json({ error: 'Name is required' });
+    }
+
+    const [result] = await pool.query<ResultSetHeader>(
+      'UPDATE users SET name = ?, phone = ? WHERE id = ?',
+      [name.trim(), phone || null, userId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const [updatedUser] = await pool.query<RowDataPacket[]>(
+      'SELECT id, name, email, phone, role, profile_photo FROM users WHERE id = ?',
+      [userId]
+    );
+
+    res.json({ 
+      message: 'Profile updated successfully',
+      user: updatedUser[0]
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
+  }
+};
+
 export const updateProfilePhoto = async (req: Request, res: Response) => {
   try {
     const userId = req.params.id;

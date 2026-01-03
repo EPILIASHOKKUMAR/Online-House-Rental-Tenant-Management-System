@@ -61,16 +61,33 @@
       </div>
 
       <div class="profile-details">
-        <h2>{{ tenant.name }}</h2>
+        <h2 *ngIf="!isEditMode">{{ tenant.name }}</h2>
+        
+        <!-- Edit Mode -->
+        <div *ngIf="isEditMode" class="edit-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="editTenant.name" required>
+          </mat-form-field>
+        </div>
 
         <div class="info-row">
           <mat-icon>email</mat-icon>
           <span>{{ tenant.email }}</span>
+          <small *ngIf="isEditMode">(Email cannot be changed)</small>
         </div>
 
-        <div class="info-row">
+        <div class="info-row" *ngIf="!isEditMode">
           <mat-icon>phone</mat-icon>
-          <span>{{ tenant.phone }}</span>
+          <span>{{ tenant.phone || 'Not provided' }}</span>
+        </div>
+
+        <!-- Edit Mode Phone -->
+        <div *ngIf="isEditMode" class="edit-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput [(ngModel)]="editTenant.phone" type="tel">
+          </mat-form-field>
         </div>
 
         <div class="badges">
@@ -87,10 +104,21 @@
       </div>
 
       <div class="profile-action">
-        <button class="edit-btn">
+        <button *ngIf="!isEditMode" class="edit-btn" (click)="toggleEditMode()">
           <mat-icon>edit</mat-icon>
           Edit Profile
         </button>
+        
+        <div *ngIf="isEditMode" class="edit-actions">
+          <button class="save-btn" (click)="saveProfile()" [disabled]="isUpdating">
+            <mat-icon>{{ isUpdating ? 'hourglass_empty' : 'save' }}</mat-icon>
+            {{ isUpdating ? 'Saving...' : 'Save' }}
+          </button>
+          <button class="cancel-btn" (click)="cancelEdit()" [disabled]="isUpdating">
+            <mat-icon>close</mat-icon>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
 
@@ -106,19 +134,40 @@
             <p>Update your account password</p>
           </div>
         </div>
-        <button class="setting-btn">Change</button>
+        <button *ngIf="!isChangePasswordMode" class="setting-btn" (click)="toggleChangePasswordMode()">Change</button>
+        <div *ngIf="isChangePasswordMode" class="password-actions">
+          <button class="setting-btn danger" (click)="cancelChangePassword()" [disabled]="isChangingPassword">Cancel</button>
+        </div>
       </div>
 
-      <div class="setting-item">
-        <div class="setting-info">
-          <mat-icon>notifications</mat-icon>
-          <div>
-            <h4>Notifications</h4>
-            <p>Manage email and push notifications</p>
-          </div>
+      <!-- Change Password Form -->
+      <div *ngIf="isChangePasswordMode" class="password-form">
+        <h4>Change Password</h4>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Current Password</mat-label>
+          <input matInput type="password" [(ngModel)]="passwordData.currentPassword" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>New Password</mat-label>
+          <input matInput type="password" [(ngModel)]="passwordData.newPassword" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm New Password</mat-label>
+          <input matInput type="password" [(ngModel)]="passwordData.confirmPassword" required>
+        </mat-form-field>
+
+        <div class="password-form-actions">
+          <button class="save-password-btn" (click)="changePassword()" [disabled]="isChangingPassword">
+            <mat-icon>{{ isChangingPassword ? 'hourglass_empty' : 'save' }}</mat-icon>
+            {{ isChangingPassword ? 'Changing...' : 'Change Password' }}
+          </button>
         </div>
-        <button class="setting-btn">Manage</button>
       </div>
+
+
 
       <div class="setting-item">
         <div class="setting-info">

@@ -147,7 +147,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   openGooglePopup(): void {
     const redirectUri = window.location.origin;
     const scope = 'email profile';
-    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${this.googleClientId}&redirect_uri=${redirectUri}&response_type=token id_token&scope=${scope}&nonce=${Date.now()}`;
+    const authUrl = `https://accounts.google.com/oauth/authorize?client_id=${this.googleClientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code`;
     
     const width = 500;
     const height = 600;

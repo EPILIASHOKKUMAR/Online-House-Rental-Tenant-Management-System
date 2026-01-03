@@ -1,13 +1,11 @@
 * {
   box-sizing: border-box;
 }
-
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
-
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
@@ -15,12 +13,10 @@
   border-right: 1px solid rgba(255,255,255,0.1);
   transition: width 0.25s ease, padding 0.25s ease;
 }
-
 .sidebar.collapsed {
   width: 80px;
   padding: 25px 10px;
 }
-
 .brand {
   display: flex;
   align-items: center;
@@ -28,13 +24,11 @@
   margin-bottom: 30px;
   padding: 0 5px;
 }
-
 .brand-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .brand mat-icon {
   font-size: 32px;
   width: 32px;
@@ -44,7 +38,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .brand-text h3 {
   margin: 0;
   font-size: 1.4rem;
@@ -52,7 +45,6 @@
   color: #ffffff;
   letter-spacing: 0.5px;
 }
-
 .collapse-btn {
   width: 32px;
   height: 32px;
@@ -66,11 +58,9 @@
   transition: all 0.3s ease;
   flex-shrink: 0;
 }
-
 .collapse-btn:hover {
   background: rgba(102, 126, 234, 0.4);
 }
-
 .collapse-btn mat-icon {
   font-size: 18px;
   width: 18px;
@@ -79,7 +69,6 @@
   background: none;
   -webkit-text-fill-color: #ffffff;
 }
-
 .menu a {
   display: flex;
   align-items: center;
@@ -96,42 +85,35 @@
   border-left: 4px solid transparent;
   cursor: pointer;
 }
-
 .menu a mat-icon {
   font-size: 24px;
   width: 24px;
   height: 24px;
 }
-
 .menu a:hover {
   background: rgba(102, 126, 234, 0.25);
   color: #ffffff;
   transform: translateX(5px);
 }
-
 .menu a.active {
   background: linear-gradient(90deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4));
   border-left: 4px solid #a78bfa;
   color: #ffffff;
 }
-
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .menu a span {
   display: none;
 }
-
 .sidebar.collapsed .menu a {
   justify-content: center;
   padding: 16px;
 }
-
 .content {
   flex: 1;
   padding: 30px;
   max-width: 1400px;
   overflow-y: auto;
 }
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -139,7 +121,6 @@
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
-
 .header h1 {
   font-size: 1.8rem;
   margin: 0;
@@ -149,7 +130,6 @@
   align-items: center;
   gap: 10px;
 }
-
 .header h1::before {
   content: '';
   width: 5px;
@@ -157,20 +137,17 @@
   background: linear-gradient(180deg, #667eea, #764ba2);
   border-radius: 3px;
 }
-
 .header p {
   margin-top: 8px;
   color: rgba(255,255,255,0.6);
   font-size: 1rem;
 }
-
 .loading {
   color: rgba(255,255,255,0.7);
   text-align: center;
   padding: 50px;
   font-size: 1.1rem;
 }
-
 .table-container {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
@@ -179,7 +156,6 @@
   overflow: hidden;
   animation: fadeInUp 0.6s ease forwards;
 }
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -190,19 +166,16 @@
     transform: translateY(0);
   }
 }
-
 .data-table {
   width: 100%;
   border-collapse: collapse;
 }
-
 .data-table th,
 .data-table td {
   padding: 18px 20px;
   text-align: left;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-
 .data-table th {
   background: rgba(255,255,255,0.05);
   color: rgba(255,255,255,0.7);
@@ -211,16 +184,13 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
 .data-table td {
   color: #fff;
   font-size: 0.95rem;
 }
-
 .data-table tr:hover {
   background: rgba(255,255,255,0.03);
 }
-
 .status-badge {
   padding: 6px 14px;
   border-radius: 20px;
@@ -228,31 +198,26 @@
   font-weight: 600;
   text-transform: capitalize;
 }
-
 .status-badge.pending {
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(252, 211, 77, 0.3));
   color: #fcd34d;
   border: 1px solid rgba(251, 191, 36, 0.3);
 }
-
 .status-badge.approved {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(74, 222, 128, 0.3));
   color: #4ade80;
   border: 1px solid rgba(34, 197, 94, 0.3);
 }
-
 .status-badge.rejected {
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(248, 113, 113, 0.3));
   color: #f87171;
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
-
 .empty-state {
   text-align: center;
   padding: 80px 20px;
   color: rgba(255,255,255,0.5);
 }
-
 .empty-state mat-icon {
   font-size: 80px;
   width: 80px;
@@ -260,27 +225,22 @@
   margin-bottom: 20px;
   opacity: 0.5;
 }
-
 .empty-state h3 {
   margin: 0 0 10px;
   color: rgba(255,255,255,0.7);
   font-size: 1.3rem;
 }
-
 .empty-state p {
   margin: 0;
   font-size: 1rem;
 }
-
 @media (max-width: 768px) {
   .sidebar {
     display: none;
   }
-
   .content {
     padding: 20px;
   }
-
   .data-table th,
   .data-table td {
     padding: 12px 10px;

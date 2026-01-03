@@ -3,7 +3,6 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
-
 .sidebar {
   width: 260px;
   background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
@@ -11,22 +10,18 @@
   border-right: 1px solid rgba(255,255,255,0.1);
   transition: width 0.25s ease, padding 0.25s ease;
 }
-
 .sidebar.collapsed {
   width: 80px;
   padding: 25px 10px;
 }
-
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .menu a span {
   display: none;
 }
-
 .sidebar.collapsed .menu a {
   justify-content: center;
   padding: 16px;
 }
-
 .brand {
   position: relative;
   display: flex;
@@ -34,13 +29,11 @@
   margin-bottom: 30px;
   padding-right: 48px;
 }
-
 .brand-left {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-
 .brand mat-icon {
   font-size: 36px;
   background: linear-gradient(135deg, #3b82f6, #06b6d4);
@@ -48,7 +41,6 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .brand-text h3 {
   margin: 0;
   font-size: 1.4rem;
@@ -56,7 +48,6 @@
   color: #ffffff;
   letter-spacing: 0.5px;
 }
-
 .collapse-btn {
   position: absolute;
   right: 0;
@@ -73,11 +64,9 @@
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .collapse-btn:hover {
   background: rgba(59, 130, 246, 0.4);
 }
-
 .collapse-btn mat-icon {
   font-size: 20px;
   color: #ffffff;
@@ -85,11 +74,9 @@
   width: auto;
   height: auto;
 }
-
 .menu {
   padding: 0;
 }
-
 .menu a {
   display: flex;
   align-items: center;
@@ -105,92 +92,83 @@
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
 }
-
 .menu a mat-icon {
   font-size: 24px;
   width: 24px;
   height: 24px;
 }
-
 .menu a:hover {
   background: rgba(59, 130, 246, 0.25);
   color: #ffffff;
   transform: translateX(5px);
 }
-
 .menu a.active {
   background: linear-gradient(90deg, rgba(59, 130, 246, 0.4), rgba(6, 182, 212, 0.4));
   border-left: 4px solid #06b6d4;
   color: #ffffff;
 }
-
 .menu a.logout-link {
   margin-top: auto;
   color: #f87171;
   border-left: 4px solid transparent;
 }
-
 .menu a.logout-link:hover {
   background: rgba(239, 68, 68, 0.25);
   color: #ef4444;
   cursor: pointer;
 }
-
 .content {
   flex: 1;
   padding: 30px;
   overflow-y: auto;
 }
-
 .loading {
   text-align: center;
   padding: 60px;
   color: #94a3b8;
   font-size: 18px;
 }
-
 .back-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: transparent;
-  border: 1px solid #6366f1;
-  color: #6366f1;
-  padding: 10px 20px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5) !important;
+  border: none;
+  color: #ffffff !important;
+  padding: 12px 24px;
+  border-radius: 10px;
   cursor: pointer;
   margin-bottom: 24px;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
 }
-
 .back-btn:hover {
-  background: rgba(99, 102, 241, 0.1);
+  background: linear-gradient(135deg, #5b5bf6, #4338ca) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
 }
-
 .details-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
 }
-
 .images-section .main-image {
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 16px;
 }
-
 .images-section .main-image img {
   width: 100%;
   height: 400px;
   object-fit: cover;
 }
-
 .thumbnails {
   display: flex;
   gap: 12px;
   overflow-x: auto;
 }
-
 .thumbnails img {
   width: 80px;
   height: 60px;
@@ -201,19 +179,16 @@
   transition: all 0.2s;
   border: 2px solid transparent;
 }
-
 .thumbnails img:hover,
 .thumbnails img.active {
   opacity: 1;
   border-color: #6366f1;
 }
-
 .info-section h1 {
   color: #f8fafc;
   font-size: 28px;
   margin: 0 0 12px 0;
 }
-
 .location {
   display: flex;
   align-items: center;
@@ -222,11 +197,9 @@
   font-size: 16px;
   margin-bottom: 20px;
 }
-
 .location mat-icon {
   color: #6366f1;
 }
-
 .price-box {
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   padding: 16px 24px;
@@ -234,25 +207,21 @@
   display: inline-block;
   margin-bottom: 24px;
 }
-
 .price-box .rent {
   color: white;
   font-size: 32px;
   font-weight: 700;
 }
-
 .price-box .period {
   color: rgba(255, 255, 255, 0.8);
   font-size: 16px;
 }
-
 .details-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
-
 .detail-item {
   display: flex;
   align-items: center;
@@ -262,33 +231,28 @@
   border-radius: 12px;
   border: 1px solid rgba(148, 163, 184, 0.1);
 }
-
 .detail-item mat-icon {
   color: #6366f1;
   font-size: 24px;
   width: 24px;
   height: 24px;
 }
-
 .detail-item .label {
   display: block;
   color: #94a3b8;
   font-size: 12px;
 }
-
 .detail-item .value {
   display: block;
   color: #f8fafc;
   font-size: 14px;
   font-weight: 600;
 }
-
 .amenities-section,
 .description-section,
 .contact-section {
   margin-bottom: 24px;
 }
-
 .amenities-section h3,
 .description-section h3,
 .contact-section h3 {
@@ -296,13 +260,11 @@
   font-size: 18px;
   margin-bottom: 16px;
 }
-
 .amenities-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
 }
-
 .amenity-item {
   display: flex;
   align-items: center;
@@ -313,19 +275,16 @@
   border-radius: 20px;
   font-size: 14px;
 }
-
 .amenity-item mat-icon {
   font-size: 18px;
   width: 18px;
   height: 18px;
   color: #22c55e;
 }
-
 .description-section p {
   color: #cbd5e1;
   line-height: 1.6;
 }
-
 .contact-details p {
   display: flex;
   align-items: center;
@@ -333,38 +292,35 @@
   color: #cbd5e1;
   margin: 12px 0;
 }
-
 .contact-details mat-icon {
   color: #6366f1;
 }
-
 .action-buttons {
   display: flex;
   gap: 16px;
   margin-top: 32px;
 }
-
 .action-buttons button {
   padding: 12px 32px;
   border-radius: 10px;
   font-size: 16px;
+  transition: all 0.3s ease;
 }
-
 .action-buttons button mat-icon {
   margin-right: 8px;
 }
-
+.action-buttons .mat-mdc-raised-button:not([disabled]):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+}
 @media (max-width: 1024px) {
   .details-grid {
     grid-template-columns: 1fr;
   }
-  
   .details-row {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-
 .booked-banner {
   display: flex;
   align-items: center;
@@ -375,60 +331,48 @@
   padding: 20px 24px;
   margin-top: 24px;
 }
-
 .booked-banner mat-icon {
   font-size: 40px;
   width: 40px;
   height: 40px;
   color: #ef4444;
 }
-
 .booked-text h4 {
   color: #ef4444;
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 6px 0;
 }
-
 .booked-text p {
   color: #fca5a5;
   font-size: 14px;
   margin: 0;
 }
-
 .booked-btn {
   background: rgba(239, 68, 68, 0.2) !important;
   color: #ef4444 !important;
   border: 1px solid rgba(239, 68, 68, 0.4) !important;
   cursor: not-allowed !important;
 }
-
 .booked-btn mat-icon {
   color: #ef4444 !important;
 }
-
 .logout-link {
   cursor: pointer;
 }
-
 .deposit-row {
   margin-top: 8px;
 }
-
 .deposit-label {
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
 }
-
 .deposit-amount {
   color: white;
   font-size: 18px;
   font-weight: 600;
   margin-left: 8px;
 }
-
-
-/* MAP SECTION */
 .map-section {
   margin-top: 25px;
   padding: 20px;
@@ -436,7 +380,6 @@
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.1);
 }
-
 .map-section h3 {
   display: flex;
   align-items: center;
@@ -445,25 +388,21 @@
   color: #ffffff;
   margin: 0 0 15px 0;
 }
-
 .map-section h3 mat-icon {
   color: #10b981;
 }
-
 .leaflet-map {
   width: 100%;
   height: 350px;
   border-radius: 12px;
   z-index: 1;
 }
-
 .map-actions {
   display: flex;
   gap: 12px;
   margin-top: 15px;
   flex-wrap: wrap;
 }
-
 .directions-btn {
   display: inline-flex;
   align-items: center;
@@ -476,18 +415,15 @@
   font-weight: 500;
   transition: all 0.3s ease;
 }
-
 .directions-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
-
 .directions-btn mat-icon {
   font-size: 20px;
   width: 20px;
   height: 20px;
 }
-
 .view-map-btn {
   display: inline-flex;
   align-items: center;
@@ -500,12 +436,10 @@
   font-weight: 500;
   transition: all 0.3s ease;
 }
-
 .view-map-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
-
 .view-map-btn mat-icon {
   font-size: 20px;
   width: 20px;
