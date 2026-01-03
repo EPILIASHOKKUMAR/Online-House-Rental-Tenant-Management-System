@@ -547,3 +547,45 @@ button[mat-raised-button] {
   color: #94a3b8;
   margin-top: 70px;
 }
+
+
+/* =========================================================
+   GLOBAL DROPDOWN STYLING - DARK THEME
+   ========================================================= */
+
+select option {
+  background: #1a1a2e !important;
+  color: #ffffff !important;
+  padding: 10px;
+}
+
+select {
+  background-color: rgba(30, 41, 59, 0.75) !important;
+  color: #ffffff !important;
+}
+
+/* Material Select Dropdown Panel */
+.mat-mdc-select-panel {
+  background: #1a1a2e !important;
+}
+
+.mat-mdc-option {
+  background: #1a1a2e !important;
+  color: #ffffff !important;
+}
+
+.mat-mdc-option:hover {
+  background: rgba(102, 126, 234, 0.3) !important;
+}
+
+.mat-mdc-option.mat-mdc-option-active {
+  background: rgba(102, 126, 234, 0.4) !important;
+}
+
+.mat-mdc-option.mdc-list-item--selected {
+  background: rgba(102, 126, 234, 0.5) !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  color: #ffffff !important;
+}

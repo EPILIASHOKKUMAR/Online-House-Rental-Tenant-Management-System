@@ -246,6 +246,12 @@ textarea {
   transition: all 0.3s ease;
 }
 
+select option {
+  background: #1a1a2e;
+  color: #ffffff;
+  padding: 10px;
+}
+
 input::placeholder,
 textarea::placeholder {
   color: rgba(255,255,255,0.4);

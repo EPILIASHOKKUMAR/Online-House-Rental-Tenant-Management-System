@@ -248,6 +248,12 @@
   font-size: 0.95rem;
 }
 
+.filters select option {
+  background: #1a1a2e;
+  color: #ffffff;
+  padding: 10px;
+}
+
 .filters input::placeholder {
   color: rgba(255,255,255,0.5);
 }
