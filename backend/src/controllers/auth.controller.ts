@@ -2,24 +2,49 @@ import { Request, Response } from 'express';
 import pool from '../config/db';
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import nodemailer from 'nodemailer';
+import https from 'https';
 
 const otpStore: Map<string, { otp: string; expires: number }> = new Map();
 
-const getTransporter = () => {
-  const port = parseInt(process.env.SMTP_PORT || '587');
-  const isSecure = port === 465;
-  
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
-    port: port,
-    secure: isSecure,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
-    },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000
+const sendEmailViaBrevoAPI = (to: string, subject: string, htmlContent: string): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const apiKey = process.env.SMTP_PASS?.replace('xsmtpsib-', '') || '';
+    
+    const data = JSON.stringify({
+      sender: { name: 'House Rental', email: process.env.SMTP_FROM || 'exploreai45@gmail.com' },
+      to: [{ email: to }],
+      subject: subject,
+      htmlContent: htmlContent
+    });
+
+    const options = {
+      hostname: 'api.brevo.com',
+      port: 443,
+      path: '/v3/smtp/email',
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'api-key': apiKey,
+        'content-type': 'application/json',
+        'content-length': Buffer.byteLength(data)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let body = '';
+      res.on('data', chunk => body += chunk);
+      res.on('end', () => {
+        if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
+          resolve();
+        } else {
+          reject(new Error(`Brevo API error: ${res.statusCode} - ${body}`));
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.write(data);
+    req.end();
   });
 };
 
@@ -47,29 +72,22 @@ export const forgotPassword = async (req: Request, res: Response) => {
     const otp = generateOTP();
     otpStore.set(email, { otp, expires: Date.now() + 10 * 60 * 1000 });
 
-    const transporter = getTransporter();
-    
-    const mailOptions = {
-      from: `"House Rental" <${process.env.SMTP_FROM || 'exploreai45@gmail.com'}>`,
-      to: email,
-      subject: 'Password Reset OTP - House Rental',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2 style="color: #667eea; text-align: center;">Password Reset Request</h2>
-          <p>Hello ${users[0].name},</p>
-          <p>You requested to reset your password. Use the OTP below to proceed:</p>
-          <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0;">
-            <h1 style="margin: 0; letter-spacing: 8px; font-size: 32px;">${otp}</h1>
-          </div>
-          <p style="color: #666;">This OTP is valid for 10 minutes.</p>
-          <p style="color: #666;">If you didn't request this, please ignore this email.</p>
-          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
-          <p style="color: #999; font-size: 12px; text-align: center;">House Rental Platform</p>
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #667eea; text-align: center;">Password Reset Request</h2>
+        <p>Hello ${users[0].name},</p>
+        <p>You requested to reset your password. Use the OTP below to proceed:</p>
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0;">
+          <h1 style="margin: 0; letter-spacing: 8px; font-size: 32px;">${otp}</h1>
         </div>
-      `
-    };
+        <p style="color: #666;">This OTP is valid for 10 minutes.</p>
+        <p style="color: #666;">If you didn't request this, please ignore this email.</p>
+        <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+        <p style="color: #999; font-size: 12px; text-align: center;">House Rental Platform</p>
+      </div>
+    `;
 
-    await transporter.sendMail(mailOptions);
+    await sendEmailViaBrevoAPI(email, 'Password Reset OTP - House Rental', htmlContent);
 
     res.json({ message: 'OTP sent to your email' });
   } catch (error: any) {
