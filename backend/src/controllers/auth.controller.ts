@@ -5,15 +5,17 @@ import nodemailer from 'nodemailer';
 
 const otpStore: Map<string, { otp: string; expires: number }> = new Map();
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587'),
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS
-  }
-});
+const getTransporter = () => {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
+    port: parseInt(process.env.SMTP_PORT || '587'),
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  });
+};
 
 const generateOTP = (): string => {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -39,16 +41,18 @@ export const forgotPassword = async (req: Request, res: Response) => {
     const otp = generateOTP();
     otpStore.set(email, { otp, expires: Date.now() + 10 * 60 * 1000 });
 
+    const transporter = getTransporter();
+    
     const mailOptions = {
-      from: `"House Rental" <${process.env.SMTP_FROM}>`,
+      from: `"House Rental" <${process.env.SMTP_FROM || 'exploreai45@gmail.com'}>`,
       to: email,
       subject: 'Password Reset OTP - House Rental',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h2 style="color: #00d4aa; text-align: center;">Password Reset Request</h2>
+          <h2 style="color: #667eea; text-align: center;">Password Reset Request</h2>
           <p>Hello ${users[0].name},</p>
           <p>You requested to reset your password. Use the OTP below to proceed:</p>
-          <div style="background: linear-gradient(135deg, #00d4aa, #00b894); color: white; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0;">
+          <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; text-align: center; border-radius: 10px; margin: 20px 0;">
             <h1 style="margin: 0; letter-spacing: 8px; font-size: 32px;">${otp}</h1>
           </div>
           <p style="color: #666;">This OTP is valid for 10 minutes.</p>
