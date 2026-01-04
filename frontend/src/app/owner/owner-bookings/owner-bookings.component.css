@@ -248,3 +248,14 @@
     padding: 20px;
   }
 }
+.menu a.logout-link {
+  margin-top: auto;
+  color: #f87171;
+  border-left: 4px solid transparent;
+}
+
+.menu a.logout-link:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+  cursor: pointer;
+}
