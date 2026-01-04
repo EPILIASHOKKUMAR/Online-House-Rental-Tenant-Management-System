@@ -1049,3 +1049,15 @@ button.secondary:hover {
   width: 18px;
   height: 18px;
 }
+/* Logout button styling */
+.menu a.logout-link {
+  margin-top: auto;
+  color: #f87171 !important;
+  border-left: 4px solid transparent;
+}
+
+.menu a.logout-link:hover {
+  background: rgba(239, 68, 68, 0.25) !important;
+  color: #ef4444 !important;
+  cursor: pointer;
+}
