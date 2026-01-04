@@ -40,13 +40,34 @@ export class PropertyListComponent implements OnInit {
   properties: Property[] = [];
   filteredProperties: Property[] = [];
   isLoading = true;
+  savedPropertyIds: number[] = [];
 
   location: string = '';
   maxBudget: number | null = null;
   amenity: string = '';
 
   ngOnInit(): void {
+    this.loadSavedProperties();
     this.loadProperties();
+  }
+
+  loadSavedProperties(): void {
+    const saved = localStorage.getItem('savedProperties');
+    this.savedPropertyIds = saved ? JSON.parse(saved) : [];
+  }
+
+  isPropertySaved(propertyId: number): boolean {
+    return this.savedPropertyIds.includes(propertyId);
+  }
+
+  toggleSaveProperty(event: Event, propertyId: number): void {
+    event.stopPropagation();
+    if (this.isPropertySaved(propertyId)) {
+      this.savedPropertyIds = this.savedPropertyIds.filter(id => id !== propertyId);
+    } else {
+      this.savedPropertyIds.push(propertyId);
+    }
+    localStorage.setItem('savedProperties', JSON.stringify(this.savedPropertyIds));
   }
 
   toggleSidebar(): void {

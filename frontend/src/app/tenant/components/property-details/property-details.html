@@ -40,7 +40,13 @@
         </div>
 
         <div class="info-section">
-          <h1>{{ property.title }}</h1>
+          <div class="title-row">
+            <h1>{{ property.title }}</h1>
+            <button class="save-btn" (click)="toggleSaveProperty()" [class.saved]="isSaved">
+              <mat-icon>{{ isSaved ? 'favorite' : 'favorite_border' }}</mat-icon>
+              <span>{{ isSaved ? 'Saved' : 'Save' }}</span>
+            </button>
+          </div>
           <p class="location"><mat-icon>location_on</mat-icon> {{ property.location }}, {{ property.city }}, {{ property.state }} - {{ property.pincode }}</p>
 
           <div class="price-box">

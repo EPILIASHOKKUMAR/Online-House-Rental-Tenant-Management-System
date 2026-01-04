@@ -251,6 +251,35 @@
 .property-card {
   position: relative;
 }
+.save-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+.save-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+.save-btn mat-icon {
+  color: #ffffff;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+.save-btn.saved mat-icon {
+  color: #ef4444;
+}
 .property-card.booked {
   opacity: 0.85;
 }

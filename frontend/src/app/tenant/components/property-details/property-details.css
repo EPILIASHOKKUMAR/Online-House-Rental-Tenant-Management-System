@@ -187,7 +187,48 @@
 .info-section h1 {
   color: #f8fafc;
   font-size: 28px;
-  margin: 0 0 12px 0;
+  margin: 0;
+}
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.save-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+.save-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+.save-btn mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+}
+.save-btn.saved {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+.save-btn.saved mat-icon {
+  color: #ef4444;
+}
+.save-btn.saved span {
+  color: #ef4444;
 }
 .location {
   display: flex;

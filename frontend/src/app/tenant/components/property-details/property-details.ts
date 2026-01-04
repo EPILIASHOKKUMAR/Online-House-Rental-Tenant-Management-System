@@ -52,6 +52,7 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
   isLoading = true;
   selectedImage = 0;
   isSidebarCollapsed = false;
+  isSaved = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -71,7 +72,29 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.loadProperty(Number(id));
+      this.checkIfSaved(Number(id));
     }
+  }
+
+  checkIfSaved(propertyId: number): void {
+    const saved = localStorage.getItem('savedProperties');
+    const savedIds = saved ? JSON.parse(saved) : [];
+    this.isSaved = savedIds.includes(propertyId);
+  }
+
+  toggleSaveProperty(): void {
+    if (!this.property) return;
+    const saved = localStorage.getItem('savedProperties');
+    let savedIds = saved ? JSON.parse(saved) : [];
+    
+    if (this.isSaved) {
+      savedIds = savedIds.filter((id: number) => id !== this.property!.id);
+    } else {
+      savedIds.push(this.property.id);
+    }
+    
+    localStorage.setItem('savedProperties', JSON.stringify(savedIds));
+    this.isSaved = !this.isSaved;
   }
 
   ngOnDestroy(): void {
