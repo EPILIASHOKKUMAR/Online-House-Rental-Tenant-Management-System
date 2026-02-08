@@ -1,25 +1,26 @@
 const mysql = require('mysql2/promise');
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 async function createTables() {
   try {
-    console.log('Connecting to MySQL at 127.0.0.1:3306 with user: root');
+    console.log('Connecting to MySQL...');
+    console.log('Host:', process.env.DB_HOST);
+    console.log('Port:', process.env.DB_PORT);
+    console.log('User:', process.env.DB_USER);
+    console.log('Database:', process.env.DB_NAME);
     
-    // Connect to MySQL server (without specifying database first)
+    // Connect to MySQL server
     const connection = await mysql.createConnection({
-      host: '127.0.0.1',
-      port: 3306,
-      user: 'root',
-      password: 'root@20042713!'
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '3306'),
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined
     });
 
     console.log('✅ Connected to MySQL server successfully!');
-
-    // Create database
-    await connection.execute('CREATE DATABASE IF NOT EXISTS house_rental_db');
-    console.log('✅ Database house_rental_db created or already exists');
-
-    // Use the database
-    await connection.execute('USE house_rental_db');
 
     // Create users table
     await connection.execute(`
